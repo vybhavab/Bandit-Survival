@@ -634,8 +634,8 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < currentLevelTiles.Count; i++)
         {
             Destroy(currentLevelTiles[i]);
-            currentLevelTiles.RemoveAt(i);
         }
+        currentLevelTiles = new List<GameObject>();
     }
 
     public struct Coordinate
