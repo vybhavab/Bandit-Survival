@@ -31,8 +31,8 @@ public class Bandit : MonoBehaviour
         // Reset Values
         prev_direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         prev_direction = prev_direction.normalized;
-        dirchanges = 0;
-        flipped_count = 0;
+        dirChanges = 0;
+        flippedCount = 0;
     }
 
     // Update is called once per frame
@@ -47,14 +47,14 @@ public class Bandit : MonoBehaviour
 
             // Check if current direciton of motion and new direction are the same
             if(direction != Vector2.zero && direction != prev_direction) {
-                dirchanges = dirchanges + 1;
+                dirChanges = dirChanges + 1;
                 // Check if the direction is flipped
                 if(Vector2.Dot(direction, prev_direction) == -1){
-                    flipped_count = flipped_count + 1;
+                    flippedCount = flippedCount + 1;
                 }
                 prev_direction = direction;
             }
-            
+
             velocity = direction * movementSpeed;
 
             // Swap direction of sprite depending on walk direction

@@ -9,9 +9,10 @@ namespace Completed
 	
 	public class AIFoodDecrement : ReinforcementAI
 	{
-        private int threshold_favorable = 3;
+        private int threshold_favorable = 3;  // Threshold to differentiate between positve/negative feedback
 
         public override void updateGenerator(int feedback) {
+            // Transform feedback to +1 or -1
             int modified_feedback = 0;
             if(feedback > threshold_favorable) {
                 modified_feedback = 1;
@@ -19,15 +20,20 @@ namespace Completed
             else {
                 modified_feedback = -1;
             }
+            // Update probabilities based on feedback
             base.updateGenerator(modified_feedback);
         }
 
         public (int, int) getFoodDecrement() {
+            // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
+            // (int, int) -> (food counter increment, food consume increment)
             if(action == 1){
+                // -2 : Food Decrement +50 : Food Consume Increment
                 return (-2, 50);
             }
             else{
+                // -1 : Food Decrement +10 : Food Consume Increment
                 return (-1, 10);
             }
         }
