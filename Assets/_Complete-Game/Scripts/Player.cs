@@ -26,6 +26,10 @@ namespace Completed
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 #endif
+		public int dirChanges = 0;					// Count number of directions changed
+		private int dir = 1;						// 1 : Vertical, -1 : Horizontal
+
+		public int foodDecrement = -2;
 		
 		
 		//Start overrides the Start function of MovingObject
@@ -39,7 +43,13 @@ namespace Completed
 			
 			//Set the foodText to reflect the current player food total.
 			foodText.text = "Food: " + food;
+
+			dirChanges = 0;
 			
+			var temps = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+			foodDecrement = temps.Item1;
+			pointsPerFood = temps.Item2;
+
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
 		}
@@ -122,6 +132,18 @@ namespace Completed
 			{
 				//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
 				//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
+				if(horizontal != 0){
+					if(dir == 1){
+						dirChanges = dirChanges + 1;
+					}
+					dir = -1;
+				}
+				else{
+					if(dir == -1){
+						dirChanges = dirChanges + 1;
+					}
+					dir = 1;
+				}
 				AttemptMove<Wall> (horizontal, vertical);
 			}
 		}
@@ -131,7 +153,8 @@ namespace Completed
 		protected override void AttemptMove <T> (int xDir, int yDir)
 		{
 			//Every time player moves, subtract from food points total.
-			food--;
+
+			food = food + foodDecrement;
 			
 			//Update food text display to reflect current score.
 			foodText.text = "Food: " + food;
@@ -178,6 +201,8 @@ namespace Completed
 			//Check if the tag of the trigger collided with is Exit.
 			if(other.tag == "Exit")
 			{
+				GameObject.FindWithTag("GameManager").GetComponent<GameManager>().setDirChanges(dirChanges);
+				GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
 				//Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
 				Invoke ("Restart", restartLevelDelay);
 				
@@ -243,8 +268,7 @@ namespace Completed
 			
 			//Check to see if game has ended.
 			CheckIfGameOver ();
-		}
-		
+		}		
 		
 		//CheckIfGameOver checks if the player is out of food points and if so, ends the game.
 		private void CheckIfGameOver ()

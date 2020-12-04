@@ -24,6 +24,7 @@ namespace Completed
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
 		
+		public int prevDirChanges = 0;
 		
 		
 		//Awake is always called before any Start functions
@@ -74,6 +75,7 @@ namespace Completed
 		//Initializes the game for each level.
 		void InitGame()
 		{
+			Debug.Log("Init Game");
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 			
@@ -143,6 +145,11 @@ namespace Completed
 			
 			//Disable this GameManager.
 			enabled = false;
+		}
+
+		public void setDirChanges(int dirChanges)
+		{
+			prevDirChanges = dirChanges;
 		}
 		
 		//Coroutine to move enemies in sequence.
