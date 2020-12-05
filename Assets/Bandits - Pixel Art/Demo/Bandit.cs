@@ -12,8 +12,11 @@ public class Bandit : MonoBehaviour
 
     public Vector2 playerPosition;
     Vector2 velocity;
+    Vector2 input = new Vector2();
     public float movementSpeed = 1;
-
+    float attackTime = .6f;
+    public bool canMove;
+    public bool canAttack;
     
 
     // Use this for initialization
@@ -23,16 +26,25 @@ public class Bandit : MonoBehaviour
         m_animator = GetComponent<Animator>();        
         playerPosition = map.randomStartingLocation;
         transform.position = playerPosition;
+        canMove = true;
+        canAttack = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
+        input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            canMove = false;
+        }
+
+        if (canMove)
+        {
             // -- Handle input and movement --
-            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            
             Vector2 direction = input.normalized;
             velocity = direction * movementSpeed;
 
@@ -44,7 +56,7 @@ public class Bandit : MonoBehaviour
 
             // Move
             banditBody.velocity = new Vector2(velocity.x, velocity.y);
-
+        }
 
 
 
@@ -68,10 +80,12 @@ public class Bandit : MonoBehaviour
             */
 
             //Attack
-            if (Input.GetMouseButtonDown(0))
-            {
-                m_animator.SetTrigger("Attack");
-            }
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(Attack());
+            banditBody.velocity = new Vector2(0, 0);
+        }
 
             /*
             //Change between idle and combat idle
@@ -89,7 +103,7 @@ public class Bandit : MonoBehaviour
             */
 
             //Run
-            else if (Mathf.Abs(input.x) > Mathf.Epsilon || Mathf.Abs(input.y) > Mathf.Epsilon)
+            else if ((Mathf.Abs(input.x) > Mathf.Epsilon || Mathf.Abs(input.y) > Mathf.Epsilon) && canMove == true)
                 m_animator.SetInteger("AnimState", 2);
 
             //Combat Idle
@@ -115,5 +129,17 @@ public class Bandit : MonoBehaviour
 
 
         }
+    }
+
+    IEnumerator Attack()
+    {
+        canMove = false;
+        m_animator.SetTrigger("Attack");
+        canAttack = false;
+
+        yield return new WaitForSeconds(attackTime);
+        canAttack = true;
+        canMove = true;
+
     }
 }
