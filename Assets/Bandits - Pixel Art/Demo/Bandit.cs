@@ -14,6 +14,10 @@ public class Bandit : MonoBehaviour
     Vector2 velocity;
     public float movementSpeed = 1;
 
+    public int dirChanges;  // Number of Times the direction of motion changes
+    public int flippedCount;  // Number of Times the direction of motion flips
+    private Vector2 prev_direction;  // Store the previous direction
+
     
 
     // Use this for initialization
@@ -23,6 +27,12 @@ public class Bandit : MonoBehaviour
         m_animator = GetComponent<Animator>();        
         playerPosition = map.randomStartingLocation;
         transform.position = playerPosition;
+
+        // Reset Values
+        prev_direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        prev_direction = prev_direction.normalized;
+        dirChanges = 0;
+        flippedCount = 0;
     }
 
     // Update is called once per frame
@@ -34,6 +44,17 @@ public class Bandit : MonoBehaviour
             // -- Handle input and movement --
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector2 direction = input.normalized;
+
+            // Check if current direciton of motion and new direction are the same
+            if(direction != Vector2.zero && direction != prev_direction) {
+                dirChanges = dirChanges + 1;
+                // Check if the direction is flipped
+                if(Vector2.Dot(direction, prev_direction) == -1){
+                    flippedCount = flippedCount + 1;
+                }
+                prev_direction = direction;
+            }
+
             velocity = direction * movementSpeed;
 
             // Swap direction of sprite depending on walk direction
