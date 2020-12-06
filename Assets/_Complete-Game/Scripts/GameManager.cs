@@ -50,8 +50,9 @@ namespace Completed
 			
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
-			
+
 			//Call the InitGame function to initialize the first level 
+			Debug.Log("Awake Init");
 			InitGame();
 		}
 
@@ -63,6 +64,7 @@ namespace Completed
             //register the callback to be called everytime the scene is loaded
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+	  
 
         //This is called each time a scene is loaded.
         static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -70,7 +72,7 @@ namespace Completed
             instance.level++;
             instance.InitGame();
         }
-
+	   
 		
 		//Initializes the game for each level.
 		void InitGame()
