@@ -30,7 +30,7 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        for(int i = 0; i < 10; i++) GenerateWeapon(new Vector2(i, 0));
+        //for(int i = 0; i < 10; i++) GenerateWeapon(new Vector2(i, 0));
   
     }
 

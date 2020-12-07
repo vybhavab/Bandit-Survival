@@ -21,6 +21,8 @@ namespace Completed
         public GameObject exitTile;
         List<GameObject> currentLevelTiles = new List<GameObject>();
 
+        ItemSpawn itemSpawn;
+
         public string seed;
         public bool randomSeed;
         public bool processMap;
@@ -53,9 +55,18 @@ namespace Completed
             originalRooms = new List<Room>();
             passageEdgeTiles = new List<Coordinate>();
             randomStartingLocation = new Vector2();
+            itemSpawn = GameObject.Find("MapGenerator").GetComponent<ItemSpawn>();
+
             GenerateMap();
             GenerateStartAndExit();
             DrawMap();
+
+            foreach (Coordinate coord in mapFloorTiles)
+            {
+                int randomNumber = UnityEngine.Random.Range(0, 1000);
+                itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber); 
+            }
+
             Debug.Log(currentLevelTiles.Count);
             print(Time.realtimeSinceStartup); //just for seeing how long maps of different size take to generate to find a reasonable upper bound on map size
         }

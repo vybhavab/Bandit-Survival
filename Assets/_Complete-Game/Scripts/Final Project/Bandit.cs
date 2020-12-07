@@ -71,10 +71,9 @@ namespace Completed
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
 
-            //food = CaveGameManager.instance.playerFoodPoints;
+            //Get the CaveGameManager component to edit food points data
             gameManager = GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>();
             food = gameManager.playerFoodPoints;
-            Debug.Log("Food: " + food);
 
             var temps = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
             foodDecrement = temps.Item1;
@@ -87,7 +86,6 @@ namespace Completed
         // Update is called once per frame
         void Update()
         {
-            Debug.Log("Food Updated: " + food);
             //If player is dead, don't process input
             if (m_isDead)
             {
@@ -211,7 +209,7 @@ namespace Completed
                 food += pointsPerFruit;
 
                 //Update foodText to represent current total and notify player that they gained points
-                foodText.text = "+" + pointsPerFruit + " Food: " + food;
+                StartCoroutine(ShowFoodGain(pointsPerFruit));
 
                 //Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
                 SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
@@ -227,7 +225,7 @@ namespace Completed
                 food += pointsPerDrink;
 
                 //Update foodText to represent current total and notify player that they gained points
-                foodText.text = "+" + pointsPerDrink + " Food: " + food;
+                StartCoroutine(ShowFoodGain(pointsPerDrink));
 
                 //Call the RandomizeSfx function of SoundManager and pass in two drinking sounds to choose between to play the drinking sound effect.
                 SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
@@ -241,7 +239,7 @@ namespace Completed
                 food += pointsPerVeg;
 
                 //Update foodText to represent current total and notify player that they gained points
-                foodText.text = "+" + pointsPerVeg + " Food: " + food;
+                StartCoroutine(ShowFoodGain(pointsPerVeg)); ;
 
                 //Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
                 SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
@@ -255,7 +253,7 @@ namespace Completed
                 food += pointsPerMeat;
 
                 //Update foodText to represent current total and notify player that they gained points
-                foodText.text = "+" + pointsPerMeat + " Food: " + food;
+                StartCoroutine(ShowFoodGain(pointsPerMeat));
 
                 //Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
                 SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
@@ -311,6 +309,12 @@ namespace Completed
             canAttack = true;
             canMove = true;
 
+        }
+
+        IEnumerator ShowFoodGain(int points)
+        {
+            foodText.text = "+" + points + " Food: " + food;
+            yield return new WaitForSeconds(1);
         }
 
         
