@@ -55,7 +55,7 @@ namespace Completed
             originalRooms = new List<Room>();
             passageEdgeTiles = new List<Coordinate>();
             randomStartingLocation = new Vector2();
-            itemSpawn = GameObject.Find("MapGenerator").GetComponent<ItemSpawn>();
+            itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
 
             GenerateMap();
             GenerateStartAndExit();

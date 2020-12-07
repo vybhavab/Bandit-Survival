@@ -265,7 +265,7 @@ namespace Completed
 
         private void OnDisable()
         {
-            gameManager.playerFoodPoints = food;
+            //gameManager.playerFoodPoints = food;
         }
 
         private void Restart()
