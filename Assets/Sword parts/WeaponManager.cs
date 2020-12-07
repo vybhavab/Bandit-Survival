@@ -8,6 +8,7 @@ public class WeaponManager : MonoBehaviour
 
     public GameObject blankWeapon;
     public GameObject[] handles, hilts, blades;
+    ItemSpawn itemSpawn;
     public void GenerateWeapon(Vector2 pos)
     {
         GameObject weapon = Instantiate(blankWeapon, (Vector3)pos, Quaternion.identity);
@@ -20,6 +21,7 @@ public class WeaponManager : MonoBehaviour
         blade.transform.localPosition = Vector3.zero;
 
         weapon.GetComponent<Weapon>().SetParts(handle, hilt, blade);
+        GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(weapon);
     }
     
     void Awake()
@@ -31,6 +33,7 @@ public class WeaponManager : MonoBehaviour
     public void Start()
     {
         //for(int i = 0; i < 10; i++) GenerateWeapon(new Vector2(i, 0));
+        
   
     }
 

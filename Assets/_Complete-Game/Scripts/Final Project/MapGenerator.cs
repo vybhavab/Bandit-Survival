@@ -663,6 +663,9 @@ namespace Completed
                 Destroy(currentLevelTiles[i]);
             }
             currentLevelTiles = new List<GameObject>();
+
+            itemSpawn = GameObject.Find("MapGenerator").GetComponent<ItemSpawn>();
+            itemSpawn.DeleteItems();
         }
 
         public struct Coordinate
