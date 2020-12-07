@@ -126,6 +126,7 @@ namespace Completed
 			
 		}
 
+		
 
 		//Hides black image used between levels
 		void HideLevelImage()
@@ -163,6 +164,8 @@ namespace Completed
 		public void GameOver()
 		{
 			//Set levelText to display number of levels passed and game over message
+
+
 			levelText.text = "Game Over";
 
 			//Enable black background image gameObject.
