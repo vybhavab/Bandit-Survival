@@ -12,7 +12,7 @@ namespace Completed
 		public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.
 		public float turnDelay = 0.1f;                          //Delay between each Player turn.
 		public int playerFoodPoints = 100;                      //Starting value for Player food points.
-		public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
+		//public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		//[HideInInspector] public bool playersTurn = true;       //Boolean to check if it's players turn, hidden in inspector but public.
 
 
@@ -33,16 +33,16 @@ namespace Completed
 		void Awake()
 		{
 			//Check if instance already exists
-			if (instance == null)
+			//if (instance == null)
 
 				//if not, set instance to this
-				instance = this;
+				//instance = this;
 
 			//If instance already exists and it's not this:
-			else if (instance != this)
+			//else if (instance != this)
 
 				//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-				Destroy(gameObject);
+				//Destroy(gameObject);
 
 			//Sets this to not be destroyed when reloading scene
 			//DontDestroyOnLoad(gameObject);
@@ -53,6 +53,7 @@ namespace Completed
 			//Assign enemies to a new List of Enemy objects.
 			enemies = new List<Enemy>();
 
+			playerFoodPoints = 100;
 			//Get a component reference to the attached BoardManager script
 			mapGenerator = GetComponent<MapGenerator>();
 
@@ -92,7 +93,7 @@ namespace Completed
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			
 
-			instance.level++;
+			level++;
 			//Set the text of levelText to the string "Day" and append the current level number.
 			levelText.text = "Level " + level;
 

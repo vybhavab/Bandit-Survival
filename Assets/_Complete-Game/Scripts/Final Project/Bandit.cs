@@ -15,6 +15,8 @@ namespace Completed
         private bool m_isDead = false;
         public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
 
+        CaveGameManager gameManager;
+
         public Vector2 playerPosition;
         public Vector2 previousPlayerPosition;
         Vector2 velocity;
@@ -69,7 +71,10 @@ namespace Completed
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
 
-            food = CaveGameManager.instance.playerFoodPoints;
+            //food = CaveGameManager.instance.playerFoodPoints;
+            gameManager = GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>();
+            food = gameManager.playerFoodPoints;
+            Debug.Log("Food: " + food);
 
             var temps = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
             foodDecrement = temps.Item1;
@@ -82,6 +87,7 @@ namespace Completed
         // Update is called once per frame
         void Update()
         {
+            Debug.Log("Food Updated: " + food);
             //If player is dead, don't process input
             if (m_isDead)
             {
@@ -261,7 +267,7 @@ namespace Completed
 
         private void OnDisable()
         {
-            CaveGameManager.instance.playerFoodPoints = food;
+            gameManager.playerFoodPoints = food;
         }
 
         private void Restart()
@@ -290,7 +296,7 @@ namespace Completed
                 m_animator.SetTrigger("Death");
 
                 //Call the GameOver function of GameManager.
-                CaveGameManager.instance.Invoke("GameOver", deathTime);
+                gameManager.Invoke("GameOver", deathTime);
             }
         }
 
