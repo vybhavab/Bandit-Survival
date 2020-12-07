@@ -15,13 +15,13 @@ public class WeaponManager : MonoBehaviour
 
         GameObject handle = Instantiate(handles[Random.Range(0, handles.Length)], weapon.transform);
         handle.transform.localPosition = Vector3.zero;
-        handle.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        handle.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
         GameObject hilt = Instantiate(hilts[Random.Range(0, hilts.Length)], weapon.transform);
         hilt.transform.localPosition = Vector3.zero;
-        hilt.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        hilt.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
         GameObject blade = Instantiate(blades[Random.Range(0, blades.Length)], weapon.transform);
         blade.transform.localPosition = Vector3.zero;
-        blade.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        blade.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
 
         weapon.GetComponent<Weapon>().SetParts(handle, hilt, blade);
         GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(weapon);
