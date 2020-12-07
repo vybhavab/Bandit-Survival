@@ -37,6 +37,8 @@ namespace Completed
         public int pointsPerMeat = 50;
 
         public Text foodText;
+        public Text weaponText;
+        public string weaponName;
         public AudioClip moveSound1;                //1 of 2 Audio clips to play when player moves.
         public AudioClip moveSound2;                //2 of 2 Audio clips to play when player moves.
         public AudioClip eatSound1;                 //1 of 2 Audio clips to play when player collects a food object.
@@ -48,6 +50,7 @@ namespace Completed
         float attackTime = .6f; //Amount of time the attack animation takes
         bool canMove; //Set to false if the attack animation is running
         bool canAttack; //Used so the full attack animation runs before the player can attack again
+        public float damage = 1;  //How much damage a player does to an enemy when chopping it.
 
         float deathTime = 1f; //Amount of time between death animation and Game Over screen
 
@@ -81,11 +84,15 @@ namespace Completed
 
             canMove = true;
             canAttack = true;
+
+            weaponName = "Weapon";
+            
         }
 
         // Update is called once per frame
         void Update()
         {
+            
             //If player is dead, don't process input
             if (m_isDead)
             {
@@ -125,7 +132,7 @@ namespace Completed
                     food = food + foodDecrement;
                     foodText.text = "Food: " + food;
                     dirFlipped = false;
-
+                    weaponText.text = weaponName + " Damage: " + damage;
                     //Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
                     SoundManager.instance.RandomizeSfx(moveSound1, moveSound2);
                 }
@@ -182,7 +189,7 @@ namespace Completed
 
         void OnTriggerEnter2D(Collider2D triggerCollider)
         {
-
+            Debug.Log(triggerCollider.tag);
             //Check if the tag of the trigger is exit and load the next level
             if (triggerCollider.tag == "Exit")
             {
@@ -261,6 +268,16 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
+            else if(triggerCollider.CompareTag("Sword"))
+            {
+                damage = triggerCollider.GetComponent<Weapon>().damage;
+                weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
+                //Update foodText to represent current total and notify player that they gained points
+                StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
+
+                //Disable the weapon object the player collided with.
+                triggerCollider.gameObject.SetActive(false);
+            }
         }
 
         private void OnDisable()
@@ -317,6 +334,10 @@ namespace Completed
             yield return new WaitForSeconds(1);
         }
 
-        
+        IEnumerator ShowWeaponChange(float points)
+        {
+            weaponText.text = "Obtained " + weaponName + "! Damage: " + points;
+            yield return new WaitForSeconds(1);
+        }
     }
 }
