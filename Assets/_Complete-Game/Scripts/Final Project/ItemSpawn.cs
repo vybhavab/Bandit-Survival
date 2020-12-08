@@ -19,7 +19,7 @@ public class ItemSpawn : MonoBehaviour
     WeaponManager weaponManager;
 
     public int foodSpawnPercent = 10;
-    public int weaponSpawnPercent = 2;
+    public int weaponSpawnPercent = 4;
 
     public List<GameObject> currentLevelItems = new List<GameObject>();
 
@@ -62,6 +62,16 @@ public class ItemSpawn : MonoBehaviour
             }
             
         }
+    }
+
+    public void updateFoodPercent(int newFoodPercent)
+    {
+        foodSpawnPercent = newFoodPercent;
+    }
+
+    public void updateWeaponPercent(int newWeaponPercent)
+    {
+        weaponSpawnPercent = newWeaponPercent;
     }
 
     public void DeleteItems()

@@ -7,9 +7,9 @@ namespace Completed
 	using System.Collections.Generic;		//Allows us to use Lists. 
 	using UnityEngine.UI;					//Allows us to use UI.
 	
-	public class AIFoodDecrement : ReinforcementAI
+	public class AIWeaponCount : ReinforcementAI
 	{
-        private int threshold_favorable = 100;  // Threshold to differentiate between positve/negative feedback
+        private int threshold_favorable = 30;  // Threshold to differentiate between positve/negative feedback
 
         public override void updateGenerator(int feedback) {
             // Transform feedback to +1 or -1
@@ -24,17 +24,17 @@ namespace Completed
             base.updateGenerator(modified_feedback);
         }
 
-        public int getFoodDecrement() {
+        public int getWeaponWeight() {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
             // (int, int) -> (food counter increment, food consume increment)
             if(action == 1){
                 // -1 : Food Decrement
-                return -1;
+                return 4;
             }
             else{
                 // -2 : Food Decrement
-                return -2;
+                return 2;
             }
         }
 	}

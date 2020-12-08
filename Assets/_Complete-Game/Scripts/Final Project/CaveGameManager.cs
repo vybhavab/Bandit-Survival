@@ -53,7 +53,7 @@ namespace Completed
 			//Assign enemies to a new List of Enemy objects.
 			enemies = new List<Enemy>();
 
-			playerFoodPoints = 100;
+			playerFoodPoints = 200;
 			//Get a component reference to the attached BoardManager script
 			mapGenerator = GetComponent<MapGenerator>();
 

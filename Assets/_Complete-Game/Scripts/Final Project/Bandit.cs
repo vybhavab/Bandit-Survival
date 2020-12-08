@@ -26,6 +26,7 @@ namespace Completed
         public int dirChanges;  // Number of Times the direction of motion changes
         public int flippedCount;  // Number of Times the direction of motion flips
         private Vector2 prev_direction;  // Store the previous direction
+        public int weaponSwings;
         bool dirFlipped = false;
 
         private int food;               //For getting the player food value from the CaveGameManager
@@ -70,6 +71,7 @@ namespace Completed
             prev_direction = prev_direction.normalized;
             dirChanges = 0;
             flippedCount = 0;
+            weaponSwings = 0;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -78,9 +80,10 @@ namespace Completed
             gameManager = GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>();
             food = gameManager.playerFoodPoints;
 
-            var temps = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
-            foodDecrement = temps.Item1;
-            pointsPerFood = temps.Item2;
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+            // pointsPerFood = temps.Item2;
 
             canMove = true;
             canAttack = true;
@@ -103,6 +106,7 @@ namespace Completed
 
             if (Input.GetMouseButtonDown(0))
             {
+                weaponSwings = weaponSwings + 1;
                 canMove = false;
             }
 
@@ -289,6 +293,13 @@ namespace Completed
         {
             //Load the next level
             CaveGameManager caveGameManager = GameObject.Find("MapGenerator").GetComponent<CaveGameManager>();
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+            // pointsPerFood = temps.Item2;
+            dirChanges = 0;
+            flippedCount = 0;
+            weaponSwings = 0;
             caveGameManager.InitGame();
         }
 
