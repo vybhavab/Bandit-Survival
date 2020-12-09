@@ -627,6 +627,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: randomSeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4684627384322868049, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: m_RootOrder
