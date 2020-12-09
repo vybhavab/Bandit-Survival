@@ -50,9 +50,8 @@ namespace Completed
 
 			dirChanges = 0;
 
-			var temps = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
-			foodDecrement = temps.Item1;
-			pointsPerFruit = temps.Item2;
+			foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            // pointsPerFood = temps.Item2;
 
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
