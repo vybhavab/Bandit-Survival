@@ -56,7 +56,7 @@ namespace Completed
             passageEdgeTiles = new List<Coordinate>();
             randomStartingLocation = new Vector2();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
-
+            // enemySpawn = GameObject.FindWithTag()
             GenerateMap();
             GenerateStartAndExit();
             DrawMap();
@@ -64,7 +64,7 @@ namespace Completed
             foreach (Coordinate coord in mapFloorTiles)
             {
                 int randomNumber = UnityEngine.Random.Range(0, 1000);
-                itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber); 
+                itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber);
             }
 
             Debug.Log(currentLevelTiles.Count);
