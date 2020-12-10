@@ -80,7 +80,8 @@ namespace Completed
             gameManager = GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>();
             food = gameManager.playerFoodPoints;
 
-            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            //foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
             // pointsPerFood = temps.Item2;
@@ -208,7 +209,10 @@ namespace Completed
 
 
                 GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().setDirChanges(dirChanges);
-                GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
+                //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
+                GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().updateGenerator(dirChanges);
+                GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().updateGenerator(weaponSwings);
+                GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().updateGenerator(flippedCount);
                 Restart();
 
 
@@ -293,10 +297,10 @@ namespace Completed
         {
             //Load the next level
             CaveGameManager caveGameManager = GameObject.Find("MapGenerator").GetComponent<CaveGameManager>();
-            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            //foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
-            // pointsPerFood = temps.Item2;
             dirChanges = 0;
             flippedCount = 0;
             weaponSwings = 0;
