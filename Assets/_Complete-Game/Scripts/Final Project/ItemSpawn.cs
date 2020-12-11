@@ -9,6 +9,7 @@ public class ItemSpawn : MonoBehaviour
     public GameObject[] drinkTiles;
     public GameObject[] meatTiles;
 
+
     public int fruitWeighting = 4;
     public int vegWeighting = 2;
     public int drinkWeighting = 2;
@@ -60,7 +61,7 @@ public class ItemSpawn : MonoBehaviour
                 GameObject meat = (GameObject)Instantiate(meatTiles[meatToSpawn], new Vector2(x, y), Quaternion.identity);
                 currentLevelItems.Add(meat);
             }
-            
+
         }
     }
 

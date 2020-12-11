@@ -19,9 +19,14 @@ namespace Completed
         public GameObject floorParent; //For organizing all floor objects under one parent to avoid cluttering
         public GameObject[] floorTiles;
         public GameObject exitTile;
+
+        public GameObject[] enemyTiles;
+        public int enemyCount = 30;
         List<GameObject> currentLevelTiles = new List<GameObject>();
 
         ItemSpawn itemSpawn;
+
+        EnemyBuilder enemySpawn;
 
         public string seed;
         public bool randomSeed;
@@ -56,15 +61,29 @@ namespace Completed
             passageEdgeTiles = new List<Coordinate>();
             randomStartingLocation = new Vector2();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
-            // enemySpawn = GameObject.FindWithTag()
+            enemySpawn = GameObject.FindWithTag("GameManager").GetComponent<EnemyBuilder>();
             GenerateMap();
             GenerateStartAndExit();
             DrawMap();
-
+            int currEnemyCount = 0;
             foreach (Coordinate coord in mapFloorTiles)
             {
-                int randomNumber = UnityEngine.Random.Range(0, 1000);
-                itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber);
+                if (UnityEngine.Random.Range(0, 15) >= 7)
+                {
+                    int randomNumber = UnityEngine.Random.Range(0, 1000);
+                    itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber);
+                }else
+                {
+                    if(currEnemyCount <= enemyCount){
+                        GameObject enemyChoice = enemyTiles[UnityEngine.Random.Range(0, enemyTiles.Length)];
+                        Instantiate(enemyChoice, new Vector2(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y), Quaternion.identity);
+                        currEnemyCount++;
+                    }else
+                    {
+                        int randomNumber = UnityEngine.Random.Range(0, 1000);
+                        itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber);
+                    }
+                }
             }
 
             Debug.Log(currentLevelTiles.Count);

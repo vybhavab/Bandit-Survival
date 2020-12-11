@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9561064}
   - component: {fileID: 5061064}
   - component: {fileID: 6161064}
-  - component: {fileID: 11461064}
+  - component: {fileID: 1873815862688216196}
   m_Layer: 8
   m_Name: Enemy2
   m_TagString: Enemy
@@ -142,17 +142,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &11461064
+--- !u!114 &1873815862688216196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,13 +161,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 161064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d22f79ef0655a41bb9e62823f6e7a3f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 353b6963b77e9714f870b132a9104b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 0.1
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
-  playerDamage: 20
+  damageToPlayer: 30
   attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
   attackSound2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
+  currentLevelBosses: []

@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 namespace Completed
 {
-    public class Enemys : MovingObject
+    using System.Collections.Generic;
+    public class EnemyBuilder : MovingObject
     {
         // Start is called before the first frame update
         public int damageToPlayer;
         public AudioClip attackSound1;
         public AudioClip attackSound2;
-
         private Animator animator;
         private Transform target;
         private bool skipMove;
+
+        public List<GameObject> currentLevelBosses = new List<GameObject>();
 
         protected override void Start()
         {
             CaveGameManager.instance.AddEnemyToList (this);
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
+            Debug.Log(target);
             base.Start();
         }
 

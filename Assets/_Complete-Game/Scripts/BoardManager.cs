@@ -30,6 +30,7 @@ namespace Completed
 		public int rows = 8;											//Number of rows in our game board.
 		public Count wallCount = new Count (5, 9);						//Lower and upper limit for our random number of walls per level.
 		public Count foodCount = new Count (1, 5);						//Lower and upper limit for our random number of food items per level.
+		public Count enemyCount = new Count(3,10);
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
 		public GameObject[] wallTiles;									//Array of wall prefabs.
@@ -40,6 +41,7 @@ namespace Completed
 		public GameObject[] vegTiles;
 		public GameObject[] drinkTiles;
 		public GameObject[] meatTiles;
+
 		public Count fruitCount = new Count(1, 4);
 		public Count vegCount = new Count(1, 2);
 		public Count drinkCount = new Count(1, 2);
@@ -156,7 +158,7 @@ namespace Completed
 
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = (int)Mathf.Log(level, 2f);
-
+			Debug.Log("Enemy count => " + enemyCount);
 			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
