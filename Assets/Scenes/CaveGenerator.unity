@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -293,8 +293,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54b74b6a16c9b4a2fa0df1e00f742fad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   player: {fileID: 1403552470}
 --- !u!1 &370068929
 GameObject:
@@ -343,8 +343,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -391,8 +391,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a1579bf96e90e249a01a0569858d910, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &584578837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,8 +403,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7ad4911c7a2cb4e8b9a19db945bee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &584578838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,8 +415,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 004b4e8a7033d00408053283203edd27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &585786302
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,8 +465,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
@@ -540,8 +540,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -563,7 +563,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text:
 --- !u!222 &682183096
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -647,7 +647,7 @@ PrefabInstance:
     - target: {fileID: 8613961909884307319, guid: 9c8524c55e1bc7945a27e9202431f61d,
         type: 3}
       propertyPath: symbolWeaponTile
-      value: 
+      value:
       objectReference: {fileID: 4926456924835293246, guid: 49d1334e90ce14df08f1ad0da924554f,
         type: 3}
     m_RemovedComponents: []
@@ -711,8 +711,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
@@ -728,8 +728,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -849,7 +849,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
     - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: randomSeed
@@ -863,36 +862,34 @@ PrefabInstance:
     - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: enemyTiles.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 3}
     - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: enemyTiles.Array.data[1]
-      value: 
+      value:
       objectReference: {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 3}
-=======
     - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
       propertyPath: symbolExitTile
-      value: 
+      value:
       objectReference: {fileID: 2144740448631084416, guid: 8f37d3db7f9ec43fda5a965102558c0a,
         type: 3}
     - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
       propertyPath: symbolFoodTile
-      value: 
+      value:
       objectReference: {fileID: 2997394653987898454, guid: de1bfc7b2115a4e7d93f13d6364e3266,
         type: 3}
     - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
       propertyPath: symbolWeaponTile
-      value: 
+      value:
       objectReference: {fileID: 4926456924835293246, guid: 49d1334e90ce14df08f1ad0da924554f,
         type: 3}
     - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: symbolExitTile
-      value: 
+      value:
       objectReference: {fileID: 2144740448631084416, guid: 8f37d3db7f9ec43fda5a965102558c0a,
         type: 3}
->>>>>>> 8401fb350caedfc0d5864106dc1c114fedcd3fde
     - target: {fileID: 4684627384322868049, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: m_RootOrder
@@ -1049,57 +1046,57 @@ PrefabInstance:
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: foodText
-      value: 
+      value:
       objectReference: {fileID: 370068931}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: eatSound1
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: 1cb61f83d60374c7389bb547431919e3, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: eatSound2
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: 062161c1897a54088a5430f8c197e1b8, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: banditBody
-      value: 
+      value:
       objectReference: {fileID: 1933121148}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: moveSound1
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: 892962212a4b74d1c9f578a3b6ea6439, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: moveSound2
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: a826bc3d758db43d6ae9caf415b63d1d, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: weaponName
-      value: 
+      value:
       objectReference: {fileID: 0}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: weaponText
-      value: 
+      value:
       objectReference: {fileID: 2086779738}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: drinkSound1
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: b6b608537288246c9a464915db27bf52, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: drinkSound2
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: bcb9dda73ee914d3e8f252895f73f461, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: gameOverSound
-      value: 
+      value:
       objectReference: {fileID: 8300000, guid: e2beefeb2273f4efe992adf5b8d67c29, type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
@@ -1178,8 +1175,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1304,8 +1301,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c24d5dcecc8198047a78fa6167e107de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &1933121146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1689866831511430, guid: 2e2183501755a214591e802f3aff33d2,
@@ -1435,8 +1432,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1507,8 +1504,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
