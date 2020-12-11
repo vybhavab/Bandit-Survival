@@ -154,7 +154,7 @@ RectTransform:
   m_Children:
   - {fileID: 1967344568}
   m_Father: {fileID: 1268413726}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -448,7 +448,7 @@ RectTransform:
   m_Children:
   - {fileID: 1485292094}
   m_Father: {fileID: 1268413726}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -644,6 +644,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8613961909884307319, guid: 9c8524c55e1bc7945a27e9202431f61d,
+        type: 3}
+      propertyPath: symbolWeaponTile
+      value: 
+      objectReference: {fileID: 4926456924835293246, guid: 49d1334e90ce14df08f1ad0da924554f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c8524c55e1bc7945a27e9202431f61d, type: 3}
 --- !u!1 &1170479931
@@ -769,8 +775,8 @@ RectTransform:
   - {fileID: 370068930}
   - {fileID: 2086779737}
   - {fileID: 682183094}
-  - {fileID: 585786303}
   - {fileID: 46768143}
+  - {fileID: 585786303}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -843,6 +849,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
+      propertyPath: symbolExitTile
+      value: 
+      objectReference: {fileID: 2144740448631084416, guid: 8f37d3db7f9ec43fda5a965102558c0a,
+        type: 3}
+    - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
+      propertyPath: symbolFoodTile
+      value: 
+      objectReference: {fileID: 2997394653987898454, guid: de1bfc7b2115a4e7d93f13d6364e3266,
+        type: 3}
+    - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
+      propertyPath: symbolWeaponTile
+      value: 
+      objectReference: {fileID: 4926456924835293246, guid: 49d1334e90ce14df08f1ad0da924554f,
+        type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: symbolExitTile
+      value: 
+      objectReference: {fileID: 2144740448631084416, guid: 8f37d3db7f9ec43fda5a965102558c0a,
+        type: 3}
     - target: {fileID: 4684627384322868049, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: m_RootOrder
@@ -1218,7 +1245,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 311
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
