@@ -22,6 +22,7 @@ namespace Completed
 
         public GameObject[] enemyTiles;
         public int enemyCount = 30;
+        public GameObject symbolExitTile;
         List<GameObject> currentLevelTiles = new List<GameObject>();
 
         ItemSpawn itemSpawn;
@@ -661,6 +662,9 @@ namespace Completed
                             {
                                 GameObject exit = (GameObject)Instantiate(exitTile, tilePosition, Quaternion.identity);
                                 currentLevelTiles.Add(exit);
+
+                                GameObject symExit = (GameObject)Instantiate(symbolExitTile, tilePosition, Quaternion.identity);
+                                GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(symExit);
                             }
                             else
                             {

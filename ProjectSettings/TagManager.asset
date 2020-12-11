@@ -19,6 +19,7 @@ TagManager:
   - Fruit
   - Wall
   - WeaponManager
+  - Symbol
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - 
   - 
   - BlockingLayer
-  - 
+  - Symbol Layer
   - 
   - 
   - 

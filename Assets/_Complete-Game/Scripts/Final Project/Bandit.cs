@@ -286,6 +286,10 @@ namespace Completed
                 //Disable the weapon object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
+            else if (triggerCollider.tag == "Symbol") {
+                //Disable the symbol object the player collided with.
+                triggerCollider.gameObject.SetActive(false);
+            }
         }
 
         private void OnDisable()
