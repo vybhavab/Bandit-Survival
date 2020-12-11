@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Food: 100'
+  m_Text: 'Food: 5000'
 --- !u!222 &370068932
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -669,6 +669,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
+      propertyPath: foodSpawnPercent
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 480224722, guid: 9db2b5551c9988b4480cecc06c2bfea7, type: 3}
+      propertyPath: weaponSpawnPercent
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4684627384322868049, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: m_RootOrder
@@ -723,6 +731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684627384322868050, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: playerFoodPoints
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 4684627384322868079, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}

@@ -34,6 +34,7 @@ namespace Completed
         public Vector2 randomStartingLocation;
         Coordinate exitCoord = new Coordinate();
         List<Coordinate> passageEdgeTiles = new List<Coordinate>(); //to ensure exit isn't generated in a passage which would block players path to the rest of the map
+        public int numberofFloorTiles;
 
         [Range(0, 100)]
         public int randomWallValue; //used for the randomly generated starting point for the cellular automata
@@ -619,6 +620,7 @@ namespace Completed
         }
         void DrawMap()
         {
+            numberofFloorTiles = 0;
             int randomFloor = floorTiles.Length;
             int randomWall = wallTiles.Length;
             wallParent = GameObject.Find("Walls");
@@ -648,6 +650,7 @@ namespace Completed
                                 GameObject floor = (GameObject)Instantiate(floorTiles[UnityEngine.Random.Range(0, randomFloor - 1)], tilePosition, Quaternion.identity);
                                 floor.transform.SetParent(floorParent.transform);
                                 currentLevelTiles.Add(floor);
+                                numberofFloorTiles += 1;
                             }
                         }
 
@@ -666,6 +669,96 @@ namespace Completed
 
             itemSpawn = GameObject.Find("MapGenerator").GetComponent<ItemSpawn>();
             itemSpawn.DeleteItems();
+        }
+
+        public void UpdateMapSize(int explorationCount)
+        {
+            float mapExplorationPercentage = (float)explorationCount / numberofFloorTiles;
+            if (mapExplorationPercentage > 0.3f)
+            {
+                if (baseHeight + 10 > 128)
+                {
+                    baseHeight = 128;
+                }
+                else
+                {
+                    baseHeight = baseHeight + 10;
+                }
+
+                if (baseWidth + 10 > 128)
+                {
+                    baseWidth = 128;
+                }
+                else
+                {
+                    baseWidth = baseWidth + 10;
+                }
+            }
+
+            else if (mapExplorationPercentage > 0.25f)
+            {
+                if (baseHeight + 5 > 128)
+                {
+                    baseHeight = 128;
+                }
+                else
+                {
+                    baseHeight = baseHeight + 5;
+                }
+
+                if (baseWidth + 5 > 128)
+                {
+                    baseWidth = 128;
+                }
+                else
+                {
+                    baseWidth = baseWidth + 5;
+                }
+            }
+
+            else if (mapExplorationPercentage < 0.15f)
+            {
+                if (baseHeight - 10 < 32)
+                {
+                    baseHeight = 32;
+                }
+                else
+                {
+                    baseHeight = baseHeight - 10;
+                }
+
+                if (baseWidth - 10 < 32)
+                {
+                    baseWidth = 32;
+                }
+                else
+                {
+                    baseWidth = baseWidth - 10;
+                }
+                
+            }
+
+            else
+            {
+                if (baseHeight - 5 < 32)
+                {
+                    baseHeight = 32;
+                }
+                else
+                {
+                    baseHeight = baseHeight - 5;
+                }
+
+                if (baseWidth - 5 < 32)
+                {
+                    baseWidth = 32;
+                }
+                else
+                {
+                    baseWidth = baseWidth - 5;
+                }
+            }
+
         }
 
         public struct Coordinate

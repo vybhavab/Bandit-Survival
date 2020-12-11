@@ -28,6 +28,9 @@ namespace Completed
         private Vector2 prev_direction;  // Store the previous direction
         public int weaponSwings;
         bool dirFlipped = false;
+        public int explorationCount; //Number of Floor Tiles in the map the player has visited
+        public float percentMapVisited; //Percent of Floor Tiles that were interacted with
+
 
         private int food;               //For getting the player food value from the CaveGameManager
         public int foodDecrement;       //Amount food is decreased by when player moves.
@@ -61,8 +64,8 @@ namespace Completed
         void Start()
         {
 
-            //
-            MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
+            
+            
             m_animator = GetComponent<Animator>();
             
 
@@ -72,6 +75,7 @@ namespace Completed
             dirChanges = 0;
             flippedCount = 0;
             weaponSwings = 0;
+            explorationCount = 0;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -173,7 +177,7 @@ namespace Completed
             */
 
             //Attack
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) & canAttack)
             {
                 StartCoroutine(Attack());
                 banditBody.velocity = new Vector2(0, 0);
@@ -194,19 +198,25 @@ namespace Completed
 
         void OnTriggerEnter2D(Collider2D triggerCollider)
         {
-            Debug.Log(triggerCollider.tag);
+            //Debug.Log(triggerCollider.tag);
             //Check if the tag of the trigger is exit and load the next level
             if (triggerCollider.tag == "Exit")
             {
+                MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
+                map.UpdateMapSize(explorationCount);
+                Debug.Log("New Map Size: " + map.baseHeight);
+
                 //Disable the exit collider component so it doesn't continue to trigger
                 triggerCollider.GetComponent<Collider2D>().enabled = false;
                 
-                //Disable the player since the elvel is over
+                //Disable the player since the level is over
                 enabled = false;
 
                 //Stop the player from moving
                 banditBody.velocity = Vector2.zero;
 
+                //Reset explorationCount for the next level
+                explorationCount = 0;
 
                 GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().setDirChanges(dirChanges);
                 //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
@@ -285,6 +295,15 @@ namespace Completed
 
                 //Disable the weapon object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
+            }
+            else if (triggerCollider.tag == "Floor")
+            {
+                //Add this tile to the exploration count
+                explorationCount += 1;
+
+                //Disable the trigger on this tile so it doesn't get added to the count again if the player revisits the tile
+                triggerCollider.GetComponent<Collider2D>().enabled = false;
+
             }
         }
 
