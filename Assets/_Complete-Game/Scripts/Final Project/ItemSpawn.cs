@@ -8,6 +8,7 @@ public class ItemSpawn : MonoBehaviour
     public GameObject[] vegTiles;
     public GameObject[] drinkTiles;
     public GameObject[] meatTiles;
+    public GameObject symbolFoodTile;
 
     public int fruitWeighting = 4;
     public int vegWeighting = 2;
@@ -39,26 +40,42 @@ public class ItemSpawn : MonoBehaviour
             if (randomFoodSpawn <= fruitWeighting)
             {
                 int fruitToSpawn = Random.Range(0, fruitTiles.Length - 1);
-                GameObject fruit = (GameObject)Instantiate(fruitTiles[fruitToSpawn], new Vector2(x, y), Quaternion.identity);
+                Vector2 vec = new Vector2(x, y);
+
+                GameObject fruit = (GameObject)Instantiate(fruitTiles[fruitToSpawn], vec, Quaternion.identity);
                 currentLevelItems.Add(fruit);
+                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                currentLevelItems.Add(symFood);
             }
             else if (randomFoodSpawn <= fruitWeighting + vegWeighting)
             {
                 int vegToSpawn = Random.Range(0, vegTiles.Length - 1);
-                GameObject veg = (GameObject)Instantiate(vegTiles[vegToSpawn], new Vector2(x, y), Quaternion.identity);
+                Vector2 vec = new Vector2(x, y);
+
+                GameObject veg = (GameObject)Instantiate(vegTiles[vegToSpawn], vec, Quaternion.identity);
                 currentLevelItems.Add(veg);
+                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                currentLevelItems.Add(symFood);
             }
             else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting)
             {
                 int drinkToSpawn = Random.Range(0, drinkTiles.Length - 1);
-                GameObject drink = (GameObject)Instantiate(drinkTiles[drinkToSpawn], new Vector2(x, y), Quaternion.identity);
+                Vector2 vec = new Vector2(x, y);
+
+                GameObject drink = (GameObject)Instantiate(drinkTiles[drinkToSpawn], vec, Quaternion.identity);
                 currentLevelItems.Add(drink);
+                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                currentLevelItems.Add(symFood);
             }
             else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting + meatWeighting)
             {
                 int meatToSpawn = Random.Range(0, meatTiles.Length - 1);
-                GameObject meat = (GameObject)Instantiate(meatTiles[meatToSpawn], new Vector2(x, y), Quaternion.identity);
+                Vector2 vec = new Vector2(x, y);
+
+                GameObject meat = (GameObject)Instantiate(meatTiles[meatToSpawn], vec, Quaternion.identity);
                 currentLevelItems.Add(meat);
+                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                currentLevelItems.Add(symFood);
             }
             
         }
