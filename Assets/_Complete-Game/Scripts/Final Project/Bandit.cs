@@ -208,7 +208,7 @@ namespace Completed
 
                 //Disable the exit collider component so it doesn't continue to trigger
                 triggerCollider.GetComponent<Collider2D>().enabled = false;
-                
+
                 //Disable the player since the level is over
                 enabled = false;
 
@@ -286,7 +286,7 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if(triggerCollider.CompareTag("Sword"))
+            else if (triggerCollider.CompareTag("Sword"))
             {
                 damage = triggerCollider.GetComponent<Weapon>().damage;
                 weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
@@ -303,7 +303,11 @@ namespace Completed
 
                 //Disable the trigger on this tile so it doesn't get added to the count again if the player revisits the tile
                 triggerCollider.GetComponent<Collider2D>().enabled = false;
+            }
 
+            else if (triggerCollider.tag == "Symbol") {
+                //Disable the symbol object the player collided with.
+                triggerCollider.gameObject.SetActive(false);
             }
         }
 

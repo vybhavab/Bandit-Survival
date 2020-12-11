@@ -8,6 +8,8 @@ public class WeaponManager : MonoBehaviour
 
     public GameObject blankWeapon;
     public GameObject[] handles, hilts, blades;
+    public GameObject symbolWeaponTile;
+
     ItemSpawn itemSpawn;
     public void GenerateWeapon(Vector2 pos)
     {
@@ -25,6 +27,8 @@ public class WeaponManager : MonoBehaviour
 
         weapon.GetComponent<Weapon>().SetParts(handle, hilt, blade);
         GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(weapon);
+        GameObject symWeapon = (GameObject)Instantiate(symbolWeaponTile, pos, Quaternion.identity);
+        GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(symWeapon);
     }
     
     void Awake()
