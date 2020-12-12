@@ -10,6 +10,7 @@ public class ItemSpawn : MonoBehaviour
     public GameObject[] meatTiles;
     public GameObject symbolFoodTile;
 
+
     public int fruitWeighting = 4;
     public int vegWeighting = 2;
     public int drinkWeighting = 2;
@@ -77,7 +78,7 @@ public class ItemSpawn : MonoBehaviour
                 GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
                 currentLevelItems.Add(symFood);
             }
-            
+
         }
     }
 

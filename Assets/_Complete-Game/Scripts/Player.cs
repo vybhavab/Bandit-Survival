@@ -16,6 +16,8 @@ namespace Completed
 		public int pointsPerVeg = 15;
 		public int pointsPerMeat = 50;
 
+		public int pointsPerHitOfEnemy = 10;
+
 		public Text foodText;						//UI Text to display current player food total.
 		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
@@ -268,6 +270,17 @@ namespace Completed
 
 				//Disable the soda object the player collided with.
 				other.gameObject.SetActive(false);
+			}else if (other.tag == "Enemy") {
+				food -= pointsPerHitOfEnemy;
+
+				//Update foodText to represent current total and notify player that they gained points
+				foodText.text = "-" + pointsPerHitOfEnemy + " Food: " + food;
+
+				//Call the RandomizeSfx function of SoundManager and pass in two drinking sounds to choose between to play the drinking sound effect.
+				//SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
+
+				//Disable the soda object the player collided with.
+				//other.gameObject.SetActive(false);
 			}
 		}
 

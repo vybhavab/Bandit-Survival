@@ -50,7 +50,7 @@ namespace Completed
 			boxCollider.enabled = true;
 			
 			//Check if nothing was hit and that the object isn't already moving.
-			if(hit.transform == null && !isMoving)
+			if(hit.transform == null && !isMoving && gameObject.activeSelf)
 			{
 				//Start SmoothMovement co-routine passing in the Vector2 end as destination
 				StartCoroutine (SmoothMovement (end));

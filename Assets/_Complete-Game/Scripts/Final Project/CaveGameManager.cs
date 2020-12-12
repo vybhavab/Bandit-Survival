@@ -4,23 +4,25 @@ using System.Collections;
 
 namespace Completed
 {
-    using System.Collections.Generic;       //Allows us to use Lists. 
+    using System.Collections.Generic;       //Allows us to use Lists.
     using UnityEngine.UI;                   //Allows us to use UI.
 
     public class CaveGameManager : MonoBehaviour
     {
 		public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.
 		public float turnDelay = 0.1f;                          //Delay between each Player turn.
+		public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		public int playerFoodPoints = 5000;                      //Starting value for Player food points.
 		//public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-		//[HideInInspector] public bool playersTurn = true;       //Boolean to check if it's players turn, hidden in inspector but public.
+		[HideInInspector] public bool playersTurn = true;       //Boolean to check if it's players turn, hidden in inspector but public.
 
 
 		private Text levelText;                                 //Text to display current level number.
 		private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
 		private MapGenerator mapGenerator;                       //Store a reference to our MapGenerator which will set up the level.
-		private int level = 0;                                  //Current level number, expressed in game as "Day 1".
-		private List<Enemy> enemies;                            //List of all Enemy units, used to issue them move commands.
+		public static int level = 0;                                  //Current level number, expressed in game as "Day 1".
+		private List<EnemyBuilder> enemies;                            //List of all Enemy units, used to issue them move commands.
+		private bool enemiesMoving;
 		Bandit player;
 		//private bool enemiesMoving;                             //Boolean to check if enemies are moving.
 		private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
@@ -33,31 +35,30 @@ namespace Completed
 		void Awake()
 		{
 			//Check if instance already exists
-			//if (instance == null)
-
+			if (instance == null)
+			{
 				//if not, set instance to this
-				//instance = this;
-
-			//If instance already exists and it's not this:
-			//else if (instance != this)
-
+				instance = this;
+			}//If instance already exists and it's not this:
+			else if (instance != this)
+			{
 				//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-				//Destroy(gameObject);
-
+				Destroy(gameObject);
+			}
 			//Sets this to not be destroyed when reloading scene
-			//DontDestroyOnLoad(gameObject);
+			DontDestroyOnLoad(gameObject);
 
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 			levelImage = GameObject.Find("LevelImage");
 			player = GameObject.Find("LightBandit").GetComponent<Bandit>();
 			//Assign enemies to a new List of Enemy objects.
-			enemies = new List<Enemy>();
+			enemies = new List<EnemyBuilder>();
 
 			playerFoodPoints = 5000;
 			//Get a component reference to the attached BoardManager script
 			mapGenerator = GetComponent<MapGenerator>();
 
-			//Call the InitGame function to initialize the first level 
+			//Call the InitGame function to initialize the first level
 			Debug.Log("Awake Init");
 			InitGame();
 		}
@@ -70,7 +71,7 @@ namespace Completed
 			//register the callback to be called everytime the scene is loaded
 			SceneManager.sceneLoaded += OnSceneLoaded;
 		}
-		
+
 		//This is called each time a scene is loaded.
 		static private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
@@ -88,10 +89,10 @@ namespace Completed
 			doingSetup = true;
 
 			//Get a reference to our image LevelImage by finding it by name.
-			
+
 
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
-			
+
 
 			level++;
 			//Set the text of levelText to the string "Day" and append the current level number.
@@ -100,16 +101,16 @@ namespace Completed
 			//Set levelImage to active blocking player's view of the game board during setup.
 			levelImage.SetActive(true);
 
-			
+
 
 			//Clear any Enemy objects in our List to prepare for next level.
 			enemies.Clear();
 
 			mapGenerator.GenerateFirstMap();
-			
+
 			player.playerPosition = mapGenerator.randomStartingLocation;
 			player.transform.position = player.playerPosition;
-			
+
 
 			//Call the HideLevelImage function with a delay in seconds of levelStartDelay.
 			Invoke("HideLevelImage", levelStartDelay);
@@ -124,10 +125,10 @@ namespace Completed
 				mapGenerator.GenerateNewMap();
 			}
 			*/
-			
+
 		}
 
-		
+
 
 		//Hides black image used between levels
 		void HideLevelImage()
@@ -144,17 +145,17 @@ namespace Completed
 		void Update()
 		{
 			//Check that playersTurn or enemiesMoving or doingSetup are not currently true.
-			if (doingSetup)
-
+			if (enemiesMoving || doingSetup)
 				//If any of these are true, return and do not start MoveEnemies.
 				return;
-
-			//Start moving enemies.
-			//StartCoroutine(MoveEnemies());
+			playersTurn = true;
+			//Start moving enemies
+			Debug.Log("Moving enemies");
+			StartCoroutine(MoveEnemies());
 		}
 
 		//Call this to add the passed in Enemy to the List of Enemy objects.
-		public void AddEnemyToList(Enemy script)
+		public void AddEnemyToList(EnemyBuilder script)
 		{
 			//Add Enemy to List enemies.
 			enemies.Add(script);
@@ -185,7 +186,7 @@ namespace Completed
 		IEnumerator MoveEnemies()
 		{
 			//While enemiesMoving is true player is unable to move.
-
+			enemiesMoving = true;
 
 			//Wait for turnDelay seconds, defaults to .1 (100 ms).
 			yield return new WaitForSeconds(turnDelay);
@@ -203,10 +204,14 @@ namespace Completed
 				//Call the MoveEnemy function of Enemy at index i in the enemies List.
 				enemies[i].MoveEnemy();
 
-				//Wait for Enemy's moveTime before moving next Enemy, 
+				//Wait for Enemy's moveTime before moving next Enemy,
 				yield return new WaitForSeconds(enemies[i].moveTime);
 			}
 
+			playersTurn = true;
+			enemiesMoving = false;
+
 		}
+
 	}
 }
