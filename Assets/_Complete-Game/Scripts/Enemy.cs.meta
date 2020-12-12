@@ -1,8 +1,11 @@
 fileFormatVersion: 2
 guid: d22f79ef0655a41bb9e62823f6e7a3f1
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
+  - attackSound2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
