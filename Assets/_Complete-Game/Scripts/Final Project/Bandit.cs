@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Completed
 {
-    public class Bandit : MonoBehaviour
+    public class Bandit : MovingObject
     {
 
         private Animator m_animator;
@@ -194,7 +194,7 @@ namespace Completed
 
         void OnTriggerEnter2D(Collider2D triggerCollider)
         {
-            Debug.Log(triggerCollider.tag);
+            
             //Check if the tag of the trigger is exit and load the next level
             if (triggerCollider.tag == "Exit")
             {
@@ -290,6 +290,16 @@ namespace Completed
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
+            else if (triggerCollider.tag == "Enemy")
+            {
+                if (canAttack == false)
+                {
+                    Debug.Log("Enemy HP: " + triggerCollider.GetComponent<EnemyBuilder>().hp);
+                    triggerCollider.GetComponent<EnemyBuilder>().DamageEnemy(damage);
+                    //StartCoroutine(AttackEnemy(triggerCollider));
+                    //banditBody.velocity = new Vector2(0, 0);
+                }
+            }
         }
 
         private void OnDisable()
@@ -345,6 +355,27 @@ namespace Completed
             canAttack = true;
             canMove = true;
 
+        }
+
+        //OnCantMove overrides the abstract function OnCantMove in MovingObject.
+        //It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
+        protected override void OnCantMove<T>(T component)
+        {
+            if (component.tag == "Wall")
+            {
+                //Set hitWall to equal the component passed in as a parameter
+                Wall hitWall = component as Wall;
+
+                //Call the DamageWall function of the Wall we are hitting.
+                hitWall.DamageWall(damage);
+            }
+            if (component.tag == "Enemy")
+            {
+                EnemyBuilder hitEnemy = component as EnemyBuilder;
+                hitEnemy.DamageEnemy(damage);
+            }
+            //Set the attack trigger of the player's animation controller in order to play the player's attack animation.
+            m_animator.SetTrigger("Attack");
         }
 
         IEnumerator ShowFoodGain(int points)
