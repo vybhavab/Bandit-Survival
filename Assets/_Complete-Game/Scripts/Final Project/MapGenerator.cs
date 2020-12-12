@@ -160,6 +160,8 @@ namespace Completed
                 if (largeRooms.Count == 1)
                 {
                     allRoomsConnected = true;
+                    mapFloorTiles = largeRooms[0].tiles;
+                    mapEdgeTiles = largeRooms[0].edgeTiles;
                 }
 
             }
@@ -537,16 +539,20 @@ namespace Completed
         void GenerateStartAndExit()
         {
             //If map is processed, set fullMapRoom equal to the entire room and make sure randomStartingLocation isn't in one of the small regions that aren't connected. If map isn't proccessed, set fullMapRoom equal to largest room
-            Room fullMapRoom = new Room(allMapRooms[0], map);
+            if (!processMap)
+            {
+                mapFloorTiles = new Room(allMapRooms[0], map).tiles;
+                mapEdgeTiles = new Room(allMapRooms[0], map).edgeTiles;
+            }
             foreach (List<Coordinate> room in allMapRooms)
             {
-                if (room.Count > fullMapRoom.tiles.Count)
+                if (room.Count > mapFloorTiles.Count)
                 {
-                    fullMapRoom = new Room(room, map);
+                    mapFloorTiles = new Room(room, map).tiles;
+                    mapEdgeTiles = new Room(room, map).edgeTiles;
                 }
             }
-            mapFloorTiles = fullMapRoom.tiles;
-            mapEdgeTiles = fullMapRoom.edgeTiles;
+
             int randomStartRoomIndex = UnityEngine.Random.Range(0, originalRooms.Count - 1);
             Room randomStartRoom = originalRooms[randomStartRoomIndex];
             int randomStartTileIndex = UnityEngine.Random.Range(0, randomStartRoom.tiles.Count - 1);
