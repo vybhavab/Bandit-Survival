@@ -196,7 +196,7 @@ namespace Completed
         {
             
             //Check if the tag of the trigger is exit and load the next level
-            if (triggerCollider.tag == "Exit")
+            if (triggerCollider.CompareTag("Exit"))
             {
                 //Disable the exit collider component so it doesn't continue to trigger
                 triggerCollider.GetComponent<Collider2D>().enabled = false;
@@ -218,7 +218,7 @@ namespace Completed
 
             }
             //Check if the tag of the trigger collided with is Food.
-            else if (triggerCollider.tag == "Fruit")
+            else if (triggerCollider.CompareTag("Fruit"))
             {
                 //Add pointsPerFruit to the players current food total.
                 food += pointsPerFruit;
@@ -234,7 +234,7 @@ namespace Completed
             }
 
             //Check if the tag of the trigger collided with is Soda.
-            else if (triggerCollider.tag == "Drink")
+            else if (triggerCollider.CompareTag("Drink"))
             {
                 //Add pointsPerDrink to players food points total
                 food += pointsPerDrink;
@@ -248,7 +248,7 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Veg")
+            else if (triggerCollider.CompareTag("Veg"))
             {
                 //Add pointsPerVeg to players food points total
                 food += pointsPerVeg;
@@ -262,7 +262,7 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Meat")
+            else if (triggerCollider.CompareTag("Meat"))
             {
                 //Add pointsPerMeat to players food points total
                 food += pointsPerMeat;
@@ -276,7 +276,7 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if(triggerCollider.CompareTag("Sword"))
+            else if (triggerCollider.CompareTag("Sword"))
             {
                 damage = triggerCollider.GetComponent<Weapon>().damage;
                 weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
@@ -286,18 +286,16 @@ namespace Completed
                 //Disable the weapon object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Symbol") {
+            else if (triggerCollider.CompareTag("Symbol")) {
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Enemy")
+            else if (triggerCollider.CompareTag("Enemy"))
             {
                 if (canAttack == false)
                 {
                     Debug.Log("Enemy HP: " + triggerCollider.GetComponent<EnemyBuilder>().hp);
                     triggerCollider.GetComponent<EnemyBuilder>().DamageEnemy(damage);
-                    //StartCoroutine(AttackEnemy(triggerCollider));
-                    //banditBody.velocity = new Vector2(0, 0);
                 }
             }
         }
@@ -350,8 +348,9 @@ namespace Completed
             canMove = false;
             m_animator.SetTrigger("Attack");
             canAttack = false;
-
+            
             yield return new WaitForSeconds(attackTime);
+            Debug.Log("Can attack");
             canAttack = true;
             canMove = true;
 
