@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Completed
 {
-    public class Bandit : MovingObject
+    public class Bandit : MonoBehaviour
     {
 
         private Animator m_animator;
@@ -24,6 +24,8 @@ namespace Completed
         public float movementSpeed = 6;
 
         public int dirChanges;  // Number of Times the direction of motion changes
+        public bool facingLeft;
+        public bool facingRight;
         public int flippedCount;  // Number of Times the direction of motion flips
         private Vector2 prev_direction;  // Store the previous direction
         public int weaponSwings;
@@ -52,8 +54,8 @@ namespace Completed
         public AudioClip gameOverSound;				//Audio clip to play when player dies.
 
         float attackTime = .6f; //Amount of time the attack animation takes
-        bool canMove; //Set to false if the attack animation is running
-        bool canAttack; //Used so the full attack animation runs before the player can attack again
+        public bool canMove; //Set to false if the attack animation is running
+        public bool canAttack; //Used so the full attack animation runs before the player can attack again
         public float damage = 1;  //How much damage a player does to an enemy when chopping it.
 
         float deathTime = 1f; //Amount of time between death animation and Game Over screen
@@ -151,9 +153,17 @@ namespace Completed
 
                 // Swap direction of sprite depending on walk direction
                 if (input.x > 0)
+                {
+                    facingLeft = false;
+                    facingRight = true;
                     transform.localScale = new Vector3(-0.8f, 0.8f, 1.0f);
+                }
                 else if (input.x < 0)
+                {
+                    facingLeft = true;
+                    facingRight = false;
                     transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
+                }
 
                 // Move
                 banditBody.velocity = new Vector2(velocity.x, velocity.y);
@@ -370,31 +380,9 @@ namespace Completed
             canAttack = false;
             
             yield return new WaitForSeconds(attackTime);
-            Debug.Log("Can attack");
             canAttack = true;
             canMove = true;
 
-        }
-
-        //OnCantMove overrides the abstract function OnCantMove in MovingObject.
-        //It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
-        protected override void OnCantMove<T>(T component)
-        {
-            if (component.tag == "Wall")
-            {
-                //Set hitWall to equal the component passed in as a parameter
-                Wall hitWall = component as Wall;
-
-                //Call the DamageWall function of the Wall we are hitting.
-                hitWall.DamageWall(damage);
-            }
-            if (component.tag == "Enemy")
-            {
-                EnemyBuilder hitEnemy = component as EnemyBuilder;
-                hitEnemy.DamageEnemy(damage);
-            }
-            //Set the attack trigger of the player's animation controller in order to play the player's attack animation.
-            m_animator.SetTrigger("Attack");
         }
 
         IEnumerator ShowFoodGain(int points)
