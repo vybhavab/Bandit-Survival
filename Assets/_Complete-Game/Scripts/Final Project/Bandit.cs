@@ -57,10 +57,11 @@ namespace Completed
         public bool canMove; //Set to false if the attack animation is running
         public bool canAttack; //Used so the full attack animation runs before the player can attack again
         public int damage;  //How much damage a player does to an enemy when chopping it.
+        public int damageChange;
 
         float deathTime = 1f; //Amount of time between death animation and Game Over screen
 
-
+        int count;
 
         // Use this for initialization
         void Start()
@@ -91,11 +92,13 @@ namespace Completed
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
             // pointsPerFood = temps.Item2;
+            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
 
             canMove = true;
             canAttack = true;
             damage = 10;
             weaponName = "Weapon";
+            count = 0;
             
         }
 
@@ -113,7 +116,7 @@ namespace Completed
 
             if (Input.GetMouseButtonDown(0))
             {
-                weaponSwings = weaponSwings + 1;
+                weaponSwings += 1;
                 canMove = false;
             }
 
@@ -229,9 +232,11 @@ namespace Completed
 
                 GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().setDirChanges(dirChanges);
                 //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
+                GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().updateGenerator(weaponSwings);
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().updateGenerator(dirChanges);
                 GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().updateGenerator(weaponSwings);
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().updateGenerator(flippedCount);
+                count++;
                 Restart();
 
 
@@ -297,7 +302,7 @@ namespace Completed
             }
             else if (triggerCollider.CompareTag("Sword"))
             {
-                damage = triggerCollider.GetComponent<Weapon>().damage;
+                damage = triggerCollider.GetComponent<Weapon>().damage + damageChange;
                 weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
                 //Update foodText to represent current total and notify player that they gained points
                 StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
@@ -333,6 +338,9 @@ namespace Completed
             foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+
+            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
+            damage += damageChange;
 
             dirChanges = 0;
             flippedCount = 0;
