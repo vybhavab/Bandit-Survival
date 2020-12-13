@@ -310,6 +310,7 @@ namespace Completed
             }
             else if (triggerCollider.CompareTag("Enemy"))
             {
+                triggerCollider.GetComponent<EnemyBuilder>();
                 if (canAttack == false)
                 {
                     Debug.Log("Enemy HP: " + triggerCollider.GetComponent<EnemyBuilder>().hp);
@@ -331,6 +332,7 @@ namespace Completed
             foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+
             dirChanges = 0;
             flippedCount = 0;
             weaponSwings = 0;

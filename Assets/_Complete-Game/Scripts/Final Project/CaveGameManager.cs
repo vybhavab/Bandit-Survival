@@ -104,7 +104,10 @@ namespace Completed
 
 
 			//Clear any Enemy objects in our List to prepare for next level.
-			enemies.Clear();
+			foreach (EnemyBuilder enemy in enemies)
+            {
+				enemy.DeleteEnemy();
+            }
 
 			mapGenerator.GenerateFirstMap();
 
@@ -138,6 +141,7 @@ namespace Completed
 
 			//Set doingSetup to false allowing player to move again.
 			doingSetup = false;
+
 			player.enabled = true;
 		}
 

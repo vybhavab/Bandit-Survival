@@ -17,6 +17,8 @@ namespace Completed
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
 
+        Bandit player;
+
         protected override void Start()
         {
             CaveGameManager.instance.AddEnemyToList (this);
@@ -25,6 +27,8 @@ namespace Completed
             Debug.Log(target);
             hp = 2;
             base.Start();
+
+            player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
         }
 
         // Update is called once per frame
@@ -89,6 +93,12 @@ namespace Completed
             if (hp <= 0)
                 //Disable the gameObject.
                 gameObject.SetActive(false);
+        }
+
+        public void DeleteEnemy()
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Enemy Destroyed");
         }
 
     }
