@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;	//Allows us to use UI.
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace Completed
 {
@@ -64,6 +65,9 @@ namespace Completed
         public EnemyBuilder enemy1;
         public EnemyBuilder enemy2;
 
+        bool destroyWallTile;
+        List<GameObject> wallToDestroy;
+
         // Use this for initialization
         void Start()
         {
@@ -78,6 +82,8 @@ namespace Completed
             flippedCount = 0;
             weaponSwings = 0;
             explorationCount = 0;
+            wallToDestroy = new List<GameObject>();
+            destroyWallTile = false;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -318,6 +324,23 @@ namespace Completed
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
+            else if (triggerCollider.tag == "Wall")
+            {
+                Debug.Log("Wall collided with");
+                destroyWallTile = true;
+                wallToDestroy.Add(triggerCollider.gameObject);
+            }
+        }
+
+      
+
+        void OnTriggerExit2D(Collider2D triggerCollider)
+        {
+            if (triggerCollider.tag == "Wall")
+            {
+                wallToDestroy = new List<GameObject>();
+                destroyWallTile = false;
+            }
         }
 
         private void OnDisable()
@@ -344,6 +367,8 @@ namespace Completed
             dirChanges = 0;
             flippedCount = 0;
             weaponSwings = 0;
+            wallToDestroy = new List<GameObject>();
+            destroyWallTile = false;
             caveGameManager.InitGame();
         }
 
@@ -373,11 +398,22 @@ namespace Completed
         IEnumerator Attack()
         {
             //Stop the player from moving while they are attacking
+            Debug.Log(destroyWallTile);
             canMove = false;
             m_animator.SetTrigger("Attack");
             canAttack = false;
             
             yield return new WaitForSeconds(attackTime);
+
+            if (destroyWallTile)
+            {
+                MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
+                Vector2 newFloorPosition = wallToDestroy[0].transform.position;
+                Destroy(wallToDestroy[0]);
+                GameObject floor = (GameObject)Instantiate(map.floorTiles[Random.Range(0, map.floorTiles.Length - 1)], newFloorPosition, Quaternion.identity);
+                floor.transform.SetParent(GameObject.Find("Floors").transform);
+                map.currentLevelTiles.Add(floor);
+            }
             canAttack = true;
             canMove = true;
 
