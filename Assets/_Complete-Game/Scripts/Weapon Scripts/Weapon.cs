@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public float damage, speed, knockback;
+    public int damage, speed, knockback;
     public int durability, maxDurability;
     public string weaponName;
 
