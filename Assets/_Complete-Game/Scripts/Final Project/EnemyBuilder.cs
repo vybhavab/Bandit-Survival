@@ -31,6 +31,7 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
             Debug.Log(target);
+<<<<<<< HEAD
 
             if (level >= 1)
             {
@@ -43,6 +44,10 @@ namespace Completed
                 hp = Random.Range(0, 50);
             }
 
+=======
+            hp = Random.Range(10, 50); //10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
+            originalHp = hp;
+>>>>>>> 4485b4864c946c3975cecfa261d0e30b68496f26
             base.Start();
 
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
@@ -127,8 +132,12 @@ namespace Completed
             //Debug.Log("Enemy attacked, current hp = " + hp);
             yield return new WaitForSeconds(.6f);
             //If hit points are less than or equal to zero:
+<<<<<<< HEAD
             if (hp <= 0)
             {
+=======
+            if (hp <= 0) {
+>>>>>>> 4485b4864c946c3975cecfa261d0e30b68496f26
                 // spawn food as reward
                 SpawnFoodReward();
                 //Disable the gameObject.
@@ -156,7 +165,7 @@ namespace Completed
                 foodType = 9;
             }
             else foodType = 10;
-
+            Debug.Log("Food Type = " + foodType);
             for (int i = 0; i < 4; i++) {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
