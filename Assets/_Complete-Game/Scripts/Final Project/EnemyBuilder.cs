@@ -16,12 +16,16 @@ namespace Completed
         public AudioClip chopSound1;                //1 of 2 audio clips that play when the enemy is attacked by the player.
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
+        public Vector2 enemyPosition;
+
+        Bandit player;
 
         protected override void Start()
         {
             CaveGameManager.instance.AddEnemyToList (this);
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
+            enemyPosition = transform.position;
             Debug.Log(target);
             hp = 2;
             base.Start();
@@ -30,7 +34,25 @@ namespace Completed
         // Update is called once per frame
         void Update()
         {
-
+            player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
+            enemyPosition = transform.position;
+            if (player.canAttack == false)
+            {
+                if(Mathf.Pow(target.position.x - enemyPosition.x, 2) + Mathf.Pow(target.position.y - enemyPosition.y, 2) <= 1)
+                {
+                    if (target.position.x - enemyPosition.x > 0 && player.facingLeft)
+                    {
+                        StartCoroutine(DamageEnemy(player.damage));
+                        player.canAttack = true;
+                    }
+                    else if (target.position.x - enemyPosition.x < 0 && player.facingRight)
+                    {
+                        StartCoroutine(DamageEnemy(player.damage));
+                        player.canAttack = true;
+                    }
+                    
+                }
+            }
         }
 
         protected override void AttemptMove <T> (int xDir, int yDir)
@@ -77,14 +99,14 @@ namespace Completed
         }
 
         //DamageEnemy is called when the player attacks a enemy.
-        public void DamageEnemy(float loss)
+        IEnumerator DamageEnemy(float loss)
         {
             //Call the RandomizeSfx function of SoundManager to play one of two chop sounds.
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
 
             //Subtract loss from hit point total.
             hp -= loss;
-
+            yield return new WaitForSeconds(.6f);
             //If hit points are less than or equal to zero:
             if (hp <= 0)
                 //Disable the gameObject.
