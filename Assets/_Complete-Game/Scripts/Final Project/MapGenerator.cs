@@ -16,6 +16,7 @@ namespace Completed
 
         public GameObject wallParent; //For organizing all wall objects under one parent to avoid cluttering
         public GameObject[] wallTiles;
+        public GameObject[] outerWallTiles;
         public GameObject floorParent; //For organizing all floor objects under one parent to avoid cluttering
         public GameObject[] floorTiles;
         public GameObject exitTile;
@@ -23,7 +24,7 @@ namespace Completed
         public GameObject[] enemyTiles;
         public int enemyCount = 30;
         public GameObject symbolExitTile;
-        List<GameObject> currentLevelTiles = new List<GameObject>();
+        public List<GameObject> currentLevelTiles = new List<GameObject>();
 
         ItemSpawn itemSpawn;
 
@@ -648,6 +649,7 @@ namespace Completed
             numberofFloorTiles = 0;
             int randomFloor = floorTiles.Length;
             int randomWall = wallTiles.Length;
+            int randomOuterWall = outerWallTiles.Length;
             wallParent = GameObject.Find("Walls");
             floorParent = GameObject.Find("Floors");
             if (map != null)
@@ -659,9 +661,18 @@ namespace Completed
                         Vector2 tilePosition = new Vector2(-baseWidth / 2 - 0.5f + x, -baseHeight / 2 - 0.5f + y);
                         if (map[x, y] == 1)
                         {
-                            GameObject wall = (GameObject)Instantiate(wallTiles[UnityEngine.Random.Range(0, randomWall - 1)], tilePosition, Quaternion.identity);
-                            wall.transform.SetParent(wallParent.transform);
-                            currentLevelTiles.Add(wall);
+                            if (x == 0 || x == baseWidth - 1 || y == 0 || y == baseHeight - 1)
+                            {
+                                GameObject wall = (GameObject)Instantiate(outerWallTiles[UnityEngine.Random.Range(0, randomOuterWall - 1)], tilePosition, Quaternion.identity);
+                                wall.transform.SetParent(wallParent.transform);
+                                currentLevelTiles.Add(wall);
+                            }
+                            else
+                            {
+                                GameObject wall = (GameObject)Instantiate(wallTiles[UnityEngine.Random.Range(0, randomWall - 1)], tilePosition, Quaternion.identity);
+                                wall.transform.SetParent(wallParent.transform);
+                                currentLevelTiles.Add(wall);
+                            }
                         }
                         else if (map[x, y] == 0)
                         {
