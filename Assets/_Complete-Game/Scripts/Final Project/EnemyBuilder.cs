@@ -27,7 +27,6 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
             Debug.Log(target);
-            hp = 15;
             base.Start();
 
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
@@ -107,12 +106,13 @@ namespace Completed
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
 
             //Subtract loss from hit point total.
+            Debug.Log("HP: " + hp + " Damage: " + loss);
             hp -= loss;
             yield return new WaitForSeconds(.6f);
             //If hit points are less than or equal to zero:
             if (hp <= 0)
                 //Disable the gameObject.
-                gameObject.SetActive(false);
+                DeleteEnemy();
         }
 
         public void DeleteEnemy()

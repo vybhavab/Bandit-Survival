@@ -366,7 +366,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Food: 100'
+  m_Text: 'Food: 5000'
 --- !u!222 &370068932
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1043,6 +1043,23 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
+        type: 3}
+      propertyPath: enemy1
+      value: 
+      objectReference: {fileID: -9215877455877058773, guid: ebfba08a213d34c46ba2b1947aeaea83,
+        type: 3}
+    - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
+        type: 3}
+      propertyPath: enemy2
+      value: 
+      objectReference: {fileID: 1873815862688216196, guid: 089a2f2c322ea40f9afdfaba0550c6d3,
+        type: 3}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: foodText
