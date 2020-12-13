@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7309516385265546936}
   - component: {fileID: 5140194188553507678}
+  - component: {fileID: 8908381627063912901}
   m_Layer: 9
   m_Name: Symbol_Exit
   m_TagString: Symbol
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8908381627063912901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144740448631084416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb1e48c5f0034ab1b08342212bd4b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

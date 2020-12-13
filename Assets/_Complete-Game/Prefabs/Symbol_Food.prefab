@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5849009271658620782}
   - component: {fileID: 8290819037307961992}
   - component: {fileID: 5318499471369349013}
+  - component: {fileID: -7079430798914959029}
   m_Layer: 9
   m_Name: Symbol_Food
   m_TagString: Symbol
@@ -109,3 +110,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &-7079430798914959029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997394653987898454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb1e48c5f0034ab1b08342212bd4b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
