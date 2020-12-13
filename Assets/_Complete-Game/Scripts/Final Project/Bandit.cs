@@ -336,6 +336,7 @@ namespace Completed
 
             damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
             damage += damageChange;
+            if (damage < 5) damage = 5;
 
             enemy1.level++;
             enemy2.level++;
