@@ -12,7 +12,7 @@ namespace Completed
         private Animator animator;
         private Transform target;
         private bool skipMove;
-        int hp;
+        public int hp;
         int originalHp;
         public AudioClip chopSound1;                //1 of 2 audio clips that play when the enemy is attacked by the player.
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
@@ -113,15 +113,17 @@ namespace Completed
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
 
             //Subtract loss from hit point total.
+            Debug.Log("HP: " + hp + " Damage: " + loss);
             hp -= loss;
             //Debug.Log("Enemy attacked, current hp = " + hp);
             yield return new WaitForSeconds(.6f);
             //If hit points are less than or equal to zero:
-            if (hp <= 0)
+            if (hp <= 0) {
                 // spawn food as reward
                 SpawnFoodReward();
                 //Disable the gameObject.
-                gameObject.SetActive(false);
+                DeleteEnemy();
+            }
         }
 
         public void SpawnFoodReward() {

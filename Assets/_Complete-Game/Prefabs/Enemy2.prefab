@@ -171,9 +171,17 @@ MonoBehaviour:
   damageToPlayer: 30
   attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
   attackSound2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
+<<<<<<< HEAD
+  hp: 2
+  chopSound1: {fileID: 8300000, guid: 4c2332bc8245b474dad63074059bb755, type: 3}
+  chopSound2: {fileID: 8300000, guid: f6aaac83be9e0493493aace800b76619, type: 3}
+  currentLevelBosses: []
+  enemyPosition: {x: 0, y: 0}
+=======
   hp: 50
   chopSound1: {fileID: 0}
   chopSound2: {fileID: 0}
   currentLevelBosses: []
   enemyPosition: {x: 0, y: 0}
   attackedTimes: 0
+>>>>>>> a4deeb7bdc407c6dd8734ad1f145573d82ad3348

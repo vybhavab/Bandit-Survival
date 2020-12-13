@@ -21,7 +21,7 @@ namespace Completed
         public Vector2 previousPlayerPosition;
         Vector2 velocity;
         Vector2 input = new Vector2();
-        public float movementSpeed = 6;
+        public int movementSpeed = 6;
 
         public int dirChanges;  // Number of Times the direction of motion changes
         public bool facingLeft;
@@ -61,13 +61,13 @@ namespace Completed
 
         float deathTime = 1f; //Amount of time between death animation and Game Over screen
 
-        int count;
+        public EnemyBuilder enemy1;
+        public EnemyBuilder enemy2;
+        public int enemyHealthChange;
 
         // Use this for initialization
         void Start()
         {
-
-            
             
             m_animator = GetComponent<Animator>();
             
@@ -93,12 +93,15 @@ namespace Completed
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
             // pointsPerFood = temps.Item2;
             damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
+            enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();
+
+            enemy1.hp = 15;
+            enemy2.hp = 15;
 
             canMove = true;
             canAttack = true;
             damage = 10;
             weaponName = "Weapon";
-            count = 0;
             
         }
 
@@ -236,7 +239,7 @@ namespace Completed
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().updateGenerator(dirChanges);
                 GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().updateGenerator(weaponSwings);
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().updateGenerator(flippedCount);
-                count++;
+                GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().updateGenerator(weaponSwings);
                 Restart();
 
 
@@ -341,6 +344,10 @@ namespace Completed
 
             damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
             damage += damageChange;
+
+            enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();
+            enemy1.hp += enemyHealthChange;
+            enemy2.hp += enemyHealthChange;
 
             dirChanges = 0;
             flippedCount = 0;
