@@ -889,6 +889,26 @@ PrefabInstance:
       propertyPath: enemyTiles.Array.data[1]
       value: 
       objectReference: {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: outerWallTiles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: outerWallTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 110520, guid: 7094f72151ec74f569c4e03f1ec0f8e7, type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: outerWallTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 110520, guid: b0ace21a29149403094422fb3bd96aa9, type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: outerWallTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 110520, guid: e85c94355cc4641da919bd5d0ac956d4, type: 3}
     - target: {fileID: 4684627384322868049, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
       propertyPath: m_RootOrder
