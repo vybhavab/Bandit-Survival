@@ -12,7 +12,7 @@ namespace Completed
         private Animator animator;
         private Transform target;
         private bool skipMove;
-        public int hp;
+        int hp;
         int originalHp;
         public AudioClip chopSound1;                //1 of 2 audio clips that play when the enemy is attacked by the player.
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
@@ -29,7 +29,7 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
             Debug.Log(target);
-            hp = Random.Range(0, 50); //0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
+            hp = Random.Range(10, 50); //10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
             originalHp = hp;
             base.Start();
 
@@ -144,7 +144,7 @@ namespace Completed
                 foodType = 9;
             }
             else foodType = 10;
-
+            Debug.Log("Food Type = " + foodType);
             for (int i = 0; i < 4; i++) {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
