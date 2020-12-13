@@ -29,7 +29,7 @@ public class ItemSpawn : MonoBehaviour
     {
         totalFoodWeighting = fruitWeighting + vegWeighting + drinkWeighting + meatWeighting;
     }
-    public void SpawnItem(float x, float y, int randomNumber)
+    public void SpawnItem(float x, float y, int randomNumber, bool def = true, int foodRandomNumber = 0)
     {
         if (randomNumber <= weaponSpawnPercent)
         {
@@ -37,8 +37,8 @@ public class ItemSpawn : MonoBehaviour
         }
         else if (randomNumber <= weaponSpawnPercent + foodSpawnPercent)
         {
-            int randomFoodSpawn = Random.Range(1, totalFoodWeighting);
-            if (randomFoodSpawn <= fruitWeighting)
+            int randomFoodSpawn = def ? Random.Range(1, totalFoodWeighting) : foodRandomNumber;
+            if (randomFoodSpawn <= fruitWeighting) //4
             {
                 int fruitToSpawn = Random.Range(0, fruitTiles.Length - 1);
                 Vector2 vec = new Vector2(x, y);
@@ -48,7 +48,7 @@ public class ItemSpawn : MonoBehaviour
                 GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
                 currentLevelItems.Add(symFood);
             }
-            else if (randomFoodSpawn <= fruitWeighting + vegWeighting)
+            else if (randomFoodSpawn <= fruitWeighting + vegWeighting) // 6
             {
                 int vegToSpawn = Random.Range(0, vegTiles.Length - 1);
                 Vector2 vec = new Vector2(x, y);
@@ -58,7 +58,7 @@ public class ItemSpawn : MonoBehaviour
                 GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
                 currentLevelItems.Add(symFood);
             }
-            else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting)
+            else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting) //8
             {
                 int drinkToSpawn = Random.Range(0, drinkTiles.Length - 1);
                 Vector2 vec = new Vector2(x, y);
@@ -68,7 +68,7 @@ public class ItemSpawn : MonoBehaviour
                 GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
                 currentLevelItems.Add(symFood);
             }
-            else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting + meatWeighting)
+            else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting + meatWeighting) //9
             {
                 int meatToSpawn = Random.Range(0, meatTiles.Length - 1);
                 Vector2 vec = new Vector2(x, y);
