@@ -21,6 +21,7 @@ TagManager:
   - WeaponManager
   - Symbol
   - Floor
+  - MiniCamera
   layers:
   - Default
   - TransparentFX

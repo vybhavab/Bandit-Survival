@@ -13,6 +13,7 @@ namespace Completed
         private Transform target;
         private bool skipMove;
         public int hp;
+        int originalHp;
         public int enemyHealthChange;
         public AudioClip chopSound1;                //1 of 2 audio clips that play when the enemy is attacked by the player.
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
@@ -42,6 +43,7 @@ namespace Completed
             {
                 hp = Random.Range(0, 50);
             }
+            originalHp = hp;
 
             base.Start();
 
@@ -141,23 +143,23 @@ namespace Completed
             // generate fruit
             int foodType;
 
-            if (hp >= 10 && hp < 20) {
+            if (originalHp >= 10 && originalHp < 20) {
                 foodType = 4;
             }
             // generate drinks
-            else if (hp >= 20 && hp < 30) {
+            else if (originalHp >= 20 && originalHp < 30) {
                 foodType = 6;
             }
             // generate veg
-            else if (hp >= 30 && hp < 40) {
+            else if (originalHp >= 30 && originalHp < 40) {
                 foodType = 8;
             }
             // generate meat
-            else if (hp >= 40 && hp < 50) {
+            else if (originalHp >= 40 && originalHp < 50) {
                 foodType = 9;
             }
             else foodType = 10;
-            Debug.Log("Food Type = " + foodType);
+            // Debug.Log("Food Type = " + foodType);
             for (int i = 0; i < 4; i++) {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
