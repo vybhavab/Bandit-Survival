@@ -27,7 +27,7 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
             Debug.Log(target);
-            hp = 2;
+            hp = 15f;
             base.Start();
 
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();

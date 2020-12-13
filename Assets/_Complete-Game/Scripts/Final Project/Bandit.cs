@@ -56,7 +56,7 @@ namespace Completed
         float attackTime = .6f; //Amount of time the attack animation takes
         public bool canMove; //Set to false if the attack animation is running
         public bool canAttack; //Used so the full attack animation runs before the player can attack again
-        public float damage = 1;  //How much damage a player does to an enemy when chopping it.
+        public float damage;  //How much damage a player does to an enemy when chopping it.
 
         float deathTime = 1f; //Amount of time between death animation and Game Over screen
 
@@ -94,7 +94,7 @@ namespace Completed
 
             canMove = true;
             canAttack = true;
-
+            damage = 10f;
             weaponName = "Weapon";
             
         }

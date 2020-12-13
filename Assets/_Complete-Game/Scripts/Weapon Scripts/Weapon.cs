@@ -30,8 +30,11 @@ public class Weapon : MonoBehaviour
     public void SetParts(GameObject handles, GameObject hilts, GameObject blades)
     {
         handle = handles.GetComponent<Handle>();
+        handle.damage = UnityEngine.Random.Range(1, 5);
         hilt = hilts.GetComponent<Hilt>();
+        hilt.damage = UnityEngine.Random.Range(1, 5);
         blade = blades.GetComponent<Blade>();
+        blade.damage = UnityEngine.Random.Range(8, 20);
 
         GetStats();
         GetName();
