@@ -63,7 +63,6 @@ namespace Completed
 
         public EnemyBuilder enemy1;
         public EnemyBuilder enemy2;
-        public int enemyHealthChange;
 
         // Use this for initialization
         void Start()
@@ -92,11 +91,6 @@ namespace Completed
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
             // pointsPerFood = temps.Item2;
-            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
-            enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();
-
-            enemy1.hp = 15;
-            enemy2.hp = 15;
 
             canMove = true;
             canAttack = true;
@@ -241,8 +235,6 @@ namespace Completed
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().updateGenerator(flippedCount);
                 GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().updateGenerator(weaponSwings);
                 Restart();
-
-
             }
             //Check if the tag of the trigger collided with is Food.
             else if (triggerCollider.CompareTag("Fruit"))
@@ -345,9 +337,8 @@ namespace Completed
             damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
             damage += damageChange;
 
-            enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();
-            enemy1.hp += enemyHealthChange;
-            enemy2.hp += enemyHealthChange;
+            enemy1.level++;
+            enemy2.level++;
 
             dirChanges = 0;
             flippedCount = 0;

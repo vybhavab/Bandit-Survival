@@ -13,11 +13,13 @@ namespace Completed
         private Transform target;
         private bool skipMove;
         public int hp;
-        int originalHp;
+        public int enemyHealthChange;
         public AudioClip chopSound1;                //1 of 2 audio clips that play when the enemy is attacked by the player.
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
         public Vector2 enemyPosition;
+
+        public int level;
 
         Bandit player;
         ItemSpawn itemSpawn;
@@ -29,11 +31,18 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
             Debug.Log(target);
-<<<<<<< HEAD
-=======
-            hp = Random.Range(0, 50); //0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
-            originalHp = hp;
->>>>>>> a4deeb7bdc407c6dd8734ad1f145573d82ad3348
+
+            if (level >= 1)
+            {
+                // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();
+                hp = Random.Range(0, 50) + enemyHealthChange;
+            }
+            else
+            {
+                hp = Random.Range(0, 50);
+            }
+
             base.Start();
 
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
@@ -53,13 +62,11 @@ namespace Completed
                     {
                         player.canAttack = true;
                         StartCoroutine(DamageEnemy(player.damage));
-                        //player.canAttack = true;
                     }
                     else if (target.position.x - enemyPosition.x < 0 && player.facingRight)
                     {
                         player.canAttack = true;
                         StartCoroutine(DamageEnemy(player.damage));
-                        //player.canAttack = true;
                     }
 
                 }
@@ -116,35 +123,36 @@ namespace Completed
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
 
             //Subtract loss from hit point total.
-            Debug.Log("HP: " + hp + " Damage: " + loss);
             hp -= loss;
             //Debug.Log("Enemy attacked, current hp = " + hp);
             yield return new WaitForSeconds(.6f);
             //If hit points are less than or equal to zero:
             if (hp <= 0)
+            {
                 // spawn food as reward
                 SpawnFoodReward();
                 //Disable the gameObject.
                 DeleteEnemy();
+            }
         }
 
         public void SpawnFoodReward() {
             // generate fruit
             int foodType;
 
-            if (originalHp >= 10 && originalHp < 20) {
+            if (hp >= 10 && hp < 20) {
                 foodType = 4;
             }
             // generate drinks
-            else if (originalHp >= 20 && originalHp < 30) {
+            else if (hp >= 20 && hp < 30) {
                 foodType = 6;
             }
             // generate veg
-            else if (originalHp >= 30 && originalHp < 40) {
+            else if (hp >= 30 && hp < 40) {
                 foodType = 8;
             }
             // generate meat
-            else if (originalHp >= 40 && originalHp < 50) {
+            else if (hp >= 40 && hp < 50) {
                 foodType = 9;
             }
             else foodType = 10;
