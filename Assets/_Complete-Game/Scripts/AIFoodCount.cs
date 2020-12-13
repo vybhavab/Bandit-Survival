@@ -11,6 +11,7 @@ namespace Completed
 	{
         private int threshold_favorable = 20;  // Threshold to differentiate between positve/negative feedback
 
+        // Update generator value
         public override void updateGenerator(int feedback) {
             // Transform feedback to +1 or -1
             int modified_feedback = 0;
@@ -24,6 +25,7 @@ namespace Completed
             base.updateGenerator(modified_feedback);
         }
 
+        // Output FoodPercentage as 10 or 6
         public int getFoodWeight() {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();

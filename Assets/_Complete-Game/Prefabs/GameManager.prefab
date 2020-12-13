@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 11433656}
   - component: {fileID: 11433658}
   - component: {fileID: 3217416873714323857}
+  - component: {fileID: 8840779749293827556}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -70,6 +71,9 @@ MonoBehaviour:
   foodCount:
     minimum: 1
     maximum: 5
+  enemyCount:
+    minimum: 3
+    maximum: 10
   exit: {fileID: 110520, guid: cb0f3020bafec423aa31d0e491c4b811, type: 3}
   floorTiles:
   - {fileID: 106160, guid: 038998774947c4a8fa170d5b4492a7dd, type: 3}
@@ -122,5 +126,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e3b6f456753980418f74ee2c293db39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8840779749293827556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d772c46dc90eb5c47aa10eabd4e4d60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

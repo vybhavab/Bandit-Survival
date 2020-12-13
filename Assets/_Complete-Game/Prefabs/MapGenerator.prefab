@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4684627384322868050}
   - component: {fileID: 4684627384322868051}
   - component: {fileID: 480224722}
+  - component: {fileID: 1293863513245753140}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: GameManager
@@ -72,10 +73,14 @@ MonoBehaviour:
   - {fileID: 110520, guid: 5535fd6cd705e4a79a1d5a4f114de5dc, type: 3}
   - {fileID: 110520, guid: c18e9692903814865aa9a855aaa66df5, type: 3}
   exitTile: {fileID: 110520, guid: cb0f3020bafec423aa31d0e491c4b811, type: 3}
+  enemyTiles: []
+  enemyCount: 30
+  symbolExitTile: {fileID: 0}
   seed: 78
   randomSeed: 1
   processMap: 1
   randomStartingLocation: {x: 0, y: 0}
+  numberofFloorTiles: 0
   randomWallValue: 40
 --- !u!114 &4684627384322868050
 MonoBehaviour:
@@ -92,6 +97,7 @@ MonoBehaviour:
   levelStartDelay: 2
   turnDelay: 0.1
   playerFoodPoints: 100
+  playersTurn: 1
   prevDirChanges: 0
 --- !u!114 &4684627384322868051
 MonoBehaviour:
@@ -134,6 +140,7 @@ MonoBehaviour:
   meatTiles:
   - {fileID: 3301302229492216686, guid: aa84f442b2c6c46d893ce9c94eb7766a, type: 3}
   - {fileID: 2704252611058433543, guid: 4068a7bcbbd2e4cd3886169c8fc1a1a8, type: 3}
+  symbolFoodTile: {fileID: 0}
   fruitWeighting: 4
   vegWeighting: 2
   drinkWeighting: 2
@@ -141,3 +148,15 @@ MonoBehaviour:
   foodSpawnPercent: 40
   weaponSpawnPercent: 2
   currentLevelItems: []
+--- !u!114 &1293863513245753140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4684627384322868079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d772c46dc90eb5c47aa10eabd4e4d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

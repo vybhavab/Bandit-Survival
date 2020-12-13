@@ -9,7 +9,6 @@ namespace Completed
 	
 	public class AIFoodDecrementContinuous : ReinforcementAIContinuous 
 	{
-        // Using Serializable allows us to embed a class with sub properties in the inspector.
 		public class Count
 		{
 			public int minimum; 			//Minimum value for our Count class.
@@ -23,14 +22,17 @@ namespace Completed
 				maximum = max;
 			}
 		}
-        public Count dirChangesRangeInput = new Count (10, 100);
-        public Count foodDrecrementRangeOutput = new Count (-10, -1);
-        private int threshold_favorable = 10;  // Threshold to differentiate between positve/negative feedback
 
+		// Set Range for DirChange Values (Input)
+        public Count dirChangesRangeInput = new Count (10, 100);
+		// Set Range for foodDecrement Values (Output)
+        public Count foodDrecrementRangeOutput = new Count (-10, -1);
+
+		// Update generator with probability as current value in terms of range (x / (max - min))
         public override void updateGenerator(float feedback) {
             base.updateGenerator((feedback - dirChangesRangeInput.minimum) / (dirChangesRangeInput.maximum - dirChangesRangeInput.minimum));
         }
-
+		// Output food decrement as an integer
         public int getFoodDecrement() {
             float action = getOutput();
             return (int)(foodDrecrementRangeOutput.minimum + action * (foodDrecrementRangeOutput.maximum - foodDrecrementRangeOutput.minimum));

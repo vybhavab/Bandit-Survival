@@ -18,29 +18,31 @@ namespace Completed {
 
         }
 
+        // Update the generator values based on user feedback
         public virtual void updateGenerator(int feedback) {
             if(intent == feedback) {
                 if(intent == output) {
-                    generator_value = generator_value + intent * weight;
+                    generator_value = generator_value + intent * weight;  // Increment to Positive
                     Debug.Log("Intent == Feedback == Output");
                 }
                 else if(intent != output) {
-                    generator_value = generator_value + intent * weight * multiplier;
+                    generator_value = generator_value + intent * weight * multiplier;  // Increment to Positive
                     Debug.Log("Intent == Feedback != Output");
                 }
             }
             else if(intent != feedback) {
                 if(intent == output) {
-                    generator_value = generator_value - intent * weight;
+                    generator_value = generator_value - intent * weight;  // Decrement to Negative
                     Debug.Log("Intent != Feedback & Intent == Output");
                 }
                 else if(intent != output) {
-                    generator_value = generator_value - intent * weight * multiplier;
+                    generator_value = generator_value - intent * weight * multiplier;  // Decrement to Negative
                     Debug.Log("Intent != Feedback & Feedback == Output");
                 }
             }
         }
 
+        // Sigmoid transform value w/ constraints
         private float sigmoidConstrained(float value) {
             float return_value = 1.0f / (1.0f + (float) Mathf.Exp(-value));  // Get value in [0, 1]
             // Cap value so that is has to be in the range [0.2, 0.8]
@@ -53,6 +55,7 @@ namespace Completed {
             return return_value;
         }
 
+        // Generate postive or negative output
         public int getOutput() {
             Debug.Log("Generator Seed: " + generator_value);
             float prob = sigmoidConstrained(generator_value);
@@ -61,6 +64,7 @@ namespace Completed {
                 intent = 1;
             }
             else {
+                prob = 1.0f - prob;
                 intent = -1;
             }
             // Select output weighted by probability
