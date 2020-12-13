@@ -52,7 +52,7 @@ namespace Completed
                         StartCoroutine(DamageEnemy(player.damage));
                         player.canAttack = true;
                     }
-                    
+
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace Completed
         }
 
         //DamageEnemy is called when the player attacks a enemy.
-        IEnumerator DamageEnemy(float loss)
+        public IEnumerator DamageEnemy(float loss)
         {
             //Call the RandomizeSfx function of SoundManager to play one of two chop sounds.
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
