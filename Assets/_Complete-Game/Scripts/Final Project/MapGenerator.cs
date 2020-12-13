@@ -88,22 +88,8 @@ namespace Completed
                     }
                 }
             }
-
-            Debug.Log(currentLevelTiles.Count);
-            print(Time.realtimeSinceStartup); //just for seeing how long maps of different size take to generate to find a reasonable upper bound on map size
         }
 
-        public void GenerateNewMap()
-        {
-            Bandit player = GameObject.Find("LightBandit").GetComponent<Bandit>();
-            DeleteMap();
-            GenerateMap();
-            GenerateStartAndExit();
-            DrawMap();
-            player.enabled = true;
-            player.playerPosition = randomStartingLocation;
-            player.transform.position = player.playerPosition;
-        }
 
         void GenerateMap()
         {
@@ -777,7 +763,7 @@ namespace Completed
                 
             }
 
-            else
+            else if (mapExplorationPercentage < 0.2f)
             {
                 if (baseHeight - 5 < 32)
                 {

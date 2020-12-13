@@ -56,18 +56,18 @@ namespace Completed
         {
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             enemyPosition = transform.position;
-            if (player.canAttack == false)
+            if (player.playerAttacking == true)
             {
                 if(Mathf.Pow(target.position.x - enemyPosition.x, 2) + Mathf.Pow(target.position.y - enemyPosition.y, 2) <= 1)
                 {
                     if (target.position.x - enemyPosition.x > 0 && player.facingLeft)
                     {
-                        player.canAttack = true;
+                        player.playerAttacking = false;
                         StartCoroutine(DamageEnemy(player.damage));
                     }
                     else if (target.position.x - enemyPosition.x < 0 && player.facingRight)
                     {
-                        player.canAttack = true;
+                        player.playerAttacking = false;
                         StartCoroutine(DamageEnemy(player.damage));
                     }
 

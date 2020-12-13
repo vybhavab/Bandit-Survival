@@ -57,6 +57,7 @@ namespace Completed
         float attackTime = .6f; //Amount of time the attack animation takes
         public bool canMove; //Set to false if the attack animation is running
         public bool canAttack; //Used so the full attack animation runs before the player can attack again
+        public bool playerAttacking;
         public int damage;  //How much damage a player does to an enemy when chopping it.
         public int damageChange;
 
@@ -196,6 +197,7 @@ namespace Completed
             if (Input.GetMouseButtonDown(0) & canAttack)
             {
                 StartCoroutine(Attack());
+                playerAttacking = true;
                 banditBody.velocity = new Vector2(0, 0);
             }
 
