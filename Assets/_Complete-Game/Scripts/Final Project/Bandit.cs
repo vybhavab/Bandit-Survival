@@ -318,15 +318,6 @@ namespace Completed
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.CompareTag("Enemy"))
-            {
-                triggerCollider.GetComponent<EnemyBuilder>();
-                if (canAttack == false)
-                {
-                    Debug.Log("Enemy HP: " + triggerCollider.GetComponent<EnemyBuilder>().hp);
-                    triggerCollider.GetComponent<EnemyBuilder>().DamageEnemy(damage);
-                }
-            }
         }
 
         private void OnDisable()

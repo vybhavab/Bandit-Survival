@@ -20,8 +20,6 @@ namespace Completed
 
         Bandit player;
 
-        Bandit player;
-
         protected override void Start()
         {
             CaveGameManager.instance.AddEnemyToList (this);
