@@ -4,9 +4,9 @@ using System.Collections;
 using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine random number generator.
 
 namespace Completed {
-	using System.Collections.Generic;		//Allows us to use Lists. 
+	using System.Collections.Generic;		//Allows us to use Lists.
 	using UnityEngine.UI;					//Allows us to use UI.
-	
+
 	public class ReinforcementAIContinuous : MonoBehaviour {
         private float generator_value;  // Value passed to sigmoid to determine probability
         protected float learning_rate = 10.0f;  // Weightage for generator_value modification
@@ -44,7 +44,7 @@ namespace Completed {
 
         // Generate probability output
         public float getOutput() {
-            Debug.Log("Generator Seed: " + generator_value);
+            //Debug.Log("Generator Seed: " + generator_value);
             // Input value to sigmoid is chosen randomly from [generator - deviation, generator + deviation]
             float prob = sigmoidConstrained(Random.Range(generator_value - deviation, generator_value + deviation));
             return prob;

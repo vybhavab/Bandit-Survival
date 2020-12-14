@@ -3,7 +3,7 @@ using System.Collections;
 namespace Completed
 {
     using System.Collections.Generic;
-    public class EnemyBuilder : MovingObject
+    public class EnemyBuilder : EntityMover
     {
         // Start is called before the first frame update
         public int damageToPlayer;
@@ -24,7 +24,6 @@ namespace Completed
 
         Bandit player;
         ItemSpawn itemSpawn;
-        WeaponManager wm;
 
         protected override void Start()
         {
@@ -48,8 +47,6 @@ namespace Completed
 
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
-            wm = GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>();
-
             base.Start();
 
         }
@@ -114,8 +111,8 @@ namespace Completed
             int yDir = 0;
 
             //If the difference in positions is approximately zero (Epsilon) do the following:
-
-            if(Mathf.Abs(target.position.x - transform.position.x) < 7 || Mathf.Abs(target.position.y - transform.position.y) < 7){
+//
+            if(Mathf.Abs(target.position.x - transform.position.x) < 3 || Mathf.Abs(target.position.y - transform.position.y) < 3){
                 if(target.position.x - transform.position.x < 0) {
                     xDir = -1;
                 }else{
@@ -132,7 +129,7 @@ namespace Completed
                 yDir = Random.Range(-1, 1);
             }
 
-            //Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
+            // //Call the AttemptMove function and pass in the generic parameter Bandit, because Enemy is moving and expecting to potentially encounter a Bandit
             AttemptMove <Bandit> (xDir, yDir);
         }
 
@@ -140,8 +137,7 @@ namespace Completed
         {
 			Bandit hitPlayer = component as Bandit;
 
-			//Call the LoseFood function of hitPlayer passing it playerDamage, the amount of foodpoints to be subtracted.
-            Debug.Log("DAMAGE" + hitPlayer);
+            Debug.Log("DAMAGE " + component);
 
             hitPlayer.DecrementHealthFromPlayer();
 
@@ -161,10 +157,10 @@ namespace Completed
             //If hit points are less than or equal to zero:
             if (hp <= 0)
             {
-                // spawn food as reward
-                SpawnFoodReward();
                 //Disable the gameObject.
                 DeleteEnemy();
+                // spawn food as reward
+                SpawnFoodReward();
             }
             //Debug.Log("Enemy attacked, current hp = " + hp);
             yield return new WaitForSeconds(.6f);
@@ -174,7 +170,7 @@ namespace Completed
             if(originalHp >= 30){
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
-                itemSpawn.SpawnItem(x, y, Random.Range(0, 4), false);
+                GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
             }
             // generate fruit
             // int foodType;
@@ -210,7 +206,8 @@ namespace Completed
         public void DeleteEnemy()
         {
             gameObject.SetActive(false);
-            Debug.Log("Enemy Destroyed");
+            Destroy(gameObject);
+            //Debug.Log("Enemy Destroyed");
         }
 
     }

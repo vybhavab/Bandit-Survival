@@ -59,7 +59,7 @@ namespace Completed
 			mapGenerator = GetComponent<MapGenerator>();
 
 			//Call the InitGame function to initialize the first level
-			Debug.Log("Awake Init");
+			//Debug.Log("Awake Init");
 			InitGame();
 		}
 
@@ -83,7 +83,7 @@ namespace Completed
 		//Initializes the game for each level.
 		public void InitGame()
 		{
-			Debug.Log("Init Game Cave");
+			//Debug.Log("Init Game Cave");
 			player.enabled = false;
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
@@ -105,9 +105,9 @@ namespace Completed
 
 			//Clear any Enemy objects in our List to prepare for next level.
 			foreach (EnemyBuilder enemy in enemies)
-            {
+			{
 				enemy.DeleteEnemy();
-            }
+      }
 
 			mapGenerator.GenerateFirstMap();
 
@@ -205,10 +205,15 @@ namespace Completed
 			for (int i = 0; i < enemies.Count; i++)
 			{
 				//Call the MoveEnemy function of Enemy at index i in the enemies List.
-				enemies[i].MoveEnemy();
+				if(enemies[i] != null){
+					enemies[i].MoveEnemy();
+					yield return new WaitForSeconds(enemies[i].moveTime);
+				}else{
+					enemies.RemoveAt(i);
+				}
 
 				//Wait for Enemy's moveTime before moving next Enemy,
-				yield return new WaitForSeconds(enemies[i].moveTime);
+					yield return new WaitForSeconds(0);
 			}
 
 			playersTurn = true;

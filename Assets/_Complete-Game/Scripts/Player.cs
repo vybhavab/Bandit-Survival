@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace Completed
 {
 	//Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
-	public class Player : MovingObject
+	public class Player : EntityMover
 	{
 		public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
 		public int wallDamage = 1;					//How much damage a player does to a wall when chopping it.

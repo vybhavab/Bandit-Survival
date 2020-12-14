@@ -52,7 +52,7 @@ namespace Completed
 			boardScript = GetComponent<BoardManager>();
 
 			//Call the InitGame function to initialize the first level
-			Debug.Log("Awake Init");
+			//Debug.Log("Awake Init");
 			InitGame();
 		}
 
@@ -77,7 +77,7 @@ namespace Completed
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			Debug.Log("Init Game");
+			//Debug.Log("Init Game");
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 

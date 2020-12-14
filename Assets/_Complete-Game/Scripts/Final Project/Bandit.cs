@@ -224,7 +224,7 @@ namespace Completed
             {
                 MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
                 map.UpdateMapSize(explorationCount);
-                Debug.Log("New Map Size: " + map.baseHeight);
+                //Debug.Log("New Map Size: " + map.baseHeight);
 
                 //Disable the exit collider component so it doesn't continue to trigger
                 triggerCollider.GetComponent<Collider2D>().enabled = false;

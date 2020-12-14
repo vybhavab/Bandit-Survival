@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace Completed {
-	using System.Collections.Generic;		//Allows us to use Lists. 
+	using System.Collections.Generic;		//Allows us to use Lists.
 	using UnityEngine.UI;					//Allows us to use UI.
-	
+
 	public class ReinforcementAI : MonoBehaviour {
         private float generator_value = 0.0f;  // Value passed to sigmoid to determine probability of 1
         protected float weight = 1.0f;  // Weightage for generator_value modification
@@ -23,21 +23,21 @@ namespace Completed {
             if(intent == feedback) {
                 if(intent == output) {
                     generator_value = generator_value + intent * weight;  // Increment to Positive
-                    Debug.Log("Intent == Feedback == Output");
+                    //Debug.Log("Intent == Feedback == Output");
                 }
                 else if(intent != output) {
                     generator_value = generator_value + intent * weight * multiplier;  // Increment to Positive
-                    Debug.Log("Intent == Feedback != Output");
+                    //Debug.Log("Intent == Feedback != Output");
                 }
             }
             else if(intent != feedback) {
                 if(intent == output) {
                     generator_value = generator_value - intent * weight;  // Decrement to Negative
-                    Debug.Log("Intent != Feedback & Intent == Output");
+                    //Debug.Log("Intent != Feedback & Intent == Output");
                 }
                 else if(intent != output) {
                     generator_value = generator_value - intent * weight * multiplier;  // Decrement to Negative
-                    Debug.Log("Intent != Feedback & Feedback == Output");
+                    //Debug.Log("Intent != Feedback & Feedback == Output");
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace Completed {
 
         // Generate postive or negative output
         public int getOutput() {
-            Debug.Log("Generator Seed: " + generator_value);
+            //Debug.Log("Generator Seed: " + generator_value);
             float prob = sigmoidConstrained(generator_value);
             // Determine int based on if probability >= 0.5 -> 1 else -1
             if(prob >= 0.5) {
