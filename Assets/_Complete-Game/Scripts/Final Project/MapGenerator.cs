@@ -73,7 +73,7 @@ namespace Completed
             {
                 if (UnityEngine.Random.Range(0, 150) >= 7)
                 {
-                    int randomNumber = UnityEngine.Random.Range(0, 1000);
+                    int randomNumber = UnityEngine.Random.Range(5, 1000);
                     itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber);
                 }else
                 {
@@ -83,7 +83,7 @@ namespace Completed
                         currEnemyCount++;
                     }else
                     {
-                        int randomNumber = UnityEngine.Random.Range(0, 1000);
+                        int randomNumber = UnityEngine.Random.Range(5, 1000);
                         itemSpawn.SpawnItem(-baseWidth / 2 - 0.5f + coord.x, -baseHeight / 2 - 0.5f + coord.y, randomNumber);
                     }
                 }
@@ -760,7 +760,7 @@ namespace Completed
                 {
                     baseWidth = baseWidth - 10;
                 }
-                
+
             }
 
             else if (mapExplorationPercentage < 0.2f)

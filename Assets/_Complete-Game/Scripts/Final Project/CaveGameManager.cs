@@ -154,7 +154,6 @@ namespace Completed
 				return;
 			playersTurn = true;
 			//Start moving enemies
-			Debug.Log("Moving enemies");
 			StartCoroutine(MoveEnemies());
 		}
 
@@ -193,13 +192,13 @@ namespace Completed
 			enemiesMoving = true;
 
 			//Wait for turnDelay seconds, defaults to .1 (100 ms).
-			yield return new WaitForSeconds(turnDelay);
+			//yield return new WaitForSeconds(turnDelay);
 
 			//If there are no enemies spawned (IE in first level):
 			if (enemies.Count == 0)
 			{
 				//Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
-				yield return new WaitForSeconds(turnDelay);
+				//yield return new WaitForSeconds(turnDelay);
 			}
 
 			//Loop through List of Enemy objects.

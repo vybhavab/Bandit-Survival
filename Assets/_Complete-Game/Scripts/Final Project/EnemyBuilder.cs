@@ -24,6 +24,7 @@ namespace Completed
 
         Bandit player;
         ItemSpawn itemSpawn;
+        WeaponManager wm;
 
         protected override void Start()
         {
@@ -31,7 +32,7 @@ namespace Completed
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
-            Debug.Log(target);
+
 
             if (level >= 1)
             {
@@ -45,10 +46,26 @@ namespace Completed
             }
             originalHp = hp;
 
-            base.Start();
-
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
+            wm = GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>();
+
+            base.Start();
+
+        }
+
+        void OnGUI()
+        {
+            var rect = new Rect(0,0,50,100);
+            var offset =  new Vector2(-.2f,-1.2f); // height above the target position
+
+            var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
+            rect.x = point.x;
+            rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
+            //var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
+            if(hp < originalHp){
+                GUI.Label(rect, hp.ToString()); // display its name, or other string
+            }
         }
 
         // Update is called once per frame
@@ -91,27 +108,42 @@ namespace Completed
 
         public void MoveEnemy ()
         {
+            //Declare variables for X and Y axis move directions, these range from -1 to 1.
+            //These values allow us to choose between the cardinal directions: up, down, left and right.
             int xDir = 0;
             int yDir = 0;
 
-            if(Mathf.Abs (target.position.x - target.position.x) < float.Epsilon)
-            {
-                yDir = target.position.y > transform.position.y ? 1 : -1;
-            }else
-            {
-                xDir = target.position.x > transform.position.x ? 1 : -1;
+            //If the difference in positions is approximately zero (Epsilon) do the following:
+
+            if(Mathf.Abs(target.position.x - transform.position.x) < 7 || Mathf.Abs(target.position.y - transform.position.y) < 7){
+                if(target.position.x - transform.position.x < 0) {
+                    xDir = -1;
+                }else{
+                    xDir = +1;
+                }
+
+                if(target.position.y - transform.position.y < 0){
+                    yDir = -1;
+                }else{
+                    yDir = +1;
+                }
+            }else{
+                xDir = Random.Range(-1, 1);
+                yDir = Random.Range(-1, 1);
             }
 
-            AttemptMove <Player> (xDir, yDir);
-
+            //Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
+            AttemptMove <Bandit> (xDir, yDir);
         }
 
         protected override void OnCantMove <T> (T component)
         {
-			Player hitPlayer = component as Player;
+			Bandit hitPlayer = component as Bandit;
 
 			//Call the LoseFood function of hitPlayer passing it playerDamage, the amount of foodpoints to be subtracted.
-			Debug.Log("REDUCE HEALTH");
+            Debug.Log("DAMAGE" + hitPlayer);
+
+            hitPlayer.DecrementHealthFromPlayer();
 
 			animator.SetTrigger ("enemyAttack");
 
@@ -140,31 +172,40 @@ namespace Completed
         }
 
         public void SpawnFoodReward() {
-            // generate fruit
-            int foodType;
-
-            if (originalHp >= 10 && originalHp < 20) {
-                foodType = 4;
-            }
-            // generate drinks
-            else if (originalHp >= 20 && originalHp < 30) {
-                foodType = 6;
-            }
-            // generate veg
-            else if (originalHp >= 30 && originalHp < 40) {
-                foodType = 8;
-            }
-            // generate meat
-            else if (originalHp >= 40 && originalHp < 50) {
-                foodType = 9;
-            }
-            else foodType = 10;
-            // Debug.Log("Food Type = " + foodType);
-            for (int i = 0; i < 4; i++) {
+            if(originalHp >= 30){
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
-                itemSpawn.SpawnItem(x, y, 5, false, foodType);
+                itemSpawn.SpawnItem(x, y, Random.Range(0, 4), false);
             }
+            // generate fruit
+            // int foodType;
+
+            // if (originalHp >= 10 && originalHp < 20) {
+            //     foodType = 4;
+            // }
+            // // generate drinks
+            // else if (originalHp >= 20 && originalHp < 30) {
+            //     foodType = 6;
+            // }
+            // // generate veg
+            // else if (originalHp >= 30 && originalHp < 40) {
+            //     foodType = 8;
+            // }
+            // // generate meat
+            // else if (originalHp >= 40 && originalHp < 50) {
+            //     foodType = 9;
+            // }
+            // else { //generate weapon
+            //     foodType = -1;
+            // };
+            // // Debug.Log("Food Type = " + foodType);
+            // if(foodType > 0){
+            //     for (int i = 0; i < 4; i++) {
+            //         float x = transform.position.x + Random.Range(-0.5f, 0.5f);
+            //         float y = transform.position.y + Random.Range(-0.5f, 0.5f);
+            //         itemSpawn.SpawnItem(x, y, 5, false, foodType);
+            //     }
+            // }
         }
 
         public void DeleteEnemy()

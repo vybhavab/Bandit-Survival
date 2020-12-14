@@ -66,15 +66,17 @@ namespace Completed
         public EnemyBuilder enemy1;
         public EnemyBuilder enemy2;
 
+        public int enemyDamage;
+
         bool destroyWallTile;
         List<GameObject> wallToDestroy;
 
         // Use this for initialization
         void Start()
         {
-            
+
             m_animator = GetComponent<Animator>();
-            
+
 
             // Reset Values
             prev_direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -103,13 +105,14 @@ namespace Completed
             canAttack = true;
             damage = 10;
             weaponName = "Weapon";
-            
+            enemyDamage = 50;
+
         }
 
         // Update is called once per frame
         void Update()
         {
-            
+
             //If player is dead, don't process input
             if (m_isDead)
             {
@@ -328,13 +331,12 @@ namespace Completed
             }
             else if (triggerCollider.tag == "Wall")
             {
-                Debug.Log("Wall collided with");
                 destroyWallTile = true;
                 wallToDestroy.Add(triggerCollider.gameObject);
             }
         }
 
-      
+
 
         void OnTriggerExit2D(Collider2D triggerCollider)
         {
@@ -400,11 +402,10 @@ namespace Completed
         IEnumerator Attack()
         {
             //Stop the player from moving while they are attacking
-            Debug.Log(destroyWallTile);
             canMove = false;
             m_animator.SetTrigger("Attack");
             canAttack = false;
-            
+
             yield return new WaitForSeconds(attackTime);
 
             if (destroyWallTile)
@@ -419,6 +420,18 @@ namespace Completed
             canAttack = true;
             canMove = true;
 
+        }
+
+        public IEnumerator DecrementHealthFromPlayer()
+        {
+            //Reduce player health
+            food -= enemyDamage;
+
+			//Update the food display with the new total.
+			foodText.text = "-"+ enemyDamage + " Food: " + food;
+            yield return new WaitForSeconds(1);
+			//Check to see if game has ended.
+			CheckIfGameOver ();
         }
 
         IEnumerator ShowFoodGain(int points)

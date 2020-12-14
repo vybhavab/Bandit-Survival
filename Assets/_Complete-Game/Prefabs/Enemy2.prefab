@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 420220807
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -136,7 +136,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -172,8 +172,9 @@ MonoBehaviour:
   attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
   attackSound2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
   hp: 0
-  originalHp: 0
+  enemyHealthChange: 0
   chopSound1: {fileID: 8300000, guid: 4c2332bc8245b474dad63074059bb755, type: 3}
   chopSound2: {fileID: 8300000, guid: f6aaac83be9e0493493aace800b76619, type: 3}
   currentLevelBosses: []
   enemyPosition: {x: 0, y: 0}
+  level: 4
