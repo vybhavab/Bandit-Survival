@@ -63,7 +63,7 @@ namespace Completed
             rect.x = point.x;
             rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
             //var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
-            if(hp < originalHp){
+            if(hp < originalHp && hp > 0){
                 GUI.Label(rect, hp.ToString()); // display its name, or other string
             }
         }
@@ -158,10 +158,7 @@ namespace Completed
 
             //Subtract loss from hit point total.
             hp -= loss;
-            //Debug.Log("Enemy attacked, current hp = " + hp);
-            yield return new WaitForSeconds(.6f);
             //If hit points are less than or equal to zero:
-
             if (hp <= 0)
             {
                 // spawn food as reward
@@ -169,6 +166,8 @@ namespace Completed
                 //Disable the gameObject.
                 DeleteEnemy();
             }
+            //Debug.Log("Enemy attacked, current hp = " + hp);
+            yield return new WaitForSeconds(.6f);
         }
 
         public void SpawnFoodReward() {
