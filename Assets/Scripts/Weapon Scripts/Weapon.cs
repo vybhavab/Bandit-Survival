@@ -44,7 +44,7 @@ namespace Completed
             if(isDamageIncrease){
                 text = "+"+(damage-player.damage);
             }else{
-                text = "+"+(player.damage-player.damage);
+                text = "-"+(player.damage-damage);
             }
             wText.SetText(text, showDam, isDamageIncrease);
             if (Input.GetKeyDown(KeyCode.E))
