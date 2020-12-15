@@ -10,7 +10,7 @@ Bandit Survival is a tile rogue based game where you play as a bandit dropped of
     2. If you are on Windows, go ahead and select the Windows release
 2. Unzip the folder downloaded
     1. Mac users may need to open the `.app` through terminal
-    2. Windows users may open the .exe file after extraction to run the game
+    2. Windows users may open the `Dungeon.exe` file after extraction to run the game
 
 
 ## Game
