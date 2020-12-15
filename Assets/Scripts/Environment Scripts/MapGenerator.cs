@@ -607,6 +607,34 @@ namespace Completed
                 exitRoom = originalRooms[0];
                 exitCoord = exitRoom.edgeTiles[UnityEngine.Random.Range(0, exitRoom.edgeTiles.Count - 1)];
             }
+
+            Coordinate startTiletoRemove = new Coordinate();
+            bool startingTileFound = false;
+            Coordinate exitTiletoRemove = new Coordinate();
+            bool exitTileFound = false;
+            foreach (Coordinate tile in mapFloorTiles)
+            {
+                if (tile.x == randomStartingLocation.x && tile.y == randomStartingLocation.y)
+                {
+                    startingTileFound = true;
+                    startTiletoRemove = tile;
+                }
+                else if (tile.x == exitCoord.x && tile.y == exitCoord.y)
+                {
+                    exitTileFound = true;
+                    exitTiletoRemove = tile;
+                }
+            }
+
+            if (startingTileFound)
+            {
+                mapFloorTiles.Remove(startTiletoRemove);
+            }
+
+            if (exitTileFound)
+            {
+                mapFloorTiles.Remove(exitTiletoRemove);
+            }
         }
 
         List<Room> RegionsToRooms(int tileType)

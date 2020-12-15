@@ -379,13 +379,17 @@ namespace Completed
 
         public void DecrementHealthFromPlayer()
         {
-            //Reduce player health
-            food -= enemyDamage;
+            CaveGameManager gameManager = GameObject.Find("MapGenerator").GetComponent<CaveGameManager>();
+            if (gameManager.doingSetup == false)
+            {
+                //Reduce player health
+                food -= enemyDamage;
 
-			//Update the food display with the new total.
-			foodText.text = "-"+ enemyDamage + " Food: " + food;
-			//Check to see if game has ended.
-			CheckIfGameOver ();
+                //Update the food display with the new total.
+                foodText.text = "-" + enemyDamage + " Food: " + food;
+                //Check to see if game has ended.
+                CheckIfGameOver();
+            }
         }
 
         IEnumerator ShowFoodGain(int points)
