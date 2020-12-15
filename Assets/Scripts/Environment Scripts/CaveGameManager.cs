@@ -26,11 +26,10 @@ namespace Completed
 		Bandit player;
 		//private bool enemiesMoving;                             //Boolean to check if enemies are moving.
 		private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
-		private bool mapInitialized = false;
 
 		public int prevDirChanges = 0;
 
-		public int getLevel()
+		public int GetLevel()
 		{
 			return level;
 		}
@@ -208,7 +207,7 @@ namespace Completed
 			enabled = false;
 		}
 
-		public void setDirChanges(int dirChanges)
+		public void SetDirChanges(int dirChanges)
 		{
 			prevDirChanges = dirChanges;
 		}

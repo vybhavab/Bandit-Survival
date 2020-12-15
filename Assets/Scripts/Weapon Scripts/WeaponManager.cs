@@ -10,7 +10,6 @@ public class WeaponManager : MonoBehaviour
     public GameObject[] handles, hilts, blades;
     public GameObject symbolWeaponTile;
 
-    ItemSpawn itemSpawn;
     public void GenerateWeapon(Vector2 pos)
     {
         GameObject weapon = Instantiate(blankWeapon, (Vector3)pos, Quaternion.identity);
@@ -34,17 +33,5 @@ public class WeaponManager : MonoBehaviour
     void Awake()
     {
         wm = this;
-    }
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-  
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

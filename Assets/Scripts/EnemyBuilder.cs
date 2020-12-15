@@ -19,7 +19,7 @@ namespace Completed
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
         public Vector2 enemyPosition;
-        bool isFacingLeft;
+
         bool isAttackingPlayer;
         Bandit player;
         ItemSpawn itemSpawn;
@@ -32,12 +32,11 @@ namespace Completed
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
-            isFacingLeft = true;
             isAttackingPlayer = false;
-            if (CaveGameManager.instance.getLevel() > 1)
+            if (CaveGameManager.instance.GetLevel() > 1)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
-                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange(CaveGameManager.instance.getLevel());
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
                 hp = Random.Range(0, 50) + enemyHealthChange;
             }
             else
@@ -58,10 +57,8 @@ namespace Completed
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             enemyPosition = transform.position;
             if(target.position.x > enemyPosition.x){
-                isFacingLeft = true;
                 transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
             }else{
-                isFacingLeft = false;
                 transform.localScale = new Vector3(-0.8f, 0.8f, 1.0f);
             }
 
@@ -147,7 +144,6 @@ namespace Completed
         {
 			Bandit hitPlayer = component as Bandit;
 
-            //Debug.Log("DAMAGE " + component);
 			animator.SetTrigger ("enemyAttack");
             if(hitPlayer){
                 GameObject.FindWithTag("Player").GetComponent<Bandit>().DecrementHealthFromPlayer();
@@ -162,13 +158,17 @@ namespace Completed
             animator.SetTrigger ("enemyAttack");
             player.DecrementHealthFromPlayer();
             SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
             isAttackingPlayer = false;
         }
 
         //DamageEnemy is called when the player attacks a enemy.
-        public IEnumerator DamageEnemy(int loss)
+        IEnumerator DamageEnemy(int loss)
         {
+            //Subtract loss from hit point total.
+            hp -= loss;
+            yield return new WaitForSeconds(.3f);
+
             //Call the RandomizeSfx function of SoundManager to play one of two chop sounds.
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
 
@@ -176,7 +176,7 @@ namespace Completed
             hp -= loss;
             //If hit points are less than or equal to zero:
             healthBar.SetHealth(hp, originalHp);
-            yield return new WaitForSeconds(.6f);
+            yield return new WaitForSeconds(.3f);
             if (hp <= 0)
             {
                 healthBar.SetHealth(0, originalHp);
@@ -195,33 +195,40 @@ namespace Completed
                 GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
             }
             // generate fruit
-            // int foodType;
+            int foodType;
 
-            // if (originalHp >= 10 && originalHp < 20) {
-            //     foodType = 4;
-            // }
-            // // generate drinks
-            // else if (originalHp >= 20 && originalHp < 30) {
-            //     foodType = 6;
-            // }
-            // // generate veg
-            // else if (originalHp >= 30 && originalHp < 40) {
-            //     foodType = 8;
-            // }
-            // // generate meat
-            // else if (originalHp >= 40 && originalHp < 50) {
-            //     foodType = 9;
-            // }
-            // else { //generate weapon
-            //     foodType = -1;
-            // };
-            // if(foodType > 0){
-            //     for (int i = 0; i < 4; i++) {
-            //         float x = transform.position.x + Random.Range(-0.5f, 0.5f);
-            //         float y = transform.position.y + Random.Range(-0.5f, 0.5f);
-            //         itemSpawn.SpawnItem(x, y, 5, false, foodType);
-            //     }
-            // }
+            if (originalHp >= 0 && originalHp < 20)
+            {
+                foodType = 4;
+            }
+            // generate drinks
+            else if (originalHp >= 20 && originalHp < 30)
+            {
+                foodType = 6;
+            }
+            // generate veg
+            else if (originalHp >= 30 && originalHp < 40)
+            {
+                foodType = 8;
+            }
+            // generate meat
+            else if (originalHp >= 40 && originalHp < 50)
+            {
+                foodType = 9;
+            }
+            else
+            { //generate weapon
+                foodType = -1;
+            };
+            if (foodType > 0)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    float x = transform.position.x + Random.Range(-0.5f, 0.5f);
+                    float y = transform.position.y + Random.Range(-0.5f, 0.5f);
+                    itemSpawn.SpawnItem(x, y, 5, false, foodType);
+                }
+            }
         }
 
         public void DeleteEnemy()

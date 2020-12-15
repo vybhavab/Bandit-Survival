@@ -14,8 +14,8 @@ namespace Completed
         // Update weights
         public override void updateGenerator(int feedback) {
             // Transform feedback to +1 or -1
-            int modified_feedback = 0;
-            if(feedback > threshold_favorable) {
+            int modified_feedback;
+            if (feedback > threshold_favorable) {
                 modified_feedback = 1;
             }
             else {
@@ -26,7 +26,7 @@ namespace Completed
         }
 
         // Output weapon percentage as 4 or 2
-        public int getWeaponWeight() {
+        public int GetWeaponWeight() {
             // Translate +1 or -1 outcome to positive and negative outcomes for weapon percent
             int action = getOutput();
             if(action == 1){

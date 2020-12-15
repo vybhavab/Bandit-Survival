@@ -66,10 +66,6 @@ namespace Completed
 
         public int enemyDamage;
 
-        bool checkforWall;
-        bool destroyWallTile;
-        List<GameObject> wallToDestroy;
-
         // Use this for initialization
         void Start()
         {
@@ -84,9 +80,6 @@ namespace Completed
             flippedCount = 0;
             weaponSwings = 0;
             explorationCount = 0;
-            wallToDestroy = new List<GameObject>();
-            destroyWallTile = false;
-            checkforWall = false;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -96,9 +89,9 @@ namespace Completed
             food = gameManager.playerFoodPoints;
 
             //foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
-            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().GetFoodDecrement();
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().GetFoodWeight());
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().GetWeaponWeight());
             // pointsPerFood = temps.Item2;
 
             canMove = true;
@@ -111,7 +104,6 @@ namespace Completed
         // Update is called once per frame
         void Update()
         {
-            checkforWall = true;
 
             //If player is dead, don't process input
             if (m_isDead)
@@ -238,7 +230,7 @@ namespace Completed
 
                 Debug.Log("Weapon swings:" + weaponSwings);
 
-                GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().setDirChanges(dirChanges);
+                GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().SetDirChanges(dirChanges);
                 //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
                 GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().updateGenerator(weaponSwings);
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().updateGenerator(dirChanges);
@@ -329,22 +321,6 @@ namespace Completed
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.CompareTag("Wall") && checkforWall)
-            {
-                destroyWallTile = true;
-                wallToDestroy.Add(triggerCollider.gameObject);
-            }
-        }
-
-
-
-        void OnTriggerExit2D(Collider2D triggerCollider)
-        {
-            if (triggerCollider.CompareTag("Wall"))
-            {
-                wallToDestroy = new List<GameObject>();
-                destroyWallTile = false;
-            }
         }
 
         private void Restart()
@@ -352,19 +328,17 @@ namespace Completed
             //Load the next level
             CaveGameManager caveGameManager = GameObject.Find("MapGenerator").GetComponent<CaveGameManager>();
             //foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
-            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().GetFoodDecrement();
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().GetFoodWeight());
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().GetWeaponWeight());
 
-            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
+            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange();
             damage += damageChange;
             if (damage < 5) damage = 5;
 
             dirChanges = 0;
             flippedCount = 0;
             weaponSwings = 0;
-            wallToDestroy = new List<GameObject>();
-            destroyWallTile = false;
             caveGameManager.InitGame();
         }
 
@@ -400,15 +374,6 @@ namespace Completed
 
             yield return new WaitForSeconds(attackTime);
 
-            if (destroyWallTile)
-            {
-                MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
-                Vector2 newFloorPosition = wallToDestroy[0].transform.position;
-                Destroy(wallToDestroy[0]);
-                GameObject floor = (GameObject)Instantiate(map.floorTiles[Random.Range(0, map.floorTiles.Length - 1)], newFloorPosition, Quaternion.identity);
-                floor.transform.SetParent(GameObject.Find("Floors").transform);
-                map.currentLevelTiles.Add(floor);
-            }
             canAttack = true;
             canMove = true;
             playerAttacking = false;

@@ -33,7 +33,7 @@ namespace Completed
             base.updateGenerator((feedback - dirChangesRangeInput.minimum) / (dirChangesRangeInput.maximum - dirChangesRangeInput.minimum));
         }
 		// Output food decrement as an integer
-        public int getFoodDecrement() {
+        public int GetFoodDecrement() {
             float action = getOutput();
             return (int)(foodDrecrementRangeOutput.minimum + action * (foodDrecrementRangeOutput.maximum - foodDrecrementRangeOutput.minimum));
         }
