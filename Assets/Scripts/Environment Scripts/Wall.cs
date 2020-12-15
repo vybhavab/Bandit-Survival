@@ -13,7 +13,7 @@ namespace Completed
 		
 		private SpriteRenderer spriteRenderer;      //Store a component reference to the attached SpriteRenderer.
 
-		private Transform target;
+		public Vector2 target;
 		Bandit player;
 		public Vector2 wallPosition;
 
@@ -26,35 +26,24 @@ namespace Completed
 		void Update()
 		{
 			player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
-			target = GameObject.FindGameObjectWithTag("Player").transform;
+			target = GameObject.FindGameObjectWithTag("Player").transform.position;
 			wallPosition = transform.position;
-
 			if (player.playerAttacking == true)
 			{
-				if (Mathf.Pow(target.position.x - wallPosition.x, 2) + Mathf.Pow(target.position.y - wallPosition.y, 2) <= 1)
+				if (Mathf.Pow(target.x - wallPosition.x, 2) + Mathf.Pow(target.y - wallPosition.y, 2) <= 2)
 				{
-					if (target.position.x - wallPosition.x > 0 && player.facingLeft)
+					if (target.x - wallPosition.x > 0 && player.facingLeft)
 					{
 						player.playerAttacking = false;
 						StartCoroutine(DamageWall(player.damage));
 					}
-					else if (target.position.x - wallPosition.x < 0 && player.facingRight)
+					else if (target.x - wallPosition.x < 0 && player.facingRight)
 					{
 						player.playerAttacking = false;
 						StartCoroutine(DamageWall(player.damage));
 					}
-                    else if (target.position.y - wallPosition.y < 0)
-                    {
-                        player.playerAttacking = false;
-                        StartCoroutine(DamageWall(player.damage));
-                    }
-                    //else if (target.position.y - wallPosition.y > 0)
-                    //{
-                    //	player.playerAttacking = false;
-                    //	StartCoroutine(DamageWall(player.damage));
-                    //}
                 }
-			}
+            }
 		}
 
 		//DamageWall is called when the player attacks a wall.
