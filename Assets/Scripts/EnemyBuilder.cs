@@ -172,11 +172,9 @@ namespace Completed
             //Call the RandomizeSfx function of SoundManager to play one of two chop sounds.
             SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
 
-            //Subtract loss from hit point total.
-            hp -= loss;
+            yield return new WaitForSeconds(.3f);
             //If hit points are less than or equal to zero:
             healthBar.SetHealth(hp, originalHp);
-            yield return new WaitForSeconds(.3f);
             if (hp <= 0)
             {
                 healthBar.SetHealth(0, originalHp);

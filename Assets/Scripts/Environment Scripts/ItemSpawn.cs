@@ -2,105 +2,103 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSpawn : MonoBehaviour
+namespace Completed
 {
-    public GameObject[] fruitTiles;
-    public GameObject[] vegTiles;
-    public GameObject[] drinkTiles;
-    public GameObject[] meatTiles;
-    public GameObject symbolFoodTile;
-
-
-    public int fruitWeighting = 4;
-    public int vegWeighting = 2;
-    public int drinkWeighting = 2;
-    public int meatWeighting = 1;
-
-    int totalFoodWeighting;
-
-    public int foodSpawnPercent = 10;
-    public int weaponSpawnPercent = 4;
-
-    public List<GameObject> currentLevelItems = new List<GameObject>();
-
-    private void Start()
+    public class ItemSpawn : MonoBehaviour
     {
-        totalFoodWeighting = fruitWeighting + vegWeighting + drinkWeighting + meatWeighting;
-    }
-    public void SpawnItem(float x, float y, int randomNumber, bool def = true, int foodRandomNumber = 0)
-    {
-        if (randomNumber <= weaponSpawnPercent)
+        public GameObject[] fruitTiles;
+        public GameObject[] vegTiles;
+        public GameObject[] drinkTiles;
+        public GameObject[] meatTiles;
+        public GameObject symbolFoodTile;
+
+
+        public int fruitWeighting = 4;
+        public int vegWeighting = 2;
+        public int drinkWeighting = 2;
+        public int meatWeighting = 1;
+
+        int totalFoodWeighting;
+
+        public int foodSpawnPercent = 10;
+        public int weaponSpawnPercent = 4;
+
+        public List<GameObject> currentLevelItems = new List<GameObject>();
+
+        private void Start()
         {
-           GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
+            totalFoodWeighting = fruitWeighting + vegWeighting + drinkWeighting + meatWeighting;
         }
-        else if (randomNumber <= weaponSpawnPercent + foodSpawnPercent)
+        public void SpawnItem(float x, float y, int randomNumber, bool def = true, int foodRandomNumber = 0)
         {
-            int randomFoodSpawn = def ? Random.Range(1, totalFoodWeighting) : foodRandomNumber;
-            if (randomFoodSpawn <= fruitWeighting) //4
+            if (randomNumber <= weaponSpawnPercent)
             {
-                int fruitToSpawn = Random.Range(0, fruitTiles.Length - 1);
-                Vector2 vec = new Vector2(x, y);
-
-                GameObject fruit = (GameObject)Instantiate(fruitTiles[fruitToSpawn], vec, Quaternion.identity);
-                currentLevelItems.Add(fruit);
-                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
-                currentLevelItems.Add(symFood);
+               GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
             }
-            else if (randomFoodSpawn <= fruitWeighting + vegWeighting) // 6
+            else if (randomNumber <= weaponSpawnPercent + foodSpawnPercent)
             {
-                int vegToSpawn = Random.Range(0, vegTiles.Length - 1);
-                Vector2 vec = new Vector2(x, y);
+                int randomFoodSpawn = def ? Random.Range(1, totalFoodWeighting) : foodRandomNumber;
+                if (randomFoodSpawn <= fruitWeighting) //4
+                {
+                    int fruitToSpawn = Random.Range(0, fruitTiles.Length - 1);
+                    Vector2 vec = new Vector2(x, y);
 
-                GameObject veg = (GameObject)Instantiate(vegTiles[vegToSpawn], vec, Quaternion.identity);
-                currentLevelItems.Add(veg);
-                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
-                currentLevelItems.Add(symFood);
+                    GameObject fruit = (GameObject)Instantiate(fruitTiles[fruitToSpawn], vec, Quaternion.identity);
+                    currentLevelItems.Add(fruit);
+                    GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                    currentLevelItems.Add(symFood);
+                }
+                else if (randomFoodSpawn <= fruitWeighting + vegWeighting) // 6
+                {
+                    int vegToSpawn = Random.Range(0, vegTiles.Length - 1);
+                    Vector2 vec = new Vector2(x, y);
+
+                    GameObject veg = (GameObject)Instantiate(vegTiles[vegToSpawn], vec, Quaternion.identity);
+                    currentLevelItems.Add(veg);
+                    GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                    currentLevelItems.Add(symFood);
+                }
+                else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting) //8
+                {
+                    int drinkToSpawn = Random.Range(0, drinkTiles.Length - 1);
+                    Vector2 vec = new Vector2(x, y);
+
+                    GameObject drink = (GameObject)Instantiate(drinkTiles[drinkToSpawn], vec, Quaternion.identity);
+                    currentLevelItems.Add(drink);
+                    GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                    currentLevelItems.Add(symFood);
+                }
+                else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting + meatWeighting) //9
+                {
+                    int meatToSpawn = Random.Range(0, meatTiles.Length - 1);
+                    Vector2 vec = new Vector2(x, y);
+
+                    GameObject meat = (GameObject)Instantiate(meatTiles[meatToSpawn], vec, Quaternion.identity);
+                    currentLevelItems.Add(meat);
+                    GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
+                    currentLevelItems.Add(symFood);
+                }
+
             }
-            else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting) //8
-            {
-                int drinkToSpawn = Random.Range(0, drinkTiles.Length - 1);
-                Vector2 vec = new Vector2(x, y);
-
-                GameObject drink = (GameObject)Instantiate(drinkTiles[drinkToSpawn], vec, Quaternion.identity);
-                currentLevelItems.Add(drink);
-                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
-                currentLevelItems.Add(symFood);
-            }
-            else if (randomFoodSpawn <= fruitWeighting + vegWeighting + drinkWeighting + meatWeighting) //9
-            {
-                int meatToSpawn = Random.Range(0, meatTiles.Length - 1);
-                Vector2 vec = new Vector2(x, y);
-
-                GameObject meat = (GameObject)Instantiate(meatTiles[meatToSpawn], vec, Quaternion.identity);
-                currentLevelItems.Add(meat);
-                GameObject symFood = (GameObject)Instantiate(symbolFoodTile, vec, Quaternion.identity);
-                currentLevelItems.Add(symFood);
-            }
-
         }
-    }
 
-    public void updateFoodPercent(int newFoodPercent)
-    {
-        foodSpawnPercent = newFoodPercent;
-    }
-
-    public void updateWeaponPercent(int newWeaponPercent)
-    {
-        weaponSpawnPercent = newWeaponPercent;
-    }
-
-    public void DeleteItems()
-    {
-        for (int i = 0; i < currentLevelItems.Count; i++)
+        public void updateFoodPercent(int newFoodPercent)
         {
-            Destroy(currentLevelItems[i]);
+            foodSpawnPercent = newFoodPercent;
         }
-        currentLevelItems = new List<GameObject>();
+
+        public void updateWeaponPercent(int newWeaponPercent)
+        {
+            weaponSpawnPercent = newWeaponPercent;
+        }
+
+        public void DeleteItems()
+        {
+            for (int i = 0; i < currentLevelItems.Count; i++)
+            {
+                Destroy(currentLevelItems[i]);
+            }
+            currentLevelItems = new List<GameObject>();
+        }
     }
-
-
-
-
-
 }
