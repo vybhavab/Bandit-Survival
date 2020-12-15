@@ -37,7 +37,7 @@ namespace Completed
             if (level >= 1)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
-                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange(level);
                 hp = Random.Range(0, 50) + enemyHealthChange;
             }
             else

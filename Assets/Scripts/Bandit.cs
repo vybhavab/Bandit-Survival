@@ -70,6 +70,7 @@ namespace Completed
 
         bool destroyWallTile;
         List<GameObject> wallToDestroy;
+        private string weaponSwigns;
 
         // Use this for initialization
         void Start()
@@ -87,6 +88,8 @@ namespace Completed
             explorationCount = 0;
             wallToDestroy = new List<GameObject>();
             destroyWallTile = false;
+            enemy1.level = 0;
+            enemy2.level = 0;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -106,7 +109,6 @@ namespace Completed
             damage = 10;
             weaponName = "Weapon";
             enemyDamage = 50;
-
         }
 
         // Update is called once per frame
@@ -120,12 +122,6 @@ namespace Completed
             }
 
             input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                weaponSwings += 1;
-                canMove = false;
-            }
 
             if (canMove)
             {
@@ -197,9 +193,12 @@ namespace Completed
             */
 
             //Attack
-            if (Input.GetMouseButtonDown(0) & canAttack)
+            if (Input.GetKeyDown(KeyCode.F) & canAttack)
             {
 
+                weaponSwings += 1;
+                canMove = false;
+                
                 playerAttacking = true;
                 StartCoroutine(Attack());
                 banditBody.velocity = new Vector2(0, 0);
@@ -238,6 +237,8 @@ namespace Completed
 
                 //Reset explorationCount for the next level
                 explorationCount = 0;
+
+                Debug.Log("Weapon swings:" + weaponSwings);
 
                 GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().setDirChanges(dirChanges);
                 //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
