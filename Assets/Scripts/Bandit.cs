@@ -295,16 +295,21 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.CompareTag("Sword"))
+            /*else if (triggerCollider.CompareTag("Sword"))
             {
-                damage = triggerCollider.GetComponent<Weapon>().damage + damageChange;
-                weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
-                //Update foodText to represent current total and notify player that they gained points
-                StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
+                if (Input.GetKeyDown(KeyCode.R))
+                {
 
-                //Disable the weapon object the player collided with.
-                triggerCollider.gameObject.SetActive(false);
-            }
+
+                    damage = triggerCollider.GetComponent<Weapon>().damage + damageChange;
+                    weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
+                    //Update foodText to represent current total and notify player that they gained points
+                    StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
+
+                    //Disable the weapon object the player collided with.
+                    triggerCollider.gameObject.SetActive(false);
+                }
+            }*/
             else if (triggerCollider.CompareTag("Floor"))
             {
                 //Add this tile to the exploration count
@@ -317,6 +322,25 @@ namespace Completed
             else if (triggerCollider.CompareTag("Symbol")) {
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D triggerCollider)
+        {
+            if (triggerCollider.CompareTag("Sword"))
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+
+
+                    damage = triggerCollider.GetComponent<Weapon>().damage + damageChange;
+                    weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
+                    //Update foodText to represent current total and notify player that they gained points
+                    StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
+
+                    //Disable the weapon object the player collided with.
+                    triggerCollider.gameObject.SetActive(false);
+                }
             }
         }
 
