@@ -24,6 +24,8 @@ namespace Completed
         Bandit player;
         ItemSpawn itemSpawn;
 
+        public HealthBarBehavior healthBar;
+
         protected override void Start()
         {
             CaveGameManager.instance.AddEnemyToList (this);
@@ -43,26 +45,11 @@ namespace Completed
                 hp = Random.Range(0, 50);
             }
             originalHp = hp;
-
+            healthBar.SetHealth(hp, originalHp);
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
             base.Start();
 
-        }
-
-        void OnGUI()
-        {
-            var rect = new Rect(0,0,50,100);
-            var offset =  new Vector2(-.2f,-1.2f); // height above the target position
-
-            var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
-            rect.x = point.x;
-            rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
-            // var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
-            // GUI.Label(rect, label);
-            if(hp < originalHp && hp > 0){
-                GUI.Label(rect, hp.ToString()); // display its name, or other string
-            }
         }
 
         // Update is called once per frame
@@ -188,9 +175,11 @@ namespace Completed
             //Subtract loss from hit point total.
             hp -= loss;
             //If hit points are less than or equal to zero:
+            healthBar.SetHealth(hp, originalHp);
             yield return new WaitForSeconds(.6f);
             if (hp <= 0)
             {
+                healthBar.SetHealth(0, originalHp);
                 //Disable the gameObject.
                 DeleteEnemy();
                 // spawn food as reward

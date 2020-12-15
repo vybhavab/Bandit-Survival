@@ -12,7 +12,7 @@ namespace Completed
 		public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.
 		public float turnDelay = 0.1f;                          //Delay between each Player turn.
 		public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-		public int playerFoodPoints = 5000;                      //Starting value for Player food points.
+		public int playerFoodPoints = 100;                      //Starting value for Player food points.
 		//public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		[HideInInspector] public bool playersTurn = false;       //Boolean to check if it's players turn, hidden in inspector but public.
 
@@ -173,6 +173,14 @@ namespace Completed
 			enemies.Add(script);
 		}
 
+		//To check that the game is being quit to save game;
+		void OnApplicationQuit()
+    {
+			if(PlayerPrefs.GetInt("HighScore") < level - 1){
+				PlayerPrefs.SetInt("HighScore", level);
+				PlayerPrefs.Save();
+			}
+    }
 
 		//GameOver is called when the player reaches 0 food points
 		public void GameOver()
@@ -180,7 +188,18 @@ namespace Completed
 			//Set levelText to display number of levels passed and game over message
 
 
-			levelText.text = "Game Over";
+			if(PlayerPrefs.HasKey("HighScore")){
+				if(PlayerPrefs.GetInt("HighScore") < level){
+					PlayerPrefs.SetInt("HighScore", level);
+					PlayerPrefs.Save();
+					levelText.text = "Game Over\nYou Reached Level: " + level + "\nNEW HIGH SCORE!";
+				}else{
+					levelText.text = "Game Over\nYou Reached Level: " + level + "\nYour HighScore is: " + PlayerPrefs.GetInt("HighScore");
+				}
+			}else{
+				PlayerPrefs.SetInt("HighScore", level);
+				PlayerPrefs.Save();
+			}
 
 			//Enable black background image gameObject.
 			levelImage.SetActive(true);
