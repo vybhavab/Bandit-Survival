@@ -15,7 +15,7 @@ Bandit Survival is a tile rogue based game where you play as a bandit dropped of
 
 ## Game
 ### Controls
-The controls rely on using either w,s,a,d to move around and left click to swing your sword. Users may also use the arrow keys along with "f" to swing your sword.
+The controls rely on using either W,A,S,D to move around and left click to swing your sword. Users may also use the arrow keys along with "E" to pick up swords and "F" to swing your sword.
 
 ### Mechanics
 - Every step decreases your food availability. The amount of food you have available is your health. Once you reach 0, it is game over. 
