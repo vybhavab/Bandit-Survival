@@ -27,20 +27,48 @@ namespace Completed
             base.updateGenerator(modified_feedback);
         }
 
-        public int GetDamageChange()
+        public int GetDamageChange(int level)
         {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
             // (int, int) -> (food counter increment, food consume increment)
             if (action == 1)
             {
-                // -1 : Food Decrement
-                return 5;
+                if (level <= 5)
+                {
+                    return 5;
+                }
+                else if (level > 5 && level <= 10)
+                {
+                    return 25;
+                }
+                else if (level > 10 && level <= 15)
+                {
+                    return 90;
+                }
+                else
+                {
+                    return 400;
+                }
             }
             else
             {
-                // -2 : Food Decrement
-                return -5;
+                if (level <= 5)
+                {
+                    return -5;
+                }
+                else if (level > 5 && level <= 10)
+                {
+                    return -25;
+                }
+                else if (level > 10 && level <= 15)
+                {
+                    return -90;
+                }
+                else
+                {
+                    return -400;
+                }
             }
         }
     }

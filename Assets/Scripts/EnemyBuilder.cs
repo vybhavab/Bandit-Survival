@@ -6,7 +6,6 @@ namespace Completed
     public class EnemyBuilder : EntityMover
     {
         // Start is called before the first frame update
-        public int damageToPlayer;
         public AudioClip attackSound1;
         public AudioClip attackSound2;
         private Animator animator;
@@ -15,6 +14,7 @@ namespace Completed
         public int hp;
         int originalHp;
         public int enemyHealthChange;
+        int multiplier;
         public AudioClip chopSound1;                //1 of 2 audio clips that play when the enemy is attacked by the player.
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
@@ -33,16 +33,37 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
             isAttackingPlayer = false;
-            if (CaveGameManager.instance.GetLevel() > 1)
+            if (CaveGameManager.instance.GetLevel() <= 1)
+            {
+                hp = Random.Range(10, 50);
+                multiplier = 1;
+            }
+            else if (CaveGameManager.instance.GetLevel() <= 5)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
                 enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
-                hp = Random.Range(0, 50) + enemyHealthChange;
+                hp = Random.Range(10, 50) + enemyHealthChange;
+                multiplier = 2;
+            }
+            else if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
+            {
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
+                hp = Random.Range(100, 500) + enemyHealthChange;
+                multiplier = 10;
+            }
+            else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15)
+            {
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
+                hp = Random.Range(500, 1000) + enemyHealthChange;
+                multiplier = 20;
             }
             else
             {
-                hp = Random.Range(0, 50);
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
+                hp = Random.Range(1000, 10000) + enemyHealthChange;
+                multiplier = 100;
             }
+
             originalHp = hp;
             healthBar.SetHealth(hp, originalHp);
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
@@ -187,7 +208,8 @@ namespace Completed
         }
 
         public void SpawnFoodReward() {
-            if(originalHp >= 30){
+            if(originalHp >= 30 * multiplier)
+            {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
                 GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
@@ -195,22 +217,22 @@ namespace Completed
             // generate fruit
             int foodType;
 
-            if (originalHp >= 0 && originalHp < 20)
+            if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
             {
                 foodType = 4;
             }
             // generate drinks
-            else if (originalHp >= 20 && originalHp < 30)
+            else if (originalHp >= 20 * multiplier && originalHp < 30 * multiplier)
             {
                 foodType = 6;
             }
             // generate veg
-            else if (originalHp >= 30 && originalHp < 40)
+            else if (originalHp >= 30 * multiplier && originalHp < 40 * multiplier)
             {
                 foodType = 8;
             }
             // generate meat
-            else if (originalHp >= 40 && originalHp < 50)
+            else if (originalHp >= 40 * multiplier && originalHp < 50 * multiplier)
             {
                 foodType = 9;
             }

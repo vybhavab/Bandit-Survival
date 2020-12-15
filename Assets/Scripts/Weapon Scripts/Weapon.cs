@@ -34,7 +34,7 @@ namespace Completed
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             target = GameObject.FindGameObjectWithTag("Player").transform.position;
             if (CaveGameManager.instance.GetLevel() > 1)
-                damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange();
+                damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange(CaveGameManager.instance.GetLevel());
             else
                 damageChange = 0;
             swordPosition = transform.position;
@@ -42,9 +42,9 @@ namespace Completed
             bool isDamageIncrease = damage > player.damage;
             string text;
             if(isDamageIncrease){
-                text = "+"+(damage-player.damage);
+                text = "+"+((damage + damageChange) - player.damage);
             }else{
-                text = "-"+(player.damage-damage);
+                text = "-"+(player.damage - (damage + damageChange));
             }
             wText.SetText(text, showDam, isDamageIncrease);
             if (Input.GetKeyDown(KeyCode.E))
@@ -72,15 +72,36 @@ namespace Completed
         public void SetParts(GameObject handles, GameObject hilts, GameObject blades)
         {
             handle = handles.GetComponent<Handle>();
-            handle.damage = UnityEngine.Random.Range(1, 5);
             hilt = hilts.GetComponent<Hilt>();
-            hilt.damage = UnityEngine.Random.Range(1, 5);
             blade = blades.GetComponent<Blade>();
-            blade.damage = UnityEngine.Random.Range(8, 20);
+
+            if (CaveGameManager.instance.GetLevel() <= 5)
+            {
+                handle.damage = UnityEngine.Random.Range(1, 5);
+                hilt.damage = UnityEngine.Random.Range(1, 5);
+                blade.damage = UnityEngine.Random.Range(8, 20);
+            }
+            else if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
+            {
+                handle.damage = UnityEngine.Random.Range(5, 15);
+                hilt.damage = UnityEngine.Random.Range(5, 15);
+                blade.damage = UnityEngine.Random.Range(20, 50);
+            }
+            else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15)
+            {
+                handle.damage = UnityEngine.Random.Range(15, 50);
+                hilt.damage = UnityEngine.Random.Range(15, 50);
+                blade.damage = UnityEngine.Random.Range(50, 150);
+            }
+            else
+            {
+                handle.damage = UnityEngine.Random.Range(50, 200);
+                hilt.damage = UnityEngine.Random.Range(50, 200);
+                blade.damage = UnityEngine.Random.Range(150, 500);
+            }
 
             GetStats();
             GetName();
-
         }
 
         public void GetName()

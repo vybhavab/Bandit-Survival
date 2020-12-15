@@ -36,7 +36,6 @@ namespace Completed
 
         private int food;               //For getting the player food value from the CaveGameManager
         public int foodDecrement;       //Amount food is decreased by when player moves.
-        public int pointsPerFood;
         public int pointsPerFruit = 10; //Number of points to add to player food points when picking up a food object.
         public int pointsPerDrink = 20; //Number of points to add to player food points when picking up a soda object.
         public int pointsPerVeg = 15;
@@ -89,7 +88,6 @@ namespace Completed
             foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().GetFoodDecrement();
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().GetFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().GetWeaponWeight());
-            // pointsPerFood = temps.Item2;
 
             canMove = true;
             canAttack = true;
@@ -319,7 +317,7 @@ namespace Completed
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().GetFoodWeight());
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().GetWeaponWeight());
 
-            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange();
+            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange(CaveGameManager.instance.GetLevel());
             damage += damageChange;
             if (damage < 5) damage = 5;
 
