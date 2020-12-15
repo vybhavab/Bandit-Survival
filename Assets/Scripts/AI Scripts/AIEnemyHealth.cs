@@ -14,7 +14,7 @@ namespace Completed
         public override void updateGenerator(int feedback)
         {
             // Transform feedback to +1 or -1
-            int modified_feedback = 0;
+            int modified_feedback;
             if (feedback > threshold_favorable)
             {
                 modified_feedback = 1;
@@ -27,7 +27,7 @@ namespace Completed
             base.updateGenerator(modified_feedback);
         }
 
-        public int getHealthChange(int level)
+        public int GetHealthChange(int level)
         {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();

@@ -14,8 +14,8 @@ namespace Completed
         // Update generator value
         public override void updateGenerator(int feedback) {
             // Transform feedback to +1 or -1
-            int modified_feedback = 0;
-            if(feedback > threshold_favorable) {
+            int modified_feedback;
+            if (feedback > threshold_favorable) {
                 modified_feedback = 1;
             }
             else {
@@ -26,7 +26,7 @@ namespace Completed
         }
 
         // Output FoodDecrement as -1 or -2
-        public int getFoodDecrement() {
+        public int GetFoodDecrement() {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
             // (int, int) -> (food counter increment, food consume increment)

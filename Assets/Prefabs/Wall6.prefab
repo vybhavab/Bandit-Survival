@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 420220807
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300058, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -127,7 +127,8 @@ MonoBehaviour:
   chopSound1: {fileID: 8300000, guid: 4c2332bc8245b474dad63074059bb755, type: 3}
   chopSound2: {fileID: 8300000, guid: f6aaac83be9e0493493aace800b76619, type: 3}
   dmgSprite: {fileID: 21300104, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
-  hp: 4
+  hp: 20
+  wallPosition: {x: 0, y: 0}
 --- !u!50 &-8854247535567125356
 Rigidbody2D:
   serializedVersion: 4

@@ -14,7 +14,7 @@ namespace Completed
         public override void updateGenerator(int feedback)
         {
             // Transform feedback to +1 or -1
-            int modified_feedback = 0;
+            int modified_feedback;
             if (feedback > threshold_favorable)
             {
                 modified_feedback = 1;
