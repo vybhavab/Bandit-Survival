@@ -26,7 +26,7 @@ namespace Completed
         }
 
         // Output FoodPercentage as 10 or 6
-        public int getFoodWeight() {
+        public int GetFoodWeight() {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
             // (int, int) -> (food counter increment, food consume increment)

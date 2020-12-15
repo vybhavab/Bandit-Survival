@@ -26,7 +26,7 @@ namespace Completed
         }
 
         // Output weapon percentage as 4 or 2
-        public int getWeaponWeight() {
+        public int GetWeaponWeight() {
             // Translate +1 or -1 outcome to positive and negative outcomes for weapon percent
             int action = getOutput();
             if(action == 1){

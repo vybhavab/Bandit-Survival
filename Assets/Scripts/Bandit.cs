@@ -96,9 +96,9 @@ namespace Completed
             food = gameManager.playerFoodPoints;
 
             //foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
-            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().GetFoodDecrement();
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().GetFoodWeight());
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().GetWeaponWeight());
             // pointsPerFood = temps.Item2;
 
             canMove = true;
@@ -352,11 +352,11 @@ namespace Completed
             //Load the next level
             CaveGameManager caveGameManager = GameObject.Find("MapGenerator").GetComponent<CaveGameManager>();
             //foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().getFoodDecrement();
-            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().getFoodDecrement();
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().getFoodWeight());
-            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().getWeaponWeight());
+            foodDecrement = GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().GetFoodDecrement();
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateFoodPercent(GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().GetFoodWeight());
+            GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().updateWeaponPercent(GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().GetWeaponWeight());
 
-            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
+            damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange();
             damage += damageChange;
             if (damage < 5) damage = 5;
 

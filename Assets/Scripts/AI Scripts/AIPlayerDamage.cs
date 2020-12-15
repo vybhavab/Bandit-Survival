@@ -27,7 +27,7 @@ namespace Completed
             base.updateGenerator(modified_feedback);
         }
 
-        public int getDamageChange()
+        public int GetDamageChange()
         {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
