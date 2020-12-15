@@ -112,7 +112,7 @@ namespace Completed
 
             input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            if (canMove)
+            if (!PauseMenu.GameIsPaused && canMove)
             {
                 // -- Handle input and movement --
 
@@ -182,7 +182,7 @@ namespace Completed
             */
 
             //Attack
-            if ((Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0)) & canAttack)
+            if (!PauseMenu.GameIsPaused && (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0)) & canAttack)
             {
 
                 weaponSwings += 1;
