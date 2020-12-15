@@ -61,9 +61,6 @@ namespace Completed
         public int damageChange;
         readonly float deathTime = 1f; //Amount of time between death animation and Game Over screen
 
-        public EnemyBuilder enemy1;
-        public EnemyBuilder enemy2;
-
         public int enemyDamage;
 
         // Use this for initialization
