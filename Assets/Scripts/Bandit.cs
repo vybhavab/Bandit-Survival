@@ -68,6 +68,7 @@ namespace Completed
 
         public int enemyDamage;
 
+        bool checkforWall;
         bool destroyWallTile;
         List<GameObject> wallToDestroy;
         private string weaponSwigns;
@@ -88,6 +89,7 @@ namespace Completed
             explorationCount = 0;
             wallToDestroy = new List<GameObject>();
             destroyWallTile = false;
+            checkforWall = false;
             // enemy1.level = 0;
             // enemy2.level = 0;
 
@@ -114,6 +116,7 @@ namespace Completed
         // Update is called once per frame
         void Update()
         {
+            checkforWall = true;
 
             //If player is dead, don't process input
             if (m_isDead)
@@ -331,7 +334,7 @@ namespace Completed
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Wall")
+            else if (triggerCollider.tag == "Wall" && checkforWall)
             {
                 destroyWallTile = true;
                 wallToDestroy.Add(triggerCollider.gameObject);
