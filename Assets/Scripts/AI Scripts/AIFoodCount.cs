@@ -25,18 +25,18 @@ namespace Completed
             base.updateGenerator(modified_feedback);
         }
 
-        // Output FoodPercentage as 10 or 6
+        // Output FoodPercentage as 40 or 25
         public int GetFoodWeight() {
             // Translate +1 or -1 outcome to positive and negative outcomes for food decrement
             int action = getOutput();
             // (int, int) -> (food counter increment, food consume increment)
             if(action == 1){
-                // -1 : Food Decrement
-                return 10;
+                // 40 : Food Percent
+                return 40;
             }
             else{
-                // -2 : Food Decrement
-                return 6;
+                // 25 : Food Percent
+                return 25;
             }
         }
 	}
