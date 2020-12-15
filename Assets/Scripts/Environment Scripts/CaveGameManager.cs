@@ -14,7 +14,7 @@ namespace Completed
 		public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		public int playerFoodPoints = 5000;                      //Starting value for Player food points.
 		//public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-		[HideInInspector] public bool playersTurn = true;       //Boolean to check if it's players turn, hidden in inspector but public.
+		[HideInInspector] public bool playersTurn = false;       //Boolean to check if it's players turn, hidden in inspector but public.
 
 
 		private Text levelText;                                 //Text to display current level number.
@@ -156,9 +156,11 @@ namespace Completed
 		void Update()
 		{
 			//Check that playersTurn or enemiesMoving or doingSetup are not currently true.
-			if (enemiesMoving || doingSetup)
+			if (playersTurn || enemiesMoving || doingSetup){
 				//If any of these are true, return and do not start MoveEnemies.
+				playersTurn = false;
 				return;
+			}
 			playersTurn = true;
 			//Start moving enemies
 			StartCoroutine(MoveEnemies());
@@ -197,7 +199,6 @@ namespace Completed
 		{
 			//While enemiesMoving is true player is unable to move.
 			enemiesMoving = true;
-
 			//Wait for turnDelay seconds, defaults to .1 (100 ms).
 			//yield return new WaitForSeconds(turnDelay);
 

@@ -19,7 +19,8 @@ namespace Completed
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
         public Vector2 enemyPosition;
-
+        bool isFacingLeft;
+        bool isAttackingPlayer;
         Bandit player;
         ItemSpawn itemSpawn;
 
@@ -29,7 +30,8 @@ namespace Completed
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
-
+            isFacingLeft = true;
+            isAttackingPlayer = false;
             if (CaveGameManager.instance.getLevel() > 1)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
@@ -48,26 +50,43 @@ namespace Completed
 
         }
 
-        // void OnGUI()
-        // {
-        //     var rect = new Rect(0,0,50,100);
-        //     var offset =  new Vector2(-.2f,-1.2f); // height above the target position
+        void OnGUI()
+        {
+            var rect = new Rect(0,0,50,100);
+            var offset =  new Vector2(-.2f,-1.2f); // height above the target position
 
-        //     var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
-        //     rect.x = point.x;
-        //     rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
-        //     var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
-        //     GUI.Label(rect, label);
-        //     // if(hp < originalHp && hp > 0){
-        //     //     GUI.Label(rect, hp.ToString()); // display its name, or other string
-        //     // }
-        // }
+            var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
+            rect.x = point.x;
+            rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
+            // var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
+            // GUI.Label(rect, label);
+            if(hp < originalHp && hp > 0){
+                GUI.Label(rect, hp.ToString()); // display its name, or other string
+            }
+        }
 
         // Update is called once per frame
         void Update()
         {
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             enemyPosition = transform.position;
+            if(target.position.x > enemyPosition.x){
+                isFacingLeft = true;
+                transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
+            }else{
+                isFacingLeft = false;
+                transform.localScale = new Vector3(-0.8f, 0.8f, 1.0f);
+            }
+
+
+            if(Mathf.Pow(target.position.x - enemyPosition.x, 2) + Mathf.Pow(target.position.y - enemyPosition.y, 2) <= 1)
+            {
+                if(!isAttackingPlayer && !player.playerAttacking && !CaveGameManager.instance.playersTurn){
+                    isAttackingPlayer = true;
+                    StartCoroutine(DamagePlayer());
+                }
+            }
+
             if (player.playerAttacking == true)
             {
                 if(Mathf.Pow(target.position.x - enemyPosition.x, 2) + Mathf.Pow(target.position.y - enemyPosition.y, 2) <= 1)
@@ -109,10 +128,8 @@ namespace Completed
             int xDir;
             int yDir;
             //If the difference in positions is approximately zero (Epsilon) do the following:
-            if (Mathf.Abs(target.position.x - transform.position.x) < 3 && Mathf.Abs(target.position.y - transform.position.y) < 3)
-            {
-                if (target.position.x - transform.position.x < 0)
-                {
+            if(!isAttackingPlayer && Mathf.Abs(target.position.x - transform.position.x) < 3 && Mathf.Abs(target.position.y - transform.position.y) < 3){
+                if(target.position.x - transform.position.x < 0) {
                     xDir = -1;
                 }
                 else
@@ -134,9 +151,9 @@ namespace Completed
                 xDir = Random.Range(-1, 1);
                 yDir = Random.Range(-1, 1);
             }
-
-            // //Call the AttemptMove function and pass in the generic parameter Bandit, because Enemy is moving and expecting to potentially encounter a Bandit
+            //Call the AttemptMove function and pass in the generic parameter Bandit, because Enemy is moving and expecting to potentially encounter a Bandit
             AttemptMove <Bandit> (xDir, yDir);
+
         }
 
         protected override void OnCantMove <T> (T component)
@@ -144,14 +161,22 @@ namespace Completed
 			Bandit hitPlayer = component as Bandit;
 
             //Debug.Log("DAMAGE " + component);
+			animator.SetTrigger ("enemyAttack");
             if(hitPlayer){
-                _ = GameObject.FindWithTag("Player").GetComponent<Bandit>().DecrementHealthFromPlayer();
+                GameObject.FindWithTag("Player").GetComponent<Bandit>().DecrementHealthFromPlayer();
             }
             hitPlayer.DecrementHealthFromPlayer();
 
-			animator.SetTrigger ("enemyAttack");
-
 			SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);
+        }
+
+        IEnumerator DamagePlayer()
+        {
+            animator.SetTrigger ("enemyAttack");
+            player.DecrementHealthFromPlayer();
+            SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);
+            yield return new WaitForSeconds(1f);
+            isAttackingPlayer = false;
         }
 
         //DamageEnemy is called when the player attacks a enemy.

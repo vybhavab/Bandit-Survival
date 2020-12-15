@@ -415,14 +415,13 @@ namespace Completed
 
         }
 
-        public IEnumerator DecrementHealthFromPlayer()
+        public void DecrementHealthFromPlayer()
         {
             //Reduce player health
             food -= enemyDamage;
 
 			//Update the food display with the new total.
 			foodText.text = "-"+ enemyDamage + " Food: " + food;
-            yield return new WaitForSeconds(1);
 			//Check to see if game has ended.
 			CheckIfGameOver ();
         }
