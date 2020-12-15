@@ -122,25 +122,32 @@ namespace Completed
 
         public void MoveEnemy ()
         {
+
             //Declare variables for X and Y axis move directions, these range from -1 to 1.
             //These values allow us to choose between the cardinal directions: up, down, left and right.
-            int xDir = 0;
-            int yDir = 0;
-
+            int xDir;
+            int yDir;
             //If the difference in positions is approximately zero (Epsilon) do the following:
             if(!isAttackingPlayer && Mathf.Abs(target.position.x - transform.position.x) < 3 && Mathf.Abs(target.position.y - transform.position.y) < 3){
                 if(target.position.x - transform.position.x < 0) {
                     xDir = -1;
-                }else{
+                }
+                else
+                {
                     xDir = +1;
                 }
 
-                if(target.position.y - transform.position.y < 0){
+                if (target.position.y - transform.position.y < 0)
+                {
                     yDir = -1;
-                }else{
+                }
+                else
+                {
                     yDir = +1;
                 }
-            }else{
+            }
+            else
+            {
                 xDir = Random.Range(-1, 1);
                 yDir = Random.Range(-1, 1);
             }
@@ -189,7 +196,6 @@ namespace Completed
                 // spawn food as reward
                 SpawnFoodReward();
             }
-            //Debug.Log("Enemy attacked, current hp = " + hp);
 
         }
 
@@ -220,7 +226,6 @@ namespace Completed
             // else { //generate weapon
             //     foodType = -1;
             // };
-            // // Debug.Log("Food Type = " + foodType);
             // if(foodType > 0){
             //     for (int i = 0; i < 4; i++) {
             //         float x = transform.position.x + Random.Range(-0.5f, 0.5f);
@@ -233,8 +238,6 @@ namespace Completed
         public void DeleteEnemy()
         {
             gameObject.SetActive(false);
-            //Destroy(gameObject);
-            //Debug.Log("Enemy Destroyed");
         }
 
         public void RemoveEnemy(){

@@ -11,7 +11,6 @@ namespace Completed
 
         private Animator m_animator;
         public Rigidbody2D banditBody;
-        private Sensor_Bandit m_groundSensor;
         private bool m_combatIdle = false;
         private bool m_isDead = false;
         public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
@@ -52,16 +51,15 @@ namespace Completed
         public AudioClip eatSound2;                 //2 of 2 Audio clips to play when player collects a food object.
         public AudioClip drinkSound1;               //1 of 2 Audio clips to play when player collects a soda object.
         public AudioClip drinkSound2;               //2 of 2 Audio clips to play when player collects a soda object.
-        public AudioClip gameOverSound;				//Audio clip to play when player dies.
+        public AudioClip gameOverSound;             //Audio clip to play when player dies.
 
-        float attackTime = .6f; //Amount of time the attack animation takes
+        readonly float attackTime = .6f; //Amount of time the attack animation takes
         public bool canMove; //Set to false if the attack animation is running
         public bool canAttack; //Used so the full attack animation runs before the player can attack again
         public bool playerAttacking;
         public int damage;  //How much damage a player does to an enemy when chopping it.
         public int damageChange;
-
-        float deathTime = 1f; //Amount of time between death animation and Game Over screen
+        readonly float deathTime = 1f; //Amount of time between death animation and Game Over screen
 
         public EnemyBuilder enemy1;
         public EnemyBuilder enemy2;
@@ -71,7 +69,6 @@ namespace Completed
         bool checkforWall;
         bool destroyWallTile;
         List<GameObject> wallToDestroy;
-        private string weaponSwigns;
 
         // Use this for initialization
         void Start()
@@ -90,8 +87,6 @@ namespace Completed
             wallToDestroy = new List<GameObject>();
             destroyWallTile = false;
             checkforWall = false;
-            // enemy1.level = 0;
-            // enemy2.level = 0;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -135,11 +130,11 @@ namespace Completed
                 // Check if current direciton of motion and new direction are the same
                 if (direction != Vector2.zero && direction != prev_direction)
                 {
-                    dirChanges = dirChanges + 1;
+                    dirChanges += 1;
                     // Check if the direction is flipped
                     if (Vector2.Dot(direction, prev_direction) == -1)
                     {
-                        flippedCount = flippedCount + 1;
+                        flippedCount += 1;
                         dirFlipped = true;
                     }
                     prev_direction = direction;
@@ -149,7 +144,7 @@ namespace Completed
                 if (Mathf.Pow(transform.position.x - previousPlayerPosition.x, 2) + Mathf.Pow(transform.position.y - previousPlayerPosition.y, 2) > 1 || dirFlipped)
                 {
                     previousPlayerPosition = transform.position;
-                    food = food + foodDecrement;
+                    food += foodDecrement;
                     foodText.text = "Food: " + food;
                     dirFlipped = false;
                     weaponText.text = weaponName + " Damage: " + damage;
@@ -321,7 +316,7 @@ namespace Completed
                 //Disable the weapon object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Floor")
+            else if (triggerCollider.CompareTag("Floor"))
             {
                 //Add this tile to the exploration count
                 explorationCount += 1;
@@ -330,11 +325,11 @@ namespace Completed
                 triggerCollider.GetComponent<Collider2D>().enabled = false;
             }
 
-            else if (triggerCollider.tag == "Symbol") {
+            else if (triggerCollider.CompareTag("Symbol")) {
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            else if (triggerCollider.tag == "Wall" && checkforWall)
+            else if (triggerCollider.CompareTag("Wall") && checkforWall)
             {
                 destroyWallTile = true;
                 wallToDestroy.Add(triggerCollider.gameObject);
@@ -345,16 +340,11 @@ namespace Completed
 
         void OnTriggerExit2D(Collider2D triggerCollider)
         {
-            if (triggerCollider.tag == "Wall")
+            if (triggerCollider.CompareTag("Wall"))
             {
                 wallToDestroy = new List<GameObject>();
                 destroyWallTile = false;
             }
-        }
-
-        private void OnDisable()
-        {
-            //gameManager.playerFoodPoints = food;
         }
 
         private void Restart()
@@ -369,9 +359,6 @@ namespace Completed
             damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().getDamageChange();
             damage += damageChange;
             if (damage < 5) damage = 5;
-
-            //enemy1.level++;
-            //enemy2.level++;
 
             dirChanges = 0;
             flippedCount = 0;
