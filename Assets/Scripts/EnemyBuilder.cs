@@ -20,8 +20,6 @@ namespace Completed
         public List<GameObject> currentLevelBosses = new List<GameObject>();
         public Vector2 enemyPosition;
 
-        public int level;
-
         Bandit player;
         ItemSpawn itemSpawn;
 
@@ -31,10 +29,9 @@ namespace Completed
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
-            level = CaveGameManager.level;
 
 
-            if (level >= 1)
+            if (CaveGameManager.level >= 1)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
                 enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange();

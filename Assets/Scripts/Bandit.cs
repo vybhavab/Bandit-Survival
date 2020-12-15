@@ -366,8 +366,8 @@ namespace Completed
             damage += damageChange;
             if (damage < 5) damage = 5;
 
-            enemy1.level++;
-            enemy2.level++;
+            //enemy1.level++;
+            //enemy2.level++;
 
             dirChanges = 0;
             flippedCount = 0;
