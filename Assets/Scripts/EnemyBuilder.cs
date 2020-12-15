@@ -31,10 +31,10 @@ namespace Completed
             enemyPosition = transform.position;
 
 
-            if (CaveGameManager.level >= 1)
+            if (CaveGameManager.instance.getLevel() >= 1)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
-                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange(level);
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange(CaveGameManager.instance.getLevel());
                 hp = Random.Range(0, 50) + enemyHealthChange;
             }
             else
@@ -49,20 +49,20 @@ namespace Completed
 
         }
 
-        void OnGUI()
-        {
-            var rect = new Rect(0,0,50,100);
-            var offset =  new Vector2(-.2f,-1.2f); // height above the target position
+        // void OnGUI()
+        // {
+        //     var rect = new Rect(0,0,50,100);
+        //     var offset =  new Vector2(-.2f,-1.2f); // height above the target position
 
-            var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
-            rect.x = point.x;
-            rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
-            var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
-            GUI.Label(rect, label);
-            // if(hp < originalHp && hp > 0){
-            //     GUI.Label(rect, hp.ToString()); // display its name, or other string
-            // }
-        }
+        //     var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
+        //     rect.x = point.x;
+        //     rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
+        //     var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
+        //     GUI.Label(rect, label);
+        //     // if(hp < originalHp && hp > 0){
+        //     //     GUI.Label(rect, hp.ToString()); // display its name, or other string
+        //     // }
+        // }
 
         // Update is called once per frame
         void Update()

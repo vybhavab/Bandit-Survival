@@ -88,8 +88,8 @@ namespace Completed
             explorationCount = 0;
             wallToDestroy = new List<GameObject>();
             destroyWallTile = false;
-            enemy1.level = 0;
-            enemy2.level = 0;
+            // enemy1.level = 0;
+            // enemy2.level = 0;
 
             //Store player position to check how far player has moved to decrement food.
             previousPlayerPosition = transform.position;
@@ -198,7 +198,7 @@ namespace Completed
 
                 weaponSwings += 1;
                 canMove = false;
-                
+
                 playerAttacking = true;
                 StartCoroutine(Attack());
                 banditBody.velocity = new Vector2(0, 0);

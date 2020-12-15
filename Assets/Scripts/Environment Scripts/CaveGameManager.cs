@@ -20,7 +20,7 @@ namespace Completed
 		private Text levelText;                                 //Text to display current level number.
 		private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
 		private MapGenerator mapGenerator;                       //Store a reference to our MapGenerator which will set up the level.
-		public static int level = 0;                                  //Current level number, expressed in game as "Day 1".
+		private int level = 0;                                  //Current level number, expressed in game as "Day 1".
 		private List<EnemyBuilder> enemies;                            //List of all Enemy units, used to issue them move commands.
 		private bool enemiesMoving;
 		Bandit player;
@@ -30,6 +30,10 @@ namespace Completed
 
 		public int prevDirChanges = 0;
 
+		public int getLevel()
+		{
+			return level;
+		}
 
 		//Awake is always called before any Start functions
 		void Awake()
