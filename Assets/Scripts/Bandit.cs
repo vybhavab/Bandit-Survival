@@ -420,6 +420,7 @@ namespace Completed
             }
             canAttack = true;
             canMove = true;
+            playerAttacking = false;
 
         }
 

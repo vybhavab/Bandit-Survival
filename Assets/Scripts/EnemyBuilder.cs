@@ -156,6 +156,7 @@ namespace Completed
             //Subtract loss from hit point total.
             hp -= loss;
             //If hit points are less than or equal to zero:
+            yield return new WaitForSeconds(.6f);
             if (hp <= 0)
             {
                 //Disable the gameObject.
@@ -164,7 +165,7 @@ namespace Completed
                 SpawnFoodReward();
             }
             //Debug.Log("Enemy attacked, current hp = " + hp);
-            yield return new WaitForSeconds(.6f);
+            
         }
 
         public void SpawnFoodReward() {
