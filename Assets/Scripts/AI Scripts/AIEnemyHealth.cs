@@ -34,16 +34,15 @@ namespace Completed
             // (int, int) -> (food counter increment, food consume increment)
             if (action == 1)
             {
-                // -1 : Food Decrement
-                if(level <= 5)
+                if (level <= 5)
                 {
                     return 20;
                 }
-                else if(level > 5 && level <= 10)
+                else if (level > 5 && level <= 10)
                 {
                     return 70;
                 }
-                else if(level > 10 && level <= 15)
+                else if (level > 10 && level <= 15)
                 {
                     return 200;
                 }

@@ -885,6 +885,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}
+      propertyPath: wallTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 110520, guid: 2570048905bd94d6f8a99d13b80daf90, type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: wallTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 110520, guid: b86334000bc0f47ba8dd33ea88cfcdb1, type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: wallTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 110520, guid: 01ca47a83ebe24ca5a2f6b1d6dcd7481, type: 3}
+    - target: {fileID: 4684627384322868048, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
       propertyPath: enemyTiles.Array.data[0]
       value: 
       objectReference: {fileID: 5246390280328966174, guid: 36b53c72e825d8643aa33aa9b0b8bf3e,

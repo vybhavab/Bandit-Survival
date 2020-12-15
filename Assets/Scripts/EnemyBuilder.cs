@@ -30,8 +30,7 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
 
-
-            if (CaveGameManager.instance.getLevel() >= 1)
+            if (CaveGameManager.instance.getLevel() > 1)
             {
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
                 enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().getHealthChange(CaveGameManager.instance.getLevel());

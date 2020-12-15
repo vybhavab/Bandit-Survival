@@ -193,7 +193,7 @@ namespace Completed
             */
 
             //Attack
-            if (Input.GetKeyDown(KeyCode.F) & canAttack)
+            if ((Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0)) & canAttack)
             {
 
                 weaponSwings += 1;
