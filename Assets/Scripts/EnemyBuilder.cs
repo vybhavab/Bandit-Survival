@@ -31,6 +31,7 @@ namespace Completed
             animator = GetComponent<Animator> ();
             target = GameObject.FindGameObjectWithTag ("Player").transform;
             enemyPosition = transform.position;
+            level = CaveGameManager.level;
 
 
             if (level >= 1)
@@ -59,10 +60,11 @@ namespace Completed
             var point = Camera.main.WorldToScreenPoint(enemyPosition + offset);
             rect.x = point.x;
             rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
-            //var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
-            if(hp < originalHp && hp > 0){
-                GUI.Label(rect, hp.ToString()); // display its name, or other string
-            }
+            var label = "x: " + (target.position.x - transform.position.x).ToString("0.00") + " y: " + (target.position.y - transform.position.y).ToString("0.00");
+            GUI.Label(rect, label);
+            // if(hp < originalHp && hp > 0){
+            //     GUI.Label(rect, hp.ToString()); // display its name, or other string
+            // }
         }
 
         // Update is called once per frame
@@ -111,7 +113,7 @@ namespace Completed
             int yDir = 0;
 
             //If the difference in positions is approximately zero (Epsilon) do the following:
-            if(Mathf.Abs(target.position.x - transform.position.x) < 3 || Mathf.Abs(target.position.y - transform.position.y) < 3){
+            if(Mathf.Abs(target.position.x - transform.position.x) < 3 && Mathf.Abs(target.position.y - transform.position.y) < 3){
                 if(target.position.x - transform.position.x < 0) {
                     xDir = -1;
                 }else{
@@ -165,7 +167,7 @@ namespace Completed
                 SpawnFoodReward();
             }
             //Debug.Log("Enemy attacked, current hp = " + hp);
-            
+
         }
 
         public void SpawnFoodReward() {
@@ -208,8 +210,12 @@ namespace Completed
         public void DeleteEnemy()
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            //Destroy(gameObject);
             //Debug.Log("Enemy Destroyed");
+        }
+
+        public void RemoveEnemy(){
+            Destroy(gameObject);
         }
 
     }

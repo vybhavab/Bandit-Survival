@@ -107,6 +107,7 @@ namespace Completed
 			foreach (EnemyBuilder enemy in enemies)
 			{
 				enemy.DeleteEnemy();
+				//enemy.RemoveEnemy();
       }
 
 			mapGenerator.GenerateFirstMap();
@@ -205,7 +206,7 @@ namespace Completed
 			for (int i = 0; i < enemies.Count; i++)
 			{
 				//Call the MoveEnemy function of Enemy at index i in the enemies List.
-				if(enemies[i] != null){
+				if(enemies[i].gameObject.activeSelf){
 					enemies[i].MoveEnemy();
 					yield return new WaitForSeconds(enemies[i].moveTime);
 				}else{
