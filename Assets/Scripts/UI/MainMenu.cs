@@ -9,7 +9,8 @@ public class MainMenu : MonoBehaviour
     public Text scoreTxt;
     void Start()
     {
-        if(scoreTxt == null){
+        StartCoroutine(FadeInAudio());
+        if (scoreTxt == null){
             scoreTxt = GameObject.FindWithTag("Score").GetComponent<Text>();
         }
         if(PlayerPrefs.HasKey("HighScore")){
@@ -32,6 +33,20 @@ public class MainMenu : MonoBehaviour
     public void QuitGame(){
         Debug.Log("Quitting boiz");
         Application.Quit();
+    }
+
+    IEnumerator FadeInAudio()
+    {
+        // Find Audio Music in scene
+        AudioSource audioMusic = GameObject.Find("MenuAudio").GetComponent<AudioSource>();
+
+        // Check Music Volume and Fade Out
+        while (audioMusic.volume < 0.5f)
+        {
+            audioMusic.volume += Time.deltaTime / 5;
+            yield return null;
+        }
+
     }
 
     IEnumerator FadeOutAudioAndStart()
