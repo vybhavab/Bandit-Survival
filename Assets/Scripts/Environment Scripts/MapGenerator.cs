@@ -28,8 +28,6 @@ namespace Completed
 
         ItemSpawn itemSpawn;
 
-        EnemyBuilder enemySpawn;
-
         public string seed;
         public bool randomSeed;
         public bool processMap;
@@ -48,8 +46,6 @@ namespace Completed
 
         int[,] map;
 
-
-
         public void GenerateFirstMap()
         {
             if (currentLevelTiles.Count > 1)
@@ -64,7 +60,6 @@ namespace Completed
             passageEdgeTiles = new List<Coordinate>();
             randomStartingLocation = new Vector2();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
-            enemySpawn = GameObject.FindWithTag("GameManager").GetComponent<EnemyBuilder>();
             GenerateMap();
             GenerateStartAndExit();
             DrawMap();
@@ -707,7 +702,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseHeight = baseHeight + 10;
+                    baseHeight += 10;
                 }
 
                 if (baseWidth + 10 > 128)
@@ -716,7 +711,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseWidth = baseWidth + 10;
+                    baseWidth += 10;
                 }
             }
 
@@ -728,7 +723,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseHeight = baseHeight + 5;
+                    baseHeight += 5;
                 }
 
                 if (baseWidth + 5 > 128)
@@ -737,7 +732,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseWidth = baseWidth + 5;
+                    baseWidth += 5;
                 }
             }
 
@@ -749,7 +744,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseHeight = baseHeight - 10;
+                    baseHeight -= 10;
                 }
 
                 if (baseWidth - 10 < 32)
@@ -758,7 +753,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseWidth = baseWidth - 10;
+                    baseWidth -= 10;
                 }
 
             }
@@ -771,7 +766,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseHeight = baseHeight - 5;
+                    baseHeight -= 5;
                 }
 
                 if (baseWidth - 5 < 32)
@@ -780,7 +775,7 @@ namespace Completed
                 }
                 else
                 {
-                    baseWidth = baseWidth - 5;
+                    baseWidth -= 5;
                 }
             }
 

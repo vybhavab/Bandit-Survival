@@ -18,8 +18,6 @@ public class ItemSpawn : MonoBehaviour
 
     int totalFoodWeighting;
 
-    WeaponManager weaponManager;
-
     public int foodSpawnPercent = 10;
     public int weaponSpawnPercent = 4;
 

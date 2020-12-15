@@ -230,7 +230,7 @@ namespace Completed
 
                 Debug.Log("Weapon swings:" + weaponSwings);
 
-                GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().setDirChanges(dirChanges);
+                GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().SetDirChanges(dirChanges);
                 //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
                 GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().updateGenerator(weaponSwings);
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrementContinuous>().updateGenerator(dirChanges);
