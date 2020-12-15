@@ -191,6 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7caab6413152e4f09b16f98869ed2fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  negativeColor: {r: 1, g: 0, b: 0, a: 1}
+  positiveColor: {r: 0, g: 1, b: 0, a: 1}
   text: {fileID: 6853647237313666386}
   Offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &8381859718221929272
@@ -244,7 +246,11 @@ MonoBehaviour:
   durability: 0
   maxDurability: 0
   weaponName: 
-  weaponText: {fileID: 8151344341657227381}
+  damageChange: 0
+  target: {x: 0, y: 0}
+  swordPosition: {x: 0, y: 0}
+  weaponText: {fileID: 0}
+  wText: {fileID: 8151344341657227381}
 --- !u!61 &-7681301421051923174
 BoxCollider2D:
   m_ObjectHideFlags: 0

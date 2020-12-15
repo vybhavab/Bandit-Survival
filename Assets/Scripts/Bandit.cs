@@ -295,21 +295,6 @@ namespace Completed
                 //Disable the soda object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
             }
-            /*else if (triggerCollider.CompareTag("Sword"))
-            {
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-
-
-                    damage = triggerCollider.GetComponent<Weapon>().damage + damageChange;
-                    weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
-                    //Update foodText to represent current total and notify player that they gained points
-                    StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
-
-                    //Disable the weapon object the player collided with.
-                    triggerCollider.gameObject.SetActive(false);
-                }
-            }*/
             else if (triggerCollider.CompareTag("Floor"))
             {
                 //Add this tile to the exploration count
@@ -322,25 +307,6 @@ namespace Completed
             else if (triggerCollider.CompareTag("Symbol")) {
                 //Disable the symbol object the player collided with.
                 triggerCollider.gameObject.SetActive(false);
-            }
-        }
-
-        private void OnTriggerStay2D(Collider2D triggerCollider)
-        {
-            if (triggerCollider.CompareTag("Sword"))
-            {
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-
-
-                    damage = triggerCollider.GetComponent<Weapon>().damage + damageChange;
-                    weaponName = triggerCollider.GetComponent<Weapon>().weaponName;
-                    //Update foodText to represent current total and notify player that they gained points
-                    StartCoroutine(ShowWeaponChange(triggerCollider.GetComponent<Weapon>().damage));
-
-                    //Disable the weapon object the player collided with.
-                    triggerCollider.gameObject.SetActive(false);
-                }
             }
         }
 
@@ -419,12 +385,6 @@ namespace Completed
         IEnumerator ShowFoodGain(int points)
         {
             foodText.text = "+" + points + " Food: " + food;
-            yield return new WaitForSeconds(1);
-        }
-
-        IEnumerator ShowWeaponChange(float points)
-        {
-            weaponText.text = "Obtained " + weaponName + "! Damage: " + points;
             yield return new WaitForSeconds(1);
         }
     }
