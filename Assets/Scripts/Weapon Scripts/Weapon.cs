@@ -33,25 +33,21 @@ namespace Completed
         {
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             target = GameObject.FindGameObjectWithTag("Player").transform.position;
-            if (CaveGameManager.instance.GetLevel() > 1)
-                damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange(CaveGameManager.instance.GetLevel());
-            else
-                damageChange = 0;
             swordPosition = transform.position;
             showDam = true;
             bool isDamageIncrease = damage > player.damage;
             string text;
             if(isDamageIncrease){
-                text = "+"+((damage + damageChange) - player.damage);
+                text = "+"+(damage-player.damage);
             }else{
-                text = "-"+(player.damage - (damage + damageChange));
+                text = "-"+(player.damage-damage);
             }
             wText.SetText(text, showDam, isDamageIncrease);
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (Mathf.Pow(target.x - swordPosition.x, 2) + Mathf.Pow(target.y - swordPosition.y, 2) <= 2)
                 {
-                    player.damage = damage + damageChange;
+                    player.damage = damage;
                     StartCoroutine(ShowWeaponChange(damage));
                     player.weaponName = weaponName;
                     gameObject.SetActive(false);
@@ -61,7 +57,11 @@ namespace Completed
 
         public void GetStats()
         {
-            damage = handle.damage + hilt.damage + blade.damage;
+            if (CaveGameManager.instance.GetLevel() > 1)
+                damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange(CaveGameManager.instance.GetLevel());
+            else
+                damageChange = 0;
+            damage = handle.damage + hilt.damage + blade.damage + damageChange;
             knockback = handle.knockback + hilt.knockback + blade.knockback;
             speed = handle.speed + hilt.speed + blade.speed;
             durability = handle.durability + hilt.durability + blade.durability;
