@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Completed
 {
-    using System.Collections.Generic;       //Allows us to use Lists. 
+    using System.Collections.Generic;       //Allows us to use Lists.
     using UnityEngine.UI;                   //Allows us to use UI.
 
     public class AIEnemyHealth : ReinforcementAI
@@ -34,8 +34,7 @@ namespace Completed
             // (int, int) -> (food counter increment, food consume increment)
             if (action == 1)
             {
-                if (level <= 5)
-                {
+                if (level <= 5) {
                     return 20;
                 }
                 else if (level > 5 && level <= 10)
