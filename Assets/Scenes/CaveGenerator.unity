@@ -843,6 +843,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8209314, guid: 76cd81135280f4ad6a4fa80f6422aea2, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76cd81135280f4ad6a4fa80f6422aea2, type: 3}
 --- !u!1001 &1360597610
@@ -984,6 +988,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684627384322868050, guid: 9db2b5551c9988b4480cecc06c2bfea7,
+        type: 3}
+      propertyPath: playerFoodPoints
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 4684627384322868079, guid: 9db2b5551c9988b4480cecc06c2bfea7,
         type: 3}

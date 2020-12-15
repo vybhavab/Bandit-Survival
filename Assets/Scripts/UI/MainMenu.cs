@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
             scoreTxt = GameObject.FindWithTag("Score").GetComponent<Text>();
         }
         if(PlayerPrefs.HasKey("HighScore")){
-            scoreTxt.text = "Current Highest Level " + PlayerPrefs.GetInt("HighScore");
+            scoreTxt.text = "Your highest level: " + PlayerPrefs.GetInt("HighScore");
         }else{
             scoreTxt.text = "Play to get a new High Score!";
         }

@@ -106,7 +106,7 @@ namespace Completed
         {
 
             //If player is dead, don't process input
-            if (m_isDead)
+            if (m_isDead || food <= 0)
             {
                 return;
             }

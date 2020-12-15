@@ -12,7 +12,7 @@ namespace Completed
 		public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.
 		public float turnDelay = 0.1f;                          //Delay between each Player turn.
 		public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-		public int playerFoodPoints = 100;                      //Starting value for Player food points.
+		public int playerFoodPoints;                      //Starting value for Player food points.
 		//public static CaveGameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		[HideInInspector] public bool playersTurn = false;       //Boolean to check if it's players turn, hidden in inspector but public.
 
@@ -57,7 +57,9 @@ namespace Completed
 			//Assign enemies to a new List of Enemy objects.
 			enemies = new List<EnemyBuilder>();
 
-			playerFoodPoints = 5000;
+			if(playerFoodPoints == null){
+				playerFoodPoints = 500;
+			}
 			//Get a component reference to the attached BoardManager script
 			mapGenerator = GetComponent<MapGenerator>();
 
@@ -205,6 +207,7 @@ namespace Completed
 
 			//Disable this GameManager.
 			enabled = false;
+
 		}
 
 		public void SetDirChanges(int dirChanges)
