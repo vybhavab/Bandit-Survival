@@ -115,6 +115,7 @@ namespace Completed
 				Destroy(enemy.gameObject);
       }
 
+
 			enemies = new List<EnemyBuilder>();
 
 			mapGenerator.GenerateFirstMap();
@@ -238,7 +239,7 @@ namespace Completed
 					enemies[i].MoveEnemy();
 					yield return new WaitForSeconds(enemies[i].moveTime);
 				}else{
-					Destroy(enemies[i]);
+					Destroy(enemies[i].gameObject);
 					enemies.RemoveAt(i);
 				}
 
