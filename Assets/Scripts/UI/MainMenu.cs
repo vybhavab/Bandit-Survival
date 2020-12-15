@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void PlayGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(FadeOutAudioAndStart());
     }
 
     public void ResetScore(){
@@ -32,5 +32,29 @@ public class MainMenu : MonoBehaviour
     public void QuitGame(){
         Debug.Log("Quitting boiz");
         Application.Quit();
+    }
+
+    IEnumerator FadeOutAudioAndStart()
+    {
+        // Find Audio Music in scene
+        AudioSource audioMusic = GameObject.Find("MenuAudio").GetComponent<AudioSource>();
+
+        // Check Music Volume and Fade Out
+        while (audioMusic.volume > 0.01f)
+        {
+            audioMusic.volume -= Time.deltaTime / 3;
+            yield return null;
+        }
+
+        // Make sure volume is set to 0
+        audioMusic.volume = 0;
+
+        // Stop Music
+        audioMusic.Stop();
+
+        // Destroy
+        Destroy(this);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
