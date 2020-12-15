@@ -49,7 +49,7 @@ namespace Completed
 				Destroy(gameObject);
 			}
 			//Sets this to not be destroyed when reloading scene
-			DontDestroyOnLoad(gameObject);
+			//DontDestroyOnLoad(gameObject);
 
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 			levelImage = GameObject.Find("LevelImage");
@@ -64,40 +64,17 @@ namespace Completed
 			mapGenerator = GetComponent<MapGenerator>();
 
 			//Call the InitGame function to initialize the first level
-			//Debug.Log("Awake Init");
 			InitGame();
 		}
-
-		//this is called only once, and the paramter tell it to be called only after the scene was loaded
-		//(otherwise, our Scene Load callback would be called the very first load, and we don't want that)
-		/*[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		static public void CallbackInitialization()
-		{
-			//register the callback to be called everytime the scene is loaded
-			SceneManager.sceneLoaded += OnSceneLoaded;
-		}
-
-		//This is called each time a scene is loaded.
-		static private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-		{
-			Debug.Log("Loading Scene");
-			instance.InitGame();
-		}
-		*/
 
 		//Initializes the game for each level.
 		public void InitGame()
 		{
 			//Debug.Log("Init Game Cave");
+			PauseMenu.GameIsPaused = false;
 			player.enabled = false;
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
-
-			//Get a reference to our image LevelImage by finding it by name.
-
-
-			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
-
 
 			level++;
 			//Set the text of levelText to the string "Day" and append the current level number.
@@ -221,33 +198,35 @@ namespace Completed
 		{
 			//While enemiesMoving is true player is unable to move.
 			enemiesMoving = true;
-			//Wait for turnDelay seconds, defaults to .1 (100 ms).
-			//yield return new WaitForSeconds(turnDelay);
-
-			//If there are no enemies spawned (IE in first level):
-			if (enemies.Count == 0)
-			{
-				//Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
+			if(!PauseMenu.GameIsPaused){
+				//Wait for turnDelay seconds, defaults to .1 (100 ms).
 				//yield return new WaitForSeconds(turnDelay);
-			}
 
-			//Loop through List of Enemy objects.
-			for (int i = 0; i < enemies.Count; i++)
-			{
-				//Call the MoveEnemy function of Enemy at index i in the enemies List.
-				if(enemies[i].gameObject.activeSelf){
-					enemies[i].MoveEnemy();
-					yield return new WaitForSeconds(enemies[i].moveTime);
-				}else{
-					Destroy(enemies[i].gameObject);
-					enemies.RemoveAt(i);
+				//If there are no enemies spawned (IE in first level):
+				if (enemies.Count == 0)
+				{
+					//Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
+					//yield return new WaitForSeconds(turnDelay);
 				}
 
-				//Wait for Enemy's moveTime before moving next Enemy,
-					yield return new WaitForSeconds(0);
-			}
+				//Loop through List of Enemy objects.
+				for (int i = 0; i < enemies.Count; i++)
+				{
+					//Call the MoveEnemy function of Enemy at index i in the enemies List.
+					if(enemies[i].gameObject.activeSelf){
+						enemies[i].MoveEnemy();
+						yield return new WaitForSeconds(enemies[i].moveTime);
+					}else{
+						Destroy(enemies[i].gameObject);
+						enemies.RemoveAt(i);
+					}
 
-			playersTurn = true;
+					//Wait for Enemy's moveTime before moving next Enemy,
+						yield return new WaitForSeconds(0);
+				}
+
+				playersTurn = true;
+			}
 			enemiesMoving = false;
 
 		}
