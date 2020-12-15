@@ -19,6 +19,7 @@ namespace Completed
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
         public Vector2 enemyPosition;
+        int killCount;
 
         bool isAttackingPlayer;
         Bandit player;
@@ -43,7 +44,7 @@ namespace Completed
                 // 0-9:no reward, 10-19:fruit, 20-29:drink, 30-39: veg, 40-49: meat
                 enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
                 hp = Random.Range(10, 50) + enemyHealthChange;
-                multiplier = 2;
+                multiplier = 1;
             }
             else if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
             {
@@ -68,6 +69,7 @@ namespace Completed
             healthBar.SetHealth(hp, originalHp);
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
+            killCount = 0;
             base.Start();
 
         }
@@ -199,6 +201,22 @@ namespace Completed
             if (hp <= 0)
             {
                 healthBar.SetHealth(0, originalHp);
+                if(CaveGameManager.instance.GetLevel() == 6)
+                {
+                    killCount++;
+                }
+                else if(CaveGameManager.instance.GetLevel() == 11)
+                {
+                    killCount++;
+                }
+                else if(CaveGameManager.instance.GetLevel() == 16)
+                {
+                    killCount++;
+                }
+                else if(CaveGameManager.instance.GetLevel() == 21)
+                {
+                    killCount++;
+                }
                 //Disable the gameObject.
                 DeleteEnemy();
                 // spawn food as reward
@@ -208,7 +226,7 @@ namespace Completed
         }
 
         public void SpawnFoodReward() {
-            if(originalHp >= 30 * multiplier)
+            if(originalHp >= 30 * multiplier || killCount == 1)
             {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
@@ -216,8 +234,11 @@ namespace Completed
             }
             // generate fruit
             int foodType;
-
-            if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
+            if (killCount == 1)
+            {
+                foodType = 9;
+            }
+            else if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
             {
                 foodType = 4;
             }
