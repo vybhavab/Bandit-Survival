@@ -11,7 +11,7 @@ namespace Completed
 
         private Animator m_animator;
         public Rigidbody2D banditBody;
-        private bool m_combatIdle = false;
+        private readonly bool m_combatIdle = false;
         private bool m_isDead = false;
         public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
 

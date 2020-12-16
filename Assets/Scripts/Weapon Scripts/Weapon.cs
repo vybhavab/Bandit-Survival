@@ -35,7 +35,7 @@ namespace Completed
             target = GameObject.FindGameObjectWithTag("Player").transform.position;
             swordPosition = transform.position;
             showDam = true;
-            bool isDamageIncrease = damage > player.damage;
+            bool isDamageIncrease = damage >= player.damage;
             string text;
             if(isDamageIncrease){
                 text = "+"+(damage-player.damage);
@@ -55,21 +55,33 @@ namespace Completed
             }
         }
 
-        public void GetStats()
+        public void GetStats(bool toughEnemy)
         {
             if (CaveGameManager.instance.GetLevel() > 1)
                 damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange(CaveGameManager.instance.GetLevel());
             else
                 damageChange = 0;
+            player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
+
+
             damage = handle.damage + hilt.damage + blade.damage + damageChange;
             knockback = handle.knockback + hilt.knockback + blade.knockback;
             speed = handle.speed + hilt.speed + blade.speed;
             durability = handle.durability + hilt.durability + blade.durability;
             maxDurability = durability;
+
+            if (toughEnemy && player.damage >= damage)
+            {
+                if (CaveGameManager.instance.GetLevel() <= 5 && player.damage + 1 < 30) damage = player.damage + 1;
+                else if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10) damage = player.damage + 5;
+                else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15) damage = player.damage + 10;
+                else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20) damage = player.damage + 50;
+                else damage = player.damage + 100;
+            }
         }
 
 
-        public void SetParts(GameObject handles, GameObject hilts, GameObject blades)
+        public void SetParts(GameObject handles, GameObject hilts, GameObject blades, bool toughEnemy)
         {
             handle = handles.GetComponent<Handle>();
             hilt = hilts.GetComponent<Hilt>();
@@ -106,7 +118,7 @@ namespace Completed
                 blade.damage = UnityEngine.Random.Range(500, 1000);
             }
 
-            GetStats();
+            GetStats(toughEnemy);
             GetName();
         }
 

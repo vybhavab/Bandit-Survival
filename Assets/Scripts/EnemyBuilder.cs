@@ -217,7 +217,7 @@ namespace Completed
                     {
                         float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                         float y = transform.position.y + Random.Range(-0.5f, 0.5f);
-                        GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
+                        GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y), false);
                         for (int i = 0; i < 4; i++)
                         {
                             x = transform.position.x + Random.Range(-0.5f, 0.5f);
@@ -240,12 +240,12 @@ namespace Completed
         }
 
         public void SpawnFoodReward() {
-            if(originalHp >= 30 * multiplier)
-            {
-                float x = transform.position.x + Random.Range(-0.5f, 0.5f);
-                float y = transform.position.y + Random.Range(-0.5f, 0.5f);
-                GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
-            }
+            //if(originalHp >= 30 * multiplier)
+            //{
+            //    float x = transform.position.x + Random.Range(-0.5f, 0.5f);
+            //    float y = transform.position.y + Random.Range(-0.5f, 0.5f);
+            //    GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
+            //}
             // generate fruit
             int foodType;
             if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
@@ -261,11 +261,17 @@ namespace Completed
             else if (originalHp >= 30 * multiplier && originalHp < 40 * multiplier)
             {
                 foodType = 8;
+                float x = transform.position.x + Random.Range(-0.5f, 0.5f);
+                float y = transform.position.y + Random.Range(-0.5f, 0.5f);
+                GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y), false);
             }
             // generate meat
             else if (originalHp >= 40 * multiplier && originalHp < 50 * multiplier)
             {
                 foodType = 9;
+                float x = transform.position.x + Random.Range(-0.5f, 0.5f);
+                float y = transform.position.y + Random.Range(-0.5f, 0.5f);
+                GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y), true);
             }
             else
             { //generate weapon

@@ -33,7 +33,7 @@ namespace Completed
         {
             if (randomNumber <= weaponSpawnPercent)
             {
-               GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
+               GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y), false);
             }
             else if (randomNumber <= weaponSpawnPercent + foodSpawnPercent)
             {

@@ -14,7 +14,7 @@ namespace Completed
         public GameObject[] handles, hilts, blades;
         public GameObject symbolWeaponTile;
 
-        public void GenerateWeapon(Vector2 pos)
+        public void GenerateWeapon(Vector2 pos, bool toughEnemy)
         {
             GameObject weapon = Instantiate(blankWeapon, (Vector3)pos, Quaternion.identity);
 
@@ -28,7 +28,7 @@ namespace Completed
             blade.transform.localPosition = Vector3.zero;
             blade.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
 
-            weapon.GetComponent<Weapon>().SetParts(handle, hilt, blade);
+            weapon.GetComponent<Weapon>().SetParts(handle, hilt, blade, toughEnemy);
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(weapon);
             GameObject symWeapon = (GameObject)Instantiate(symbolWeaponTile, pos, Quaternion.identity);
             GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>().currentLevelItems.Add(symWeapon);
