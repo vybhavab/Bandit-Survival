@@ -218,9 +218,19 @@ namespace Completed
                         float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                         float y = transform.position.y + Random.Range(-0.5f, 0.5f);
                         GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
+                        for (int i = 0; i < 4; i++)
+                        {
+                            x = transform.position.x + Random.Range(-0.5f, 0.5f);
+                            y = transform.position.y + Random.Range(-0.5f, 0.5f);
+                            itemSpawn.SpawnItem(x, y, 5, false, 9);
+                        }
+                    }
+                    // spawn food as reward
+                    else
+                    {
+                        SpawnFoodReward();
                     }
                 }
-                // spawn food as reward
                 else
                 {
                     SpawnFoodReward();
@@ -230,7 +240,7 @@ namespace Completed
         }
 
         public void SpawnFoodReward() {
-            if(originalHp >= 30 * multiplier || GameObject.FindGameObjectWithTag("Player").GetComponent<Bandit>().firstKill)
+            if(originalHp >= 30 * multiplier)
             {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
@@ -238,12 +248,7 @@ namespace Completed
             }
             // generate fruit
             int foodType;
-            if (GameObject.FindGameObjectWithTag("Player").GetComponent<Bandit>().firstKill)
-            {
-                foodType = 9;
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Bandit>().firstKill = false;
-            }
-            else if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
+            if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
             {
                 foodType = 4;
             }
@@ -265,7 +270,7 @@ namespace Completed
             else
             { //generate weapon
                 foodType = -1;
-            };
+            }
             if (foodType > 0)
             {
                 for (int i = 0; i < 4; i++)
