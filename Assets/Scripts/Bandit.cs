@@ -329,7 +329,7 @@ namespace Completed
 
             if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
             {
-                if (CaveGameManager.instance.GetLevel() == 6) firstKill = true;
+                //if (CaveGameManager.instance.GetLevel() == 6) firstKill = true;
                 pointsPerFruit = 30;
                 pointsPerDrink = 60;
                 pointsPerVeg = 45;
@@ -338,7 +338,7 @@ namespace Completed
             }
             else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15)
             {
-                if (CaveGameManager.instance.GetLevel() == 11) firstKill = true;
+                //if (CaveGameManager.instance.GetLevel() == 11) firstKill = true;
                 pointsPerFruit = 150;
                 pointsPerDrink = 300;
                 pointsPerVeg = 225;
@@ -347,7 +347,7 @@ namespace Completed
             }
             else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20)
             {
-                if (CaveGameManager.instance.GetLevel() == 16) firstKill = true;
+                //if (CaveGameManager.instance.GetLevel() == 16) firstKill = true;
                 pointsPerFruit = 250;
                 pointsPerDrink = 500;
                 pointsPerVeg = 375;
@@ -356,7 +356,7 @@ namespace Completed
             }
             else if (CaveGameManager.instance.GetLevel() > 20)
             {
-                if (CaveGameManager.instance.GetLevel() == 21) firstKill = true;
+                //if (CaveGameManager.instance.GetLevel() == 21) firstKill = true;
                 pointsPerFruit = 1250;
                 pointsPerDrink = 2500;
                 pointsPerVeg = 1875;
@@ -367,6 +367,7 @@ namespace Completed
             dirChanges = 0;
             flippedCount = 0;
             weaponSwings = 0;
+            firstKill = false;
             caveGameManager.InitGame();
         }
 

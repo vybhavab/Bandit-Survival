@@ -208,8 +208,23 @@ namespace Completed
                 healthBar.SetHealth(0, originalHp);
                 //Disable the gameObject.
                 DeleteEnemy();
+
+                if (player.firstKill == false)
+                {
+                    player.firstKill = true;
+                    int level = CaveGameManager.instance.GetLevel();
+                    if (level == 6 || level == 11 || level == 16 || level == 21)
+                    {
+                        float x = transform.position.x + Random.Range(-0.5f, 0.5f);
+                        float y = transform.position.y + Random.Range(-0.5f, 0.5f);
+                        GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y));
+                    }
+                }
                 // spawn food as reward
-                SpawnFoodReward();
+                else
+                {
+                    SpawnFoodReward();
+                }
             }
 
         }
