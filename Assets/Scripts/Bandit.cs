@@ -36,10 +36,10 @@ namespace Completed
 
         private int food;               //For getting the player food value from the CaveGameManager
         public int foodDecrement;       //Amount food is decreased by when player moves.
-        public int pointsPerFruit = 10; //Number of points to add to player food points when picking up a food object.
-        public int pointsPerDrink = 20; //Number of points to add to player food points when picking up a soda object.
-        public int pointsPerVeg = 15;
-        public int pointsPerMeat = 50;
+        public int pointsPerFruit; //Number of points to add to player food points when picking up a food object.
+        public int pointsPerDrink; //Number of points to add to player food points when picking up a soda object.
+        public int pointsPerVeg;
+        public int pointsPerMeat;
 
         public Text foodText;
         public Text weaponText;
@@ -94,7 +94,11 @@ namespace Completed
             damage = 10;
             weaponName = "Weapon";
             enemyDamage = 50;
-        }
+            pointsPerFruit = 10; 
+            pointsPerDrink = 20;
+            pointsPerVeg = 15;
+            pointsPerMeat = 50;
+    }
 
         // Update is called once per frame
         void Update()
@@ -320,6 +324,31 @@ namespace Completed
             damageChange = GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().GetDamageChange(CaveGameManager.instance.GetLevel());
             damage += damageChange;
             if (damage < 5) damage = 5;
+
+            if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
+            {
+                pointsPerFruit = 30;
+                pointsPerDrink = 60;
+                pointsPerVeg = 45;
+                pointsPerMeat = 150;
+                enemyDamage = 150;
+            }
+            else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15)
+            {
+                pointsPerFruit = 150;
+                pointsPerDrink = 300;
+                pointsPerVeg = 225;
+                pointsPerMeat = 600;
+                enemyDamage = 600;
+            }
+            else if (CaveGameManager.instance.GetLevel() > 20)
+            {
+                pointsPerFruit = 250;
+                pointsPerDrink = 500;
+                pointsPerVeg = 375;
+                pointsPerMeat = 1000;
+                enemyDamage = 1000;
+            }
 
             dirChanges = 0;
             flippedCount = 0;
