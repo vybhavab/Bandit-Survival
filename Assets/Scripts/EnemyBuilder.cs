@@ -259,7 +259,7 @@ namespace Completed
                 GameObject.FindWithTag("WeaponManager").GetComponent<WeaponManager>().GenerateWeapon(new Vector2(x, y), false);
             }
             // generate meat
-            else if (originalHp >= 40 * multiplier && originalHp < 50 * multiplier)
+            else if (originalHp > 40 * multiplier)
             {
                 foodType = 9;
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
