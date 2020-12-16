@@ -59,6 +59,7 @@ namespace Completed
         public int damage;  //How much damage a player does to an enemy when chopping it.
         public int damageChange;
         readonly float deathTime = 1f; //Amount of time between death animation and Game Over screen
+        public bool firstKill;
 
         public int enemyDamage;
 
@@ -98,7 +99,8 @@ namespace Completed
             pointsPerDrink = 20;
             pointsPerVeg = 15;
             pointsPerMeat = 50;
-    }
+            firstKill = false;
+        }
 
         // Update is called once per frame
         void Update()
@@ -327,6 +329,7 @@ namespace Completed
 
             if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
             {
+                if (CaveGameManager.instance.GetLevel() == 6) firstKill = true;
                 pointsPerFruit = 30;
                 pointsPerDrink = 60;
                 pointsPerVeg = 45;
@@ -335,19 +338,30 @@ namespace Completed
             }
             else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15)
             {
+                if (CaveGameManager.instance.GetLevel() == 11) firstKill = true;
                 pointsPerFruit = 150;
                 pointsPerDrink = 300;
                 pointsPerVeg = 225;
                 pointsPerMeat = 600;
                 enemyDamage = 600;
             }
-            else if (CaveGameManager.instance.GetLevel() > 20)
+            else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20)
             {
+                if (CaveGameManager.instance.GetLevel() == 16) firstKill = true;
                 pointsPerFruit = 250;
                 pointsPerDrink = 500;
                 pointsPerVeg = 375;
                 pointsPerMeat = 1000;
                 enemyDamage = 1000;
+            }
+            else if (CaveGameManager.instance.GetLevel() > 20)
+            {
+                if (CaveGameManager.instance.GetLevel() == 21) firstKill = true;
+                pointsPerFruit = 1250;
+                pointsPerDrink = 2500;
+                pointsPerVeg = 1875;
+                pointsPerMeat = 5000;
+                enemyDamage = 5000;
             }
 
             dirChanges = 0;

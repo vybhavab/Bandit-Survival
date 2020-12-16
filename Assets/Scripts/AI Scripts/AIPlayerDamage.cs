@@ -46,9 +46,13 @@ namespace Completed
                 {
                     return 90;
                 }
-                else
+                else if(level > 15 && level <= 20)
                 {
                     return 400;
+                }
+                else
+                {
+                    return 4000;
                 }
             }
             else
@@ -65,9 +69,13 @@ namespace Completed
                 {
                     return -90;
                 }
-                else
+                else if (level > 15 && level <= 20)
                 {
                     return -400;
+                }
+                else
+                {
+                    return -4000;
                 }
             }
         }

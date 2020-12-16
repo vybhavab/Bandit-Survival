@@ -10,6 +10,7 @@ namespace Completed
         public AudioClip attackSound2;
         private Animator animator;
         private Transform target;
+        public Vector2 targetd;
         private bool skipMove;
         public int hp;
         int originalHp;
@@ -19,7 +20,6 @@ namespace Completed
         public AudioClip chopSound2;                //2 of 2 audio clips that play when the enemy is attacked by the player.
         public List<GameObject> currentLevelBosses = new List<GameObject>();
         public Vector2 enemyPosition;
-        int killCount;
 
         bool isAttackingPlayer;
         Bandit player;
@@ -58,18 +58,23 @@ namespace Completed
                 hp = Random.Range(500, 1000) + enemyHealthChange;
                 multiplier = 20;
             }
+            else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20)
+            {
+                enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
+                hp = Random.Range(1000, 5000) + enemyHealthChange;
+                multiplier = 100;
+            }
             else
             {
                 enemyHealthChange = GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().GetHealthChange(CaveGameManager.instance.GetLevel());
-                hp = Random.Range(1000, 10000) + enemyHealthChange;
-                multiplier = 100;
+                hp = Random.Range(5000, 20000) + enemyHealthChange;
+                multiplier = 400;
             }
 
             originalHp = hp;
             healthBar.SetHealth(hp, originalHp);
             player = GameObject.FindWithTag("Player").GetComponent<Bandit>();
             itemSpawn = GameObject.FindWithTag("GameManager").GetComponent<ItemSpawn>();
-            killCount = 0;
             base.Start();
 
         }
@@ -178,9 +183,9 @@ namespace Completed
 
         IEnumerator DamagePlayer()
         {
-            animator.SetTrigger ("enemyAttack");
+            animator.SetTrigger("enemyAttack");
             player.DecrementHealthFromPlayer();
-            SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);
+            SoundManager.instance.RandomizeSfx(attackSound1, attackSound2);
             yield return new WaitForSeconds(3f);
             isAttackingPlayer = false;
         }
@@ -201,22 +206,6 @@ namespace Completed
             if (hp <= 0)
             {
                 healthBar.SetHealth(0, originalHp);
-                if(CaveGameManager.instance.GetLevel() == 6)
-                {
-                    killCount++;
-                }
-                else if(CaveGameManager.instance.GetLevel() == 11)
-                {
-                    killCount++;
-                }
-                else if(CaveGameManager.instance.GetLevel() == 16)
-                {
-                    killCount++;
-                }
-                else if(CaveGameManager.instance.GetLevel() == 21)
-                {
-                    killCount++;
-                }
                 //Disable the gameObject.
                 DeleteEnemy();
                 // spawn food as reward
@@ -226,7 +215,7 @@ namespace Completed
         }
 
         public void SpawnFoodReward() {
-            if(originalHp >= 30 * multiplier || killCount == 1)
+            if(originalHp >= 30 * multiplier || GameObject.FindGameObjectWithTag("Player").GetComponent<Bandit>().firstKill)
             {
                 float x = transform.position.x + Random.Range(-0.5f, 0.5f);
                 float y = transform.position.y + Random.Range(-0.5f, 0.5f);
@@ -234,9 +223,10 @@ namespace Completed
             }
             // generate fruit
             int foodType;
-            if (killCount == 1)
+            if (GameObject.FindGameObjectWithTag("Player").GetComponent<Bandit>().firstKill)
             {
                 foodType = 9;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Bandit>().firstKill = false;
             }
             else if (originalHp >= 10 * multiplier && originalHp < 20 * multiplier)
             {

@@ -93,11 +93,17 @@ namespace Completed
                 hilt.damage = UnityEngine.Random.Range(30, 75);
                 blade.damage = UnityEngine.Random.Range(50, 150);
             }
-            else
+            else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20)
             {
                 handle.damage = UnityEngine.Random.Range(75, 200);
                 hilt.damage = UnityEngine.Random.Range(75, 200);
                 blade.damage = UnityEngine.Random.Range(150, 500);
+            }
+            else
+            {
+                handle.damage = UnityEngine.Random.Range(200, 500);
+                hilt.damage = UnityEngine.Random.Range(200, 500);
+                blade.damage = UnityEngine.Random.Range(500, 1000);
             }
 
             GetStats();
