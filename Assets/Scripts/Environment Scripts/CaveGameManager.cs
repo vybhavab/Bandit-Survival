@@ -49,7 +49,7 @@ namespace Completed
 				Destroy(gameObject);
 			}
 			//Sets this to not be destroyed when reloading scene
-			//DontDestroyOnLoad(gameObject);
+			// DontDestroyOnLoad(gameObject);
 
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 			levelImage = GameObject.Find("LevelImage");
@@ -62,8 +62,8 @@ namespace Completed
 			}
 			//Get a component reference to the attached BoardManager script
 			mapGenerator = GetComponent<MapGenerator>();
-
 			//Call the InitGame function to initialize the first level
+			PauseMenu.GameIsPaused = false;
 			InitGame();
 		}
 
@@ -71,7 +71,6 @@ namespace Completed
 		public void InitGame()
 		{
 			//Debug.Log("Init Game Cave");
-			PauseMenu.GameIsPaused = false;
 			player.enabled = false;
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
@@ -102,6 +101,7 @@ namespace Completed
 
 
 			//Call the HideLevelImage function with a delay in seconds of levelStartDelay.
+			Debug.Log("isPaused: " + PauseMenu.GameIsPaused + " delay: " + levelStartDelay);
 			Invoke("HideLevelImage", levelStartDelay);
 			/*if (!mapInitialized)
 			{
