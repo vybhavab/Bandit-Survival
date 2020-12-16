@@ -21,7 +21,7 @@ namespace Completed
         public Vector2 previousPlayerPosition;
         Vector2 velocity;
         Vector2 input = new Vector2();
-        public int movementSpeed = 6;
+        public int movementSpeed;
 
         public int dirChanges;  // Number of Times the direction of motion changes
         public bool facingLeft;
@@ -100,6 +100,7 @@ namespace Completed
             pointsPerVeg = 15;
             pointsPerMeat = 50;
             firstKill = false;
+            movementSpeed = 6;
         }
 
         // Update is called once per frame
@@ -215,7 +216,10 @@ namespace Completed
             {
                 MapGenerator map = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
                 map.UpdateMapSize(explorationCount);
-                //Debug.Log("New Map Size: " + map.baseHeight);
+
+                int numberofFloorTiles = GameObject.Find("MapGenerator").GetComponent<MapGenerator>().numberofFloorTiles;
+                int mapExplorationPercentage = (int)((float)explorationCount / numberofFloorTiles * 100);
+                GameObject.FindWithTag("GameManager").GetComponent<AIMovementSpeed>().updateGenerator(mapExplorationPercentage);
 
                 //Disable the exit collider component so it doesn't continue to trigger
                 triggerCollider.GetComponent<Collider2D>().enabled = false;
@@ -229,8 +233,6 @@ namespace Completed
                 //Reset explorationCount for the next level
                 explorationCount = 0;
 
-                Debug.Log("Weapon swings:" + weaponSwings);
-
                 GameObject.FindWithTag("GameManager").GetComponent<CaveGameManager>().SetDirChanges(dirChanges);
                 //GameObject.FindWithTag("GameManager").GetComponent<AIFoodDecrement>().updateGenerator(dirChanges);
                 GameObject.FindWithTag("GameManager").GetComponent<AIPlayerDamage>().updateGenerator(weaponSwings);
@@ -238,6 +240,7 @@ namespace Completed
                 GameObject.FindWithTag("GameManager").GetComponent<AIWeaponCount>().updateGenerator(weaponSwings);
                 GameObject.FindWithTag("GameManager").GetComponent<AIFoodCount>().updateGenerator(flippedCount);
                 GameObject.FindWithTag("GameManager").GetComponent<AIEnemyHealth>().updateGenerator(weaponSwings);
+
                 Restart();
             }
             //Check if the tag of the trigger collided with is Food.
@@ -363,6 +366,8 @@ namespace Completed
                 pointsPerMeat = 5000;
                 enemyDamage = 5000;
             }
+
+            movementSpeed = GameObject.FindWithTag("GameManager").GetComponent<AIMovementSpeed>().GetSpeedChange();
 
             dirChanges = 0;
             flippedCount = 0;

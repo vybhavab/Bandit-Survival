@@ -72,7 +72,7 @@ namespace Completed
 
             if (toughEnemy && player.damage >= damage)
             {
-                if (CaveGameManager.instance.GetLevel() <= 5 && player.damage + 1 < 30) damage = player.damage + 1;
+                if (CaveGameManager.instance.GetLevel() <= 5) damage = player.damage + 1;
                 else if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10) damage = player.damage + 5;
                 else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15) damage = player.damage + 10;
                 else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20) damage = player.damage + 50;

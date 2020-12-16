@@ -101,7 +101,6 @@ namespace Completed
 
 
 			//Call the HideLevelImage function with a delay in seconds of levelStartDelay.
-			Debug.Log("isPaused: " + PauseMenu.GameIsPaused + " delay: " + levelStartDelay);
 			Invoke("HideLevelImage", levelStartDelay);
 			/*if (!mapInitialized)
 			{
