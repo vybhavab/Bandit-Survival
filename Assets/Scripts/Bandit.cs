@@ -327,7 +327,7 @@ namespace Completed
             damage += damageChange;
             if (damage < 5) damage = 5;
 
-            if (CaveGameManager.instance.GetLevel() > 5 && CaveGameManager.instance.GetLevel() <= 10)
+            if (CaveGameManager.instance.GetLevel() >= 5 && CaveGameManager.instance.GetLevel() < 10)
             {
                 //if (CaveGameManager.instance.GetLevel() == 6) firstKill = true;
                 pointsPerFruit = 30;
@@ -336,7 +336,7 @@ namespace Completed
                 pointsPerMeat = 150;
                 enemyDamage = 150;
             }
-            else if (CaveGameManager.instance.GetLevel() > 10 && CaveGameManager.instance.GetLevel() <= 15)
+            else if (CaveGameManager.instance.GetLevel() >= 10 && CaveGameManager.instance.GetLevel() < 15)
             {
                 //if (CaveGameManager.instance.GetLevel() == 11) firstKill = true;
                 pointsPerFruit = 150;
@@ -345,7 +345,7 @@ namespace Completed
                 pointsPerMeat = 600;
                 enemyDamage = 600;
             }
-            else if (CaveGameManager.instance.GetLevel() > 15 && CaveGameManager.instance.GetLevel() <= 20)
+            else if (CaveGameManager.instance.GetLevel() >= 15 && CaveGameManager.instance.GetLevel() < 20)
             {
                 //if (CaveGameManager.instance.GetLevel() == 16) firstKill = true;
                 pointsPerFruit = 250;
@@ -354,7 +354,7 @@ namespace Completed
                 pointsPerMeat = 1000;
                 enemyDamage = 1000;
             }
-            else if (CaveGameManager.instance.GetLevel() > 20)
+            else if (CaveGameManager.instance.GetLevel() >= 20)
             {
                 //if (CaveGameManager.instance.GetLevel() == 21) firstKill = true;
                 pointsPerFruit = 1250;
